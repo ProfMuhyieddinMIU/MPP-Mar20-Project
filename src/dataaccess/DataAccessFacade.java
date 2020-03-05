@@ -64,9 +64,7 @@ public class DataAccessFacade implements DataAccess
 		return (HashMap<String, User>)readFromStorage(StorageType.USERS);
 	}
 	
-	/*
-	 * Hus3/5/20:: Pause Rubbish loads (not real data)
-	 * 
+	
 	/////load methods - these place test data into the storage area
 	///// - used just once at startup  
 	
@@ -89,12 +87,12 @@ public class DataAccessFacade implements DataAccess
 		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
 		memberList.forEach(member -> members.put(member.getMemberId(), member));
 		saveToStorage(StorageType.MEMBERS, members);
-	}*/
+	}
 	
 	/**
-	 * 
+	 * Save an object to the file system
 	 * @param type Type of storage (Book, Member or User)
-	 * @param ob
+	 * @param ob The Object to save
 	 */
 	static void saveToStorage(StorageType type, Object ob) 
 	{
@@ -126,9 +124,9 @@ public class DataAccessFacade implements DataAccess
 	}
 	
 	/**
-	 * 
-	 * @param type
-	 * @return
+	 * Read an object from the file system
+	 * @param type type Type of storage (Book, Member or User)
+	 * @return The object that was read
 	 */
 	static Object readFromStorage(StorageType type) 
 	{

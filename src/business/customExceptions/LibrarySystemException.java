@@ -1,4 +1,4 @@
-package business;
+package business.customExceptions;
 
 import java.io.Serializable;
 

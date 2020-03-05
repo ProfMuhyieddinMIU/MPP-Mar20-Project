@@ -1,4 +1,5 @@
 package dataaccess;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -14,170 +15,144 @@ import business.BookCopy;
 import business.LibraryMember;
 import dataaccess.DataAccessFacade.StorageType;
 
-
-public class DataAccessFacade implements DataAccess
-{
-	public static final String OUTPUT_DIR = System.getProperty("user.dir") 
-			+ "\\src\\dataaccess\\storage";
+public class DataAccessFacade implements DataAccess {
+	public static final String OUTPUT_DIR = System.getProperty("user.dir") + "\\src\\dataaccess\\storage";
 	public static final String DATE_PATTERN = "MM/dd/yyyy";
 	private static final long serialVersionUID = 5399827794066637059L;
-	
-	enum StorageType 
-	{
+
+	enum StorageType {
 		BOOKS, MEMBERS, USERS;
 	}
 
-	//implement: other save operations
-	public void saveNewMember(LibraryMember member) 
-	{
+	// implement: other save operations
+	public void saveNewMember(LibraryMember member) {
 		HashMap<String, LibraryMember> mems = readMemberMap();
 		String memberId = member.getMemberId();
 		mems.put(memberId, member);
-		saveToStorage(StorageType.MEMBERS, mems);	
+		saveToStorage(StorageType.MEMBERS, mems);
 	}
-	
-	@SuppressWarnings("unchecked")
-	public  HashMap<String,Book> readBooksMap() 
-	{
-		//Returns a Map with name/value pairs being
-		//   isbn -> Book
-		return (HashMap<String,Book>) readFromStorage(StorageType.BOOKS);
+
+	/**
+	 * 
+	 * @param book
+	 */
+	public void saveNewBook(Book book) {
+		HashMap<String, Book> mems = readBooksMap();
+		String bookIsbn = book.getIsbn();
+		mems.put(bookIsbn, book);
+		saveToStorage(StorageType.BOOKS, mems);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public HashMap<String, LibraryMember> readMemberMap() 
-	{
-		//Returns a Map with name/value pairs being
-		//   memberId -> LibraryMember
+	public HashMap<String, Book> readBooksMap() {
+		// Returns a Map with name/value pairs being
+		// isbn -> Book
+		return (HashMap<String, Book>) readFromStorage(StorageType.BOOKS);
+	}
+
+	@SuppressWarnings("unchecked")
+	public HashMap<String, LibraryMember> readMemberMap() {
+		// Returns a Map with name/value pairs being
+		// memberId -> LibraryMember
 		return (HashMap<String, LibraryMember>) readFromStorage(StorageType.MEMBERS);
 	}
-	
-	
+
 	@SuppressWarnings("unchecked")
-	public HashMap<String, User> readUserMap() 
-	{
-		//Returns a Map with name/value pairs being
-		//   userId -> User
-		return (HashMap<String, User>)readFromStorage(StorageType.USERS);
+	public HashMap<String, User> readUserMap() {
+		// Returns a Map with name/value pairs being
+		// userId -> User
+		return (HashMap<String, User>) readFromStorage(StorageType.USERS);
 	}
-	
-	
-	/////load methods - these place test data into the storage area
-	///// - used just once at startup  
-	
-		
-	static void loadBookMap(List<Book> bookList) 
-	{
+
+	///// load methods - these place test data into the storage area
+	///// - used just once at startup
+
+	static void loadBookMap(List<Book> bookList) {
 		HashMap<String, Book> books = new HashMap<String, Book>();
 		bookList.forEach(book -> books.put(book.getIsbn(), book));
 		saveToStorage(StorageType.BOOKS, books);
 	}
-	
-	static void loadUserMap(List<User> userList) 
-	{
+
+	static void loadUserMap(List<User> userList) {
 		HashMap<String, User> users = new HashMap<String, User>();
 		userList.forEach(user -> users.put(user.getId(), user));
 		saveToStorage(StorageType.USERS, users);
 	}
- 
-	static void loadMemberMap(List<LibraryMember> memberList) 
-	{
+
+	static void loadMemberMap(List<LibraryMember> memberList) {
 		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
 		memberList.forEach(member -> members.put(member.getMemberId(), member));
 		saveToStorage(StorageType.MEMBERS, members);
 	}
-	
-	static void saveToStorage(StorageType type, Object ob) 
-	{
+
+	static void saveToStorage(StorageType type, Object ob) {
 		ObjectOutputStream out = null;
-		try 
-		{
+		try {
 			Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
 			out = new ObjectOutputStream(Files.newOutputStream(path));
 			out.writeObject(ob);
-		} 
-		catch(IOException e) 
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		finally 
-		{
-			if(out != null) 
-			{
-				try 
-				{
+		} finally {
+			if (out != null) {
+				try {
 					out.close();
-				} 
-				catch(Exception e) 
-				{}
+				} catch (Exception e) {
+				}
 			}
 		}
 	}
-	
-	static Object readFromStorage(StorageType type) 
-	{
+
+	static Object readFromStorage(StorageType type) {
 		ObjectInputStream in = null;
 		Object retVal = null;
-		try 
-		{
+		try {
 			Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
 			in = new ObjectInputStream(Files.newInputStream(path));
 			retVal = in.readObject();
-		} 
-		catch(Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally 
-		{
-			if(in != null) 
-			{
-				try 
-				{
+		} finally {
+			if (in != null) {
+				try {
 					in.close();
-				} 
-				catch(Exception e) 
-				{}
+				} catch (Exception e) {
+				}
 			}
 		}
 		return retVal;
 	}
-	
-	
-	
-	final static class Pair<S,T> implements Serializable
-	{
-		
+
+	final static class Pair<S, T> implements Serializable {
+
 		S first;
 		T second;
-		Pair(S s, T t) 
-		{
+
+		Pair(S s, T t) {
 			first = s;
 			second = t;
 		}
-		@Override 
-		public boolean equals(Object ob) 
-		{
-			if(ob == null) 
+
+		@Override
+		public boolean equals(Object ob) {
+			if (ob == null)
 				return false;
-			if(this == ob) 
+			if (this == ob)
 				return true;
-			if(ob.getClass() != getClass()) 
+			if (ob.getClass() != getClass())
 				return false;
 			@SuppressWarnings("unchecked")
-			Pair<S,T> p = (Pair<S,T>)ob;
+			Pair<S, T> p = (Pair<S, T>) ob;
 			return p.first.equals(first) && p.second.equals(second);
 		}
-		
-		@Override 
-		public int hashCode() 
-		{
+
+		@Override
+		public int hashCode() {
 			return first.hashCode() + 5 * second.hashCode();
 		}
-		
+
 		@Override
-		public String toString() 
-		{
+		public String toString() {
 			return "(" + first.toString() + ", " + second.toString() + ")";
 		}
 	}

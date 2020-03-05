@@ -65,7 +65,7 @@ public class DataAccessFacade implements DataAccess
 	}
 	
 	/*
-	 * Hus3/5/20:: Pause Rubbish loads (not real data
+	 * Hus3/5/20:: Pause Rubbish loads (not real data)
 	 * 
 	/////load methods - these place test data into the storage area
 	///// - used just once at startup  

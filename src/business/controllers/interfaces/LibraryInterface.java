@@ -16,8 +16,8 @@ public interface LibraryInterface {
 	
 	public List<LibraryMember> getAllMembers();
 	public LibraryMember getMemberById(String memberId);
-	public LibraryMember getMemberByFName(String  fname);
-	public LibraryMember getMemberByLName(String  lname);
+	public  List<LibraryMember> getMemberByFName(String  fname);
+	public  List<LibraryMember> getMemberByLName(String  lname);
 
 	public boolean CheckOutBook (String memberId , int copyId) ; 
 	

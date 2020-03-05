@@ -1,4 +1,5 @@
 package business;
+//created by Mohamed Elarian
 
 import java.util.List;
 
@@ -14,6 +15,6 @@ public interface LibraryInterface {
 	public LibraryMember getMemberByFName(String  fname);
 	public LibraryMember getMemberByLName(String  lname);
 
-	//public CheckOutBook ;
+	public boolean CheckOutBook (String memberId , int copyId) ; 
 	
 }

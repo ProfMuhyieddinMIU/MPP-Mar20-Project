@@ -1,8 +1,13 @@
-package business;
+package business.controllers.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import business.Author;
+import business.Book;
+import business.LibraryMember;
+import business.controllers.interfaces.LibraryInterface;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 
@@ -21,20 +26,38 @@ public class LibraryController implements LibraryInterface {
 	}
  
 	public static void main(String[] args) {
+		// for test LibraryController only 
 		LibraryController l = new LibraryController();
-		System.out.println(l.getAllBooks());
+		System.out.println("test getAllBooks ==> " + l.getAllBooks());
+		
+		System.out.println("test getBookByIsbn ==> " + l.getBookByIsbn("28-12331").toString());
+		
+		System.out.println("test getBooskByName ==> " + l.getBooskByName( "test"));
+		
 	}
 	
 	@Override
 	public Book getBookByIsbn(String isbn) {
-		// TODO Auto-generated method stub
-		return null;
+		DataAccess da = new DataAccessFacade();
+		HashMap<String,Book> books =new  HashMap<>();
+		books.putAll(da.readBooksMap());
+		Book bookById = books.get(isbn);
+		return bookById ;
 	}
 
 	@Override
 	public List<Book> getBooskByName(String title) {
-		// TODO Auto-generated method stub
-		return null;
+		DataAccess da = new DataAccessFacade();
+		List<Book> books = new ArrayList<>();
+		books.addAll(da.readBooksMap().values());
+		
+		List<Book> booksResult = new ArrayList<>();
+		for (Book book : books) {
+			if ( title.equalsIgnoreCase( book.getTitle() ) ) {
+				booksResult.add(book);
+			}
+		} 
+		return booksResult;
 	}
 
 	@Override
@@ -72,5 +95,7 @@ public class LibraryController implements LibraryInterface {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	 
 
 }

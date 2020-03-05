@@ -1,7 +1,11 @@
-package business;
+package business.controllers.interfaces;
 //created by Mohamed Elarian
 
 import java.util.List;
+
+import business.Author;
+import business.Book;
+import business.LibraryMember;
 
 public interface LibraryInterface {
  	

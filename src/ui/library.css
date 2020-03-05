@@ -1,7 +1,9 @@
-#top-container{
+#top-container
+{
      -fx-background-color: #fbffd1;/*#8E0000*/;
 }
 
-.label {
+.label 
+{
    -fx-text-fill: #000098;
 }

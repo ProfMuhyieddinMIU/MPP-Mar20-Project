@@ -3,8 +3,8 @@ package ui;
 import java.util.Collections;
 import java.util.List;
 
-import business.ControllerInterface;
-import business.SystemController;
+import business.controllers.impl.SystemController;
+import business.controllers.interfaces.ControllerInterface;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

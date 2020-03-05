@@ -7,17 +7,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="767.0" 
-xmlns="http://javafx.com/javafx/8" 
-xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="ui.controllers.MainWindowController">
    <children>
       <MenuBar prefHeight="30.0" prefWidth="768.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Login" />
-              <MenuItem id="exitMenuItem" mnemonicParsing="false" text="Exit" />
+                  <MenuItem id="loginMenuItem" mnemonicParsing="false" text="Login" />
+              <MenuItem id="exitMenuItem" onAction="#exitApplication" mnemonicParsing="false" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -27,15 +25,15 @@ fx:controller="">
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-                  <MenuItem mnemonicParsing="false" text="Search" />
+              <MenuItem id="aboutMenuItem" mnemonicParsing="false" text="About" />
+                  <MenuItem id="searchMenuItem" mnemonicParsing="false" text="Search" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
       <ImageView fitHeight="467.0" fitWidth="768.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Pictures/MIU%20Photos/Campus/MIU_CAMP3.jpg" />
+            <Image url="@images/MIU_CAMP3.jpg" />
          </image>
       </ImageView>
       <TextField layoutX="352.0" layoutY="158.0" />

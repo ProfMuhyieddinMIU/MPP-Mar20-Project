@@ -7,10 +7,13 @@ import java.time.LocalDate;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 
-final public class LibraryMember extends Person implements Serializable {
+final public class LibraryMember extends Person implements Serializable
+{
 	private String memberId;
+	private static final long serialVersionUID = -2226197306790714013L;
 	
-	public LibraryMember(String memberId, String fname, String lname, String tel,Address add) {
+	public LibraryMember(String memberId, String fname, String lname, String tel,Address add) 
+	{
 		super(fname,lname, tel, add);
 		this.memberId = memberId;		
 	}
@@ -27,6 +30,4 @@ final public class LibraryMember extends Person implements Serializable {
 		return "Member Info: " + "ID: " + memberId + ", name: " + getFirstName() + " " + getLastName() + 
 				", " + getTelephone() + " " + getAddress();
 	}
-
-	private static final long serialVersionUID = -2226197306790714013L;
 }

@@ -14,58 +14,62 @@ import business.BookCopy;
 import business.LibraryMember;
 import dataaccess.DataAccessFacade.StorageType;
 
-
+//Hus3/5/20:: see all warnings
 public class DataAccessFacade implements DataAccess
 {
-	public static final String OUTPUT_DIR = System.getProperty("user.dir") 
-			+ "\\src\\dataaccess\\storage";
+	public static final String OUTPUT_DIR = System.getProperty("user.dir") + "\\src\\dataaccess\\storage";
 	public static final String DATE_PATTERN = "MM/dd/yyyy";
 	private static final long serialVersionUID = 5399827794066637059L;
 	
+	/**
+	 * Books, Members, or Users
+	 *
+	 */
 	enum StorageType 
 	{
 		BOOKS, MEMBERS, USERS;
 	}
 
 	//implement: other save operations
+	
 	public void saveNewMember(LibraryMember member) 
 	{
 		HashMap<String, LibraryMember> mems = readMemberMap();
 		String memberId = member.getMemberId();
 		mems.put(memberId, member);
-		saveToStorage(StorageType.MEMBERS, mems);	
+		saveToStorage(StorageType.MEMBERS, mems);
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * @return Map with name/value pairs being: isbn -> Book
+	 */
 	public  HashMap<String,Book> readBooksMap() 
 	{
-		//Returns a Map with name/value pairs being
-		//   isbn -> Book
 		return (HashMap<String,Book>) readFromStorage(StorageType.BOOKS);
 	}
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * @returnMap Map with name/value pairs being: memberId -> LibraryMember
+	 */
 	public HashMap<String, LibraryMember> readMemberMap() 
 	{
-		//Returns a Map with name/value pairs being
-		//   memberId -> LibraryMember
 		return (HashMap<String, LibraryMember>) readFromStorage(StorageType.MEMBERS);
 	}
 	
-	
-	@SuppressWarnings("unchecked")
+	/**
+	 * @return Map with name/value pairs being: userId -> User
+	 */
 	public HashMap<String, User> readUserMap() 
 	{
-		//Returns a Map with name/value pairs being
-		//   userId -> User
 		return (HashMap<String, User>)readFromStorage(StorageType.USERS);
 	}
 	
-	
+	/*
+	 * Hus3/5/20:: Pause Rubbish loads (not real data
+	 * 
 	/////load methods - these place test data into the storage area
 	///// - used just once at startup  
 	
-		
 	static void loadBookMap(List<Book> bookList) 
 	{
 		HashMap<String, Book> books = new HashMap<String, Book>();
@@ -85,8 +89,13 @@ public class DataAccessFacade implements DataAccess
 		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
 		memberList.forEach(member -> members.put(member.getMemberId(), member));
 		saveToStorage(StorageType.MEMBERS, members);
-	}
+	}*/
 	
+	/**
+	 * 
+	 * @param type Type of storage (Book, Member or User)
+	 * @param ob
+	 */
 	static void saveToStorage(StorageType type, Object ob) 
 	{
 		ObjectOutputStream out = null;
@@ -109,11 +118,18 @@ public class DataAccessFacade implements DataAccess
 					out.close();
 				} 
 				catch(Exception e) 
-				{}
+				{//Hus3/5/20::was catching without displaying the error or solving it
+					System.err.println("Error Closing Output Stream");
+				}
 			}
 		}
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 * @return
+	 */
 	static Object readFromStorage(StorageType type) 
 	{
 		ObjectInputStream in = null;
@@ -143,11 +159,9 @@ public class DataAccessFacade implements DataAccess
 		return retVal;
 	}
 	
-	
-	
+	/*Hus3/5/20::StopUnknown
 	final static class Pair<S,T> implements Serializable
 	{
-		
 		S first;
 		T second;
 		Pair(S s, T t) 
@@ -164,7 +178,7 @@ public class DataAccessFacade implements DataAccess
 				return true;
 			if(ob.getClass() != getClass()) 
 				return false;
-			@SuppressWarnings("unchecked")
+
 			Pair<S,T> p = (Pair<S,T>)ob;
 			return p.first.equals(first) && p.second.equals(second);
 		}
@@ -180,5 +194,5 @@ public class DataAccessFacade implements DataAccess
 		{
 			return "(" + first.toString() + ", " + second.toString() + ")";
 		}
-	}
+	}*/
 }

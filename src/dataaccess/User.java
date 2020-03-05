@@ -9,6 +9,12 @@ final public class User implements Serializable
 	private String password;
 	private Auth authorization;
 	
+	/**
+	 * 
+	 * @param id
+	 * @param pass
+	 * @param auth
+	 */
 	User(String id, String pass, Auth  auth) 
 	{
 		this.id = id;
@@ -16,16 +22,28 @@ final public class User implements Serializable
 		this.authorization = auth;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getId() 
 	{
 		return id;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getPassword() 
 	{
 		return password;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Auth getAuthorization() 
 	{
 		return authorization;

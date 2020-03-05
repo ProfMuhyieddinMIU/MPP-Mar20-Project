@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *
@@ -14,21 +13,31 @@ final public class Book implements Serializable
 {
 	
 	private static final long serialVersionUID = 6110690276685962829L;
-	private BookCopy[] copies;
+	private List<BookCopy> copies;//Hus3/5/20
 	private List<Author> authors;
 	private String isbn;
 	private String title;
 	private int maxCheckoutLength;
 	
+	/**
+	 * 
+	 * @param isbn The ID of the book
+	 * @param title The Title of the book
+	 * @param maxCheckoutLength The max number of days the book can be checked out each time
+	 * @param authors A list of the book authors
+	 */
 	public Book(String isbn, String title, int maxCheckoutLength, List<Author> authors) 
 	{
 		this.isbn = isbn;
 		this.title = title;
 		this.maxCheckoutLength = maxCheckoutLength;
 		this.authors = Collections.unmodifiableList(authors);
-		copies = new BookCopy[]{new BookCopy(this, 1, true)};	
+		//Hus3/5/20:: first copy of book, id=1,available
+		copies = new ArrayList<BookCopy>();
+		copies.add(new BookCopy(this, 1, true));
 	}
 	
+	/* Hus3/5/20:: 
 	public void updateCopies(BookCopy copy) 
 	{
 		for(int i = 0; i < copies.length; ++i) 
@@ -37,8 +46,12 @@ final public class Book implements Serializable
 			if(c.equals(copy))
 				copies[i] = copy;
 		}
-	}
+	}*/
 
+	/**
+	 * 
+	 * @return All the copy IDs for the current book
+	 */
 	public List<Integer> getCopyNums()
 	{
 		List<Integer> retVal = new ArrayList<>();
@@ -48,12 +61,15 @@ final public class Book implements Serializable
 		
 	}
 	
+	/**
+	 * Add a new copy to this book having incremental ID
+	 */
 	public void addCopy() 
-	{
-		BookCopy[] newArr = new BookCopy[copies.length + 1];
-		System.arraycopy(copies, 0, newArr, 0, copies.length);
-		newArr[copies.length] = new BookCopy(this, copies.length +1, true);
-		copies = newArr;
+	{//Hus3/5/20:: ArraytoList copies
+		BookCopy[] newArr = new BookCopy[copies.size() + 1];
+		System.arraycopy(copies, 0, newArr, 0, copies.size());
+		newArr[copies.size()] = new BookCopy(this, copies.size() +1, true);
+		copies.addAll(Arrays.asList(newArr));
 	}
 	
 	
@@ -66,13 +82,18 @@ final public class Book implements Serializable
 		return b.isbn.equals(isbn);
 	}
 	
+	/**
+	 * 
+	 * @return Whether there is a copy that is available for loan
+	 */
 	public boolean isAvailable() 
-	{
+	{//Hus3/5/20 arraytolist copies
 		if(copies == null)
 			return false;
-		return Arrays.stream(copies)
-				     .map(l -> l.isAvailable())
-				     .reduce(false, (x,y) -> x || y);
+		for(BookCopy c : copies)
+			if(c.isAvailable())
+				return true;
+		return false;
 	}
 	@Override
 	public String toString() 
@@ -80,39 +101,68 @@ final public class Book implements Serializable
 		return "isbn: " + isbn + ", maxLength: " + maxCheckoutLength + ", available: " + isAvailable();
 	}
 	
+	/**
+	 * 
+	 * @return The current total number of copies owned by the library
+	 */
 	public int getNumCopies() 
 	{
-		return copies.length;
+		return copies.size();
 	}
 	
+	/**
+	 * 
+	 * @return The title of the book
+	 */
 	public String getTitle() 
 	{
 		return title;
 	}
 	
-	public BookCopy[] getCopies() 
+	/**
+	 * 
+	 * @return A list of all available copies
+	 */
+	public List<BookCopy> getCopies() 
 	{
 		return copies;
 	}
 	
+	/**
+	 * 
+	 * @return A list of the book Authors
+	 */
 	public List<Author> getAuthors() 
 	{
 		return authors;
 	}
 	
+	/**
+	 * 
+	 * @return The book ISBN
+	 */
 	public String getIsbn() 
 	{
 		return isbn;
 	}
 	
+	/**
+	 * 
+	 * @return The first available copy, or null if none is available
+	 */
 	public BookCopy getNextAvailableCopy() 
 	{	
-		Optional<BookCopy> optional 
-			= Arrays.stream(copies)
-			        .filter(x -> x.isAvailable()).findFirst();
-		return optional.isPresent() ? optional.get() : null;
+		for(BookCopy c : copies)
+			if(c.isAvailable())
+				return c;
+		return null;
 	}
 	
+	/**
+	 * Get a copy by its ID
+	 * @param copyNum The copy ID
+	 * @return Reference to this copy
+	 */
 	public BookCopy getCopy(int copyNum) 
 	{
 		for(BookCopy c : copies)
@@ -121,6 +171,10 @@ final public class Book implements Serializable
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return The maximum number of days this book can be checkedOut each time
+	 */
 	public int getMaxCheckoutLength() 
 	{
 		return maxCheckoutLength;

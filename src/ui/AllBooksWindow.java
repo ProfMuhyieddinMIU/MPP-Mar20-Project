@@ -14,25 +14,33 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class AllBooksWindow extends Stage implements LibWindow {
+public class AllBooksWindow extends Stage implements LibWindow 
+{
 	public static final AllBooksWindow INSTANCE = new AllBooksWindow();
-	
+	private TextArea ta;
 	private boolean isInitialized = false;
-	public boolean isInitialized() {
+	
+	public boolean isInitialized() 
+	{
 		return isInitialized;
 	}
-	public void isInitialized(boolean val) {
+	
+	public void isInitialized(boolean val) 
+	{
 		isInitialized = val;
 	}
-	private TextArea ta;
-	public void setData(String data) {
+	
+	public void setData(String data) 
+	{
 		ta.setText(data);
 	}
 	
 	/* This class is a singleton */
-	private AllBooksWindow() {}
+	private AllBooksWindow() 
+	{}
 	
-	public void init() {
+	public void init() 
+	{
 		GridPane grid = new GridPane();
 		grid.setId("top-container");
 		grid.setAlignment(Pos.CENTER);
@@ -47,9 +55,11 @@ public class AllBooksWindow extends Stage implements LibWindow {
 		ta = new TextArea();
 		grid.add(ta, 0,1);
 		Button backBtn = new Button("<= Back to Main");
-        backBtn.setOnAction(new EventHandler<ActionEvent>() {
+        backBtn.setOnAction(new EventHandler<ActionEvent>() 
+        {
         	@Override
-        	public void handle(ActionEvent e) {
+        	public void handle(ActionEvent e) 
+        	{
         		Start.hideAllWindows();
         		Start.primStage().show();
         	}

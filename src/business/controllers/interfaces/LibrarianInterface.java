@@ -7,7 +7,7 @@ import business.Author;
 import business.Book;
 import business.LibraryMember;
 
-public interface LibraryInterface {
+public interface LibrarianInterface {
  	
 	public List<Book> getAllBooks();	
 	public Book getBookByIsbn(String isbn);

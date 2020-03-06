@@ -11,7 +11,7 @@ import business.controllers.interfaces.LibraryInterface;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 
-public class LibraryController implements LibraryInterface {
+public class LibrarianController implements LibraryInterface {
 
 	@Override
 	public List<Book> getAllBooks() {

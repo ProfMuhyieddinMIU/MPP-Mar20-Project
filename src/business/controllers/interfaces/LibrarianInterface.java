@@ -24,5 +24,6 @@ public interface LibrarianInterface {
 	public  List<LibraryMember> getMemberByLName(String  lname);
 	public List<CheckOutRecord> getAllCheckOutRecords();
 	public boolean checkOutBook(String memberId,  String isbn) throws MemberNotFoundException , BookNotFoundException  , LibrarySystemException; 
-	
+	public List<Book> getBooksFromAllCheckOutRecordsByMemberId(String memberID);
+	public List<LibraryMember> getMembersFromAllCheckOutRecordsByIsbn(String isbn);
 }

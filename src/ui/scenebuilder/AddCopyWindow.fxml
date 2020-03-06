@@ -66,5 +66,13 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="backButton" defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" onAction="#back" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

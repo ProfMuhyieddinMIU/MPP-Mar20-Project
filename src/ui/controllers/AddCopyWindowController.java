@@ -23,6 +23,9 @@ import javafx.scene.control.Alert.AlertType;
 public class AddCopyWindowController implements Initializable {
 
 	@FXML
+	private Button backButton;
+	
+	@FXML
 	private TextField isbnTextField;
 
 	@FXML
@@ -62,6 +65,12 @@ public class AddCopyWindowController implements Initializable {
 			alert.show();
 
 		}
+
+	}
+	
+	public void back(ActionEvent event) {
+
+		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
 

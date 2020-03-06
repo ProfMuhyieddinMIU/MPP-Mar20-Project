@@ -30,6 +30,9 @@ import ui.dataModel.BookDataModel;
 import ui.dataModel.MemberDataModel;
 
 public class ListMembersWindowController implements Initializable {
+	
+	@FXML
+	private Button backButton;
 
 	@FXML
 	private MenuItem exitMenuItem;
@@ -88,6 +91,12 @@ public class ListMembersWindowController implements Initializable {
 	public void exitApplication(ActionEvent event) {
 
 		System.exit(0);
+
+	}
+	
+	public void back(ActionEvent event) {
+
+		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
 }

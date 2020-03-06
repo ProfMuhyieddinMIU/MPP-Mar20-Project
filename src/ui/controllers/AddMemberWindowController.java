@@ -26,6 +26,9 @@ public class AddMemberWindowController implements Initializable {
 	
 	@FXML
 	private Button addButton;
+	
+	@FXML
+	private Button backButton;
 
 	@FXML
 	private TextField firstNameTextField;
@@ -87,6 +90,12 @@ public class AddMemberWindowController implements Initializable {
 			alert.show();
 
 		}
+
+	}
+	
+	public void back(ActionEvent event) {
+
+		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
 

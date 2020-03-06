@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,6 +20,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import ui.dataModel.BookDataModel;
 
 public class ListBooksWindowController implements Initializable {
+	
+	@FXML
+	private Button backButton;
 
 	@FXML
 	private MenuItem exitMenuItem;
@@ -77,6 +81,12 @@ public class ListBooksWindowController implements Initializable {
 		for(Book b: books){
 			booksData.add(new BookDataModel(b));
 		}
+	}
+	
+	public void back(ActionEvent event) {
+
+		WindowController.openWindow("AdminWindow", event, this.getClass());
+
 	}
 	
 	

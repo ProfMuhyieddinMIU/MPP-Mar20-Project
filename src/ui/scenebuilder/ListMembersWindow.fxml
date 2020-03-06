@@ -8,13 +8,12 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1016.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.MainWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1016.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.ListMembersWindowController">
    <children>
       <MenuBar prefHeight="30.0" prefWidth="1016.0" stylesheets="@style.css">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem fx:id="loginMenuItem" mnemonicParsing="false" text="Login" />
               <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
             </items>
           </Menu>
@@ -36,24 +35,12 @@
             <Image url="@images/MIU_CAMP3.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameTextField" layoutX="441.0" layoutY="188.0" />
-      <Label layoutX="310.0" layoutY="185.0" styleClass="label-normal" text="Username" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
-         <font>
-            <Font name="Arial Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="313.0" layoutY="226.0" styleClass="label-normal" text="Password" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
-         <font>
-            <Font name="Arial Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="283.0" layoutY="59.0" prefHeight="55.0" prefWidth="451.0" styleClass="label-header" text="Maharishi Library System" textAlignment="CENTER">
+      <Label layoutX="393.0" layoutY="51.0" prefHeight="53.0" prefWidth="230.0" styleClass="label-header" text="All Members" textAlignment="CENTER">
          <font>
             <Font name="Arial Bold" size="29.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passwordTextField" layoutX="441.0" layoutY="228.0" />
-      <Button fx:id="loginButton" defaultButton="true" layoutX="441.0" layoutY="267.0" mnemonicParsing="false" onAction="#login" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Login" textFill="WHITE">
+      <Button fx:id="backButton" onAction="#back"  defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
@@ -66,5 +53,15 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
+      <TableView fx:id="tblMembers" layoutX="14.0" layoutY="122.0" opacity="0.85" prefHeight="459.0" prefWidth="989.0">
+        <columns>
+          <TableColumn fx:id="clmID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="clmFirstName" prefWidth="141.0" text="First Name" />
+            <TableColumn fx:id="clmLastName" prefWidth="142.0" text="Last Name" />
+            <TableColumn fx:id="clmEmail" prefWidth="164.0" text="Email" />
+            <TableColumn fx:id="clmTelephone" prefWidth="165.0" text="Telephone" />
+            <TableColumn fx:id="clmAddress" prefWidth="518.0" text="Address" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

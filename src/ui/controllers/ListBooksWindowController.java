@@ -1,43 +1,70 @@
 package ui.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import business.LoginException;
-import business.controllers.impl.SystemController;
-import business.controllers.interfaces.ControllerInterface;
-import javafx.event.ActionEvent; 
+import business.Book;
+import business.controllers.impl.LibrarianController;
+import business.controllers.interfaces.LibrarianInterface;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import ui.dataModel.BookDataModel;
 
 public class ListBooksWindowController implements Initializable {
+	
+	@FXML
+	private Button backButton;
 
 	@FXML
 	private MenuItem exitMenuItem;
 
-	@FXML
-	private Button loginButton;
+	ObservableList<BookDataModel> booksData = FXCollections.observableArrayList();
 
 	@FXML
-	private TextField usernameTextField;
-
+	private TableView<BookDataModel> tblBooks;
 	@FXML
-	private PasswordField passwordTextField;
-	
+	private TableColumn<BookDataModel, String> clmISBN;
 	@FXML
-	private Label errorLabel;
+	private TableColumn<BookDataModel, String> clmTitle;
+	@FXML
+	private TableColumn<BookDataModel, String> clmAuthors;
+	@FXML
+	private TableColumn<BookDataModel, String> clmDays;
+	@FXML
+	private TableColumn<BookDataModel, String> clmCopies;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 
+		clmISBN.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("isbn"));
+		clmTitle.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("title"));
+		clmAuthors.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("authors"));
+		clmDays.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("maxCheckoutLength"));
+		clmCopies.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("copies"));
+
+		this.getAllBooks();
+		
+		TableViewLoad(booksData);
+
+	}
+
+	private void TableViewLoad(ObservableList<BookDataModel> booksData) {
+
+		tblBooks.setItems(getBooksData());
+
+	}
+
+	public ObservableList<BookDataModel> getBooksData() {
+		return booksData;
 	}
 
 	public void exitApplication(ActionEvent event) {
@@ -47,22 +74,21 @@ public class ListBooksWindowController implements Initializable {
 
 	}
 
-	public void login(ActionEvent event) {
+	public void getAllBooks() {
+		LibrarianInterface c = new LibrarianController();
+		List<Book> books = c.getAllBooks();
 		
-		try {
-			
-			ControllerInterface c = new SystemController();
-			c.login(usernameTextField.getText(), passwordTextField.getText());
-			System.out.println(SystemController.currentLoggedInUser.getAuthorization());
-		} catch (LoginException e) {
-			
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Invalid Credentionals!");
-			alert.setContentText(e.getMessage());
-			alert.show();
-
+		for(Book b: books){
+			booksData.add(new BookDataModel(b));
 		}
+	}
+	
+	public void back(ActionEvent event) {
+
+		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
+	
+	
 
 }

@@ -4,9 +4,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import business.LoginException;
+import business.controllers.impl.AdminController;
 import business.controllers.impl.SystemController;
+import business.controllers.interfaces.AdminControllerInterface;
 import business.controllers.interfaces.ControllerInterface;
-import javafx.event.ActionEvent; 
+import business.customExceptions.BookNotFoundException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -20,19 +23,13 @@ import javafx.scene.control.Alert.AlertType;
 public class AddCopyWindowController implements Initializable {
 
 	@FXML
-	private MenuItem exitMenuItem;
-
-	@FXML
-	private Button loginButton;
-
-	@FXML
-	private TextField usernameTextField;
-
-	@FXML
-	private PasswordField passwordTextField;
+	private Button backButton;
 	
 	@FXML
-	private Label errorLabel;
+	private TextField isbnTextField;
+
+	@FXML
+	private TextField countTextField;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -47,21 +44,33 @@ public class AddCopyWindowController implements Initializable {
 
 	}
 
-	public void login(ActionEvent event) {
-		
+	public void addCopy(ActionEvent event) {
+
 		try {
+
+			AdminControllerInterface c = new AdminController();
+
+			c.addBookCopy(isbnTextField.getText(), Integer.parseInt(countTextField.getText()));
 			
-			ControllerInterface c = new SystemController();
-			c.login(usernameTextField.getText(), passwordTextField.getText());
-			System.out.println(SystemController.currentLoggedInUser.getAuthorization());
-		} catch (LoginException e) {
-			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Successed!");
+			alert.setContentText("You added "+ countTextField.getText() + " copy/ies to Book with ISBN # "+ isbnTextField.getText());
+			alert.show();
+
+		} catch (NumberFormatException | BookNotFoundException e) {
+
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Invalid Credentionals!");
+			alert.setTitle("Failed!");
 			alert.setContentText(e.getMessage());
 			alert.show();
 
 		}
+
+	}
+	
+	public void back(ActionEvent event) {
+
+		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
 

@@ -20,6 +20,9 @@ import javafx.scene.control.Alert.AlertType;
 public class CheckoutWindowController implements Initializable {
 
 	@FXML
+	private Button backButton;
+	
+	@FXML
 	private MenuItem exitMenuItem;
 
 	@FXML
@@ -47,7 +50,7 @@ public class CheckoutWindowController implements Initializable {
 
 	}
 
-	public void login(ActionEvent event) {
+	public void checkout(ActionEvent event) {
 		
 		try {
 			
@@ -62,6 +65,12 @@ public class CheckoutWindowController implements Initializable {
 			alert.show();
 
 		}
+
+	}
+	
+	public void back(ActionEvent event) {
+
+		WindowController.openWindow("LibrarianWindow", event, this.getClass());
 
 	}
 

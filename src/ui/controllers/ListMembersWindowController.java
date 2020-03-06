@@ -1,12 +1,19 @@
 package ui.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import business.Book;
+import business.LibraryMember;
 import business.LoginException;
+import business.controllers.impl.LibrarianController;
 import business.controllers.impl.SystemController;
 import business.controllers.interfaces.ControllerInterface;
-import javafx.event.ActionEvent; 
+import business.controllers.interfaces.LibrarianInterface;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -14,55 +21,82 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import ui.dataModel.BookDataModel;
+import ui.dataModel.MemberDataModel;
 
 public class ListMembersWindowController implements Initializable {
+	
+	@FXML
+	private Button backButton;
 
 	@FXML
 	private MenuItem exitMenuItem;
 
-	@FXML
-	private Button loginButton;
+	ObservableList<MemberDataModel> membersData = FXCollections.observableArrayList();
 
 	@FXML
-	private TextField usernameTextField;
-
+	private TableView<MemberDataModel> tblMembers;
 	@FXML
-	private PasswordField passwordTextField;
-	
+	private TableColumn<MemberDataModel, String> clmID;
 	@FXML
-	private Label errorLabel;
+	private TableColumn<MemberDataModel, String> clmFirstName;
+	@FXML
+	private TableColumn<MemberDataModel, String> clmLastName;
+	@FXML
+	private TableColumn<MemberDataModel, String> clmEmail;
+	@FXML
+	private TableColumn<MemberDataModel, String> clmTelephone;
+	@FXML
+	private TableColumn<MemberDataModel, String> clmAddress;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		clmID.setCellValueFactory(new PropertyValueFactory<MemberDataModel, String>("memberId"));
+		clmFirstName.setCellValueFactory(new PropertyValueFactory<MemberDataModel, String>("firstName"));
+		clmLastName.setCellValueFactory(new PropertyValueFactory<MemberDataModel, String>("lastName"));
+		clmEmail.setCellValueFactory(new PropertyValueFactory<MemberDataModel, String>("email"));
+		clmTelephone.setCellValueFactory(new PropertyValueFactory<MemberDataModel, String>("telephone"));
+		clmAddress.setCellValueFactory(new PropertyValueFactory<MemberDataModel, String>("address"));
+
+		this.getAllMembers();
+
+		TableViewLoad(membersData);
 
 	}
 
+	private void TableViewLoad(ObservableList<MemberDataModel> membersData) {
+
+		tblMembers.setItems(getMembersData());
+
+	}
+
+	public ObservableList<MemberDataModel> getMembersData() {
+		return membersData;
+	}
+
+	public void getAllMembers() {
+		LibrarianInterface c = new LibrarianController();
+		List<LibraryMember> members = c.getAllMembers();
+
+		for (LibraryMember m : members) {
+			membersData.add(new MemberDataModel(m));
+		}
+	}
+
 	public void exitApplication(ActionEvent event) {
-		System.out.println("Application Exit!");
 
 		System.exit(0);
 
 	}
+	
+	public void back(ActionEvent event) {
 
-	public void login(ActionEvent event) {
-		
-		try {
-			
-			ControllerInterface c = new SystemController();
-			c.login(usernameTextField.getText(), passwordTextField.getText());
-			System.out.println(SystemController.currentLoggedInUser.getAuthorization());
-		} catch (LoginException e) {
-			
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Invalid Credentionals!");
-			alert.setContentText(e.getMessage());
-			alert.show();
-
-		}
+		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
-
 }

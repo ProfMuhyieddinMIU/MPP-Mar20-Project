@@ -20,6 +20,7 @@ public interface DataAccess {
 	public void saveNewBook(Book book);
 	
 	public void saveNewCheckOutRecord(CheckOutRecord checkOutRecord  ) ;
+	public void updateCheckOutRecord(CheckOutRecord checkOutRecord);
 	public void updateBook(Book book);
 	public void updateMember(LibraryMember m);//Hus3/6/20
 }

@@ -51,7 +51,8 @@ public class LibrarianController implements LibrarianInterface  {
 		
 		System.out.println("test getBooksFromAllCheckOutRecordsByMemberId(String memberID)  ==> " + l.getBooksFromAllCheckOutRecordsByMemberId("1004")); 
 		
-		
+	//	System.out.println("test bookReturn  ==> " + ( l.bookReturn( "11" ,  "",  "" ) ? "True" : "False"  ) ; 
+		System.out.println("test bookReturn  ==> " +  l.bookReturn( "11" ,  "",  "" )    ) ; 
 		
 		try {
 			System.out.println("test checkOutBook  ==> " + l.checkOutBook ("1004" , "28-12331" ) );
@@ -315,5 +316,37 @@ public class LibrarianController implements LibrarianInterface  {
 		da.updateBook(book);
 		
 	}
+	
+	
+	private void setCheckOutRecordReturnDate (CheckOutRecord checkOutRecord) {
+		 checkOutRecord.setBookReturnDate(LocalDateTime.now());
+		 DataAccess da = new DataAccessFacade();
+			da.updateCheckOutRecord(checkOutRecord);
+		 
+	}
+	
+	@Override
+	public boolean bookReturn(String transId , String memberId, String isbn ) {
+		DataAccess da = new DataAccessFacade();
+		 
+		for (CheckOutRecord checkOutRecord : da.readCheckOutRecordsMap().values()  ) {
+			if (transId != null && checkOutRecord.getTransId() == Long.parseLong(transId) ) {
+				    setCheckOutRecordReturnDate ( checkOutRecord) ;
+				    return true ;
+				}
+			
+			if (checkOutRecord.getIsbn() != null 
+					&& checkOutRecord.getIsbn().equalsIgnoreCase(isbn)
+					&& checkOutRecord.getMemberId().equalsIgnoreCase(memberId)
+					&& checkOutRecord.getBookReturnDate() == null ) {
+					setCheckOutRecordReturnDate ( checkOutRecord) ;
+				    return true ;
+				}
+ 
+		}
+		return false ; // didn't find checkOutRecord to update
+	}
+	
+	
 	
 }

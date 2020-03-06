@@ -71,23 +71,7 @@ public class Start extends Application
 	@Override
 	public void start(Stage primaryStage)
 	{
-	    try {
-            // Read file fxml and draw interface.
-            Parent root = FXMLLoader.load(getClass()
-                    .getResource("/ui/scenebuilder/MainWindow.fxml"));
- 
-            primaryStage.setTitle("Login");
-            primaryStage.setScene(new Scene(root));
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.show();
-            
-            
-         
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
 	    
-	    /*
 		primStage = primaryStage;
 		primaryStage.setTitle("Main Page");
 
@@ -187,7 +171,7 @@ public class Start extends Application
 		scene.getStylesheets().add(getClass().getResource("library.css").toExternalForm());
 		primaryStage.show();
 		
-		*/
+		
 	}
 
 }

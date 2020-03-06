@@ -15,22 +15,54 @@ import business.BookCopy;
 import business.LibraryMember;
 import dataaccess.DataAccessFacade.StorageType;
 
+<<<<<<< HEAD
+//Hus3/5/20:: see all warnings
+public class DataAccessFacade implements DataAccess
+{
+=======
 public class DataAccessFacade implements DataAccess {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 	public static final String OUTPUT_DIR = System.getProperty("user.dir") + "\\src\\dataaccess\\storage";
 	public static final String DATE_PATTERN = "MM/dd/yyyy";
 	private static final long serialVersionUID = 5399827794066637059L;
+<<<<<<< HEAD
+	
+	/**
+	 * Books, Members, or Users
+	 *
+	 */
+	enum StorageType 
+	{
+=======
 
 	enum StorageType {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		BOOKS, MEMBERS, USERS;
 	}
 
+<<<<<<< HEAD
+	//implement: other save operations
+	
+	public void saveNewMember(LibraryMember member) 
+	{
+=======
 	// implement: other save operations
 	public void saveNewMember(LibraryMember member) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		HashMap<String, LibraryMember> mems = readMemberMap();
 		String memberId = member.getMemberId();
 		mems.put(memberId, member);
 		saveToStorage(StorageType.MEMBERS, mems);
 	}
+<<<<<<< HEAD
+	
+	/**
+	 * @return Map with name/value pairs being: isbn -> Book
+	 */
+	public  HashMap<String,Book> readBooksMap() 
+	{
+		return (HashMap<String,Book>) readFromStorage(StorageType.BOOKS);
+=======
 
 	/**
 	 * 
@@ -41,7 +73,16 @@ public class DataAccessFacade implements DataAccess {
 		String bookIsbn = book.getIsbn();
 		mems.put(bookIsbn, book);
 		saveToStorage(StorageType.BOOKS, mems);
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 	}
+<<<<<<< HEAD
+	
+	/**
+	 * @returnMap Map with name/value pairs being: memberId -> LibraryMember
+	 */
+	public HashMap<String, LibraryMember> readMemberMap() 
+	{
+=======
 
 	@SuppressWarnings("unchecked")
 	public HashMap<String, Book> readBooksMap() {
@@ -54,20 +95,41 @@ public class DataAccessFacade implements DataAccess {
 	public HashMap<String, LibraryMember> readMemberMap() {
 		// Returns a Map with name/value pairs being
 		// memberId -> LibraryMember
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		return (HashMap<String, LibraryMember>) readFromStorage(StorageType.MEMBERS);
 	}
+<<<<<<< HEAD
+	
+	/**
+	 * @return Map with name/value pairs being: userId -> User
+	 */
+	public HashMap<String, User> readUserMap() 
+	{
+		return (HashMap<String, User>)readFromStorage(StorageType.USERS);
+=======
 
 	@SuppressWarnings("unchecked")
 	public HashMap<String, User> readUserMap() {
 		// Returns a Map with name/value pairs being
 		// userId -> User
 		return (HashMap<String, User>) readFromStorage(StorageType.USERS);
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 	}
+<<<<<<< HEAD
+	
+	
+	/////load methods - these place test data into the storage area
+	///// - used just once at startup  
+	
+	static void loadBookMap(List<Book> bookList) 
+	{
+=======
 
 	///// load methods - these place test data into the storage area
 	///// - used just once at startup
 
 	static void loadBookMap(List<Book> bookList) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		HashMap<String, Book> books = new HashMap<String, Book>();
 		bookList.forEach(book -> books.put(book.getIsbn(), book));
 		saveToStorage(StorageType.BOOKS, books);
@@ -84,8 +146,19 @@ public class DataAccessFacade implements DataAccess {
 		memberList.forEach(member -> members.put(member.getMemberId(), member));
 		saveToStorage(StorageType.MEMBERS, members);
 	}
+<<<<<<< HEAD
+	
+	/**
+	 * Save an object to the file system
+	 * @param type Type of storage (Book, Member or User)
+	 * @param ob The Object to save
+	 */
+	static void saveToStorage(StorageType type, Object ob) 
+	{
+=======
 
 	static void saveToStorage(StorageType type, Object ob) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		ObjectOutputStream out = null;
 		try {
 			Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
@@ -97,13 +170,31 @@ public class DataAccessFacade implements DataAccess {
 			if (out != null) {
 				try {
 					out.close();
+<<<<<<< HEAD
+				} 
+				catch(Exception e) 
+				{//Hus3/5/20::was catching without displaying the error or solving it
+					System.err.println("Error Closing Output Stream");
+=======
 				} catch (Exception e) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 				}
 			}
 		}
 	}
+<<<<<<< HEAD
+	
+	/**
+	 * Read an object from the file system
+	 * @param type type Type of storage (Book, Member or User)
+	 * @return The object that was read
+	 */
+	static Object readFromStorage(StorageType type) 
+	{
+=======
 
 	static Object readFromStorage(StorageType type) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		ObjectInputStream in = null;
 		Object retVal = null;
 		try {
@@ -122,9 +213,16 @@ public class DataAccessFacade implements DataAccess {
 		}
 		return retVal;
 	}
+<<<<<<< HEAD
+	
+	/*Hus3/5/20::StopUnknown
+	final static class Pair<S,T> implements Serializable
+	{
+=======
 
 	final static class Pair<S, T> implements Serializable {
 
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		S first;
 		T second;
 
@@ -141,8 +239,13 @@ public class DataAccessFacade implements DataAccess {
 				return true;
 			if (ob.getClass() != getClass())
 				return false;
+<<<<<<< HEAD
+
+			Pair<S,T> p = (Pair<S,T>)ob;
+=======
 			@SuppressWarnings("unchecked")
 			Pair<S, T> p = (Pair<S, T>) ob;
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 			return p.first.equals(first) && p.second.equals(second);
 		}
 
@@ -155,5 +258,5 @@ public class DataAccessFacade implements DataAccess {
 		public String toString() {
 			return "(" + first.toString() + ", " + second.toString() + ")";
 		}
-	}
+	}*/
 }

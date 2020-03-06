@@ -12,6 +12,13 @@ final public class Address implements Serializable
 	private String state;
 	private String zip;
 	
+	/**
+	 * 
+	 * @param street Street Name
+	 * @param city
+	 * @param state
+	 * @param zip The ZIP code
+	 */
 	public Address(String street, String city, String state, String zip) 
 	{
 		this.street = street;
@@ -43,7 +50,7 @@ final public class Address implements Serializable
 	@Override
 	public String toString() 
 	{
-		return "(" + street + ", " + city + ", " + zip + ")";
+		return "(" + street + ", " + city + ", " + state + ", " + zip + ")";
 		
 	}
 }

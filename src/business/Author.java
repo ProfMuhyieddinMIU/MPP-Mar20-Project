@@ -13,9 +13,27 @@ final public class Author extends Person implements Serializable
 		return bio;
 	}
 	
-	public Author(String f, String l, String t, Address a, String bio) 
+	/**
+	 *  Update the Author's Biography
+	 * @param b The new updated Biography
+	 */
+	public void setBio(String b)
 	{
-		super(f, l, t, a);
+		bio = b;
+	}
+	
+	/**
+	 * 
+	 * @param f First Name
+	 * @param l Last Name
+	 * @param t Telephone Number
+	 * @param a Address
+	 * @param bio Biography
+	 * @param em Email
+	 */
+	public Author(String f, String l, String t, Address a, String bio, String em) 
+	{
+		super(f, l, t, a, em);
 		this.bio = bio;
 	}
 }

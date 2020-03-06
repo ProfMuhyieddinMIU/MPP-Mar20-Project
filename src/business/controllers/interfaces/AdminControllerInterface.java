@@ -1,15 +1,16 @@
 package business.controllers.interfaces;
 
-import business.Book;
 import business.LibraryMember;
 import business.customExceptions.BookNotFoundException;
+import business.customExceptions.MemberInvalidDataException;
 
 public interface AdminControllerInterface {
 
-	void addMember(LibraryMember member);
+	LibraryMember addMember(String firstName, String lastName, String telephone, String email, String street,
+			String state, String city, String zip) throws MemberInvalidDataException;
 
-	void addBook(Book book);
+	void addBook(String firstName, String lastName, String phone);
 
-	void addBookCopy(String isbn) throws BookNotFoundException;
+	void addBookCopy(String isbn, int numOfCopies) throws BookNotFoundException;
 
 }

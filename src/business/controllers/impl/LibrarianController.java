@@ -280,6 +280,16 @@ public class LibrarianController implements LibrarianInterface  {
 			throw new BookNotFoundException();
 		} 
 		
+		DataAccess da = new DataAccessFacade();
+		for (CheckOutRecord checkOutRecord : da.readCheckOutRecordsMap().values()  ) {
+			if (checkOutRecord.getIsbn() != null && checkOutRecord.getMemberId() != null 
+				&& checkOutRecord.getIsbn().equalsIgnoreCase(isbn)
+				&& checkOutRecord.getMemberId().equalsIgnoreCase(memberId)
+					) {
+				  throw new LibrarySystemException("This member already has a copy from this book amd can't get another copy") ;
+			}
+		}
+		
 		int copyNum = -1 ;
 		if(book.isAvailable())
 			copyNum = book.getNextAvailableCopy().getCopyNum() ;

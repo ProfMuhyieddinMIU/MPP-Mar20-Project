@@ -7,14 +7,12 @@ import java.util.List;
 
 import business.Author;
 import business.Book;
-import business.BookCopy;
 import business.CheckOutRecord;
 import business.LibraryMember;
 import business.controllers.interfaces.LibrarianInterface;
 import business.customExceptions.BookNotFoundException;
 import business.customExceptions.LibrarySystemException;
 import business.customExceptions.MemberNotFoundException;
-import business.controllers.interfaces.LibrarianInterface;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 
@@ -307,8 +305,15 @@ public class LibrarianController implements LibrarianInterface  {
 		
 		//Hus3/6/20:: Next copy is not available
 		book.getNextAvailableCopy().changeAvailability();
+		updateBookMap(book);
 		saveCheckOutBook( memberId, isbn , copyNum );
 		return true;
+	}
+
+	private void updateBookMap(Book book) {
+		DataAccess da = new DataAccessFacade();
+		da.updateBook(book);
+		
 	}
 	
 }

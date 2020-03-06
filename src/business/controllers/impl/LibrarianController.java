@@ -242,12 +242,16 @@ public class LibrarianController implements LibrarianInterface  {
 		} 
 		
 		int copyNum = -1 ;
-		for (BookCopy  bookCopy : book.getCopies()) {
+		if(book.isAvailable())
+			copyNum = book.getNextAvailableCopy().getCopyNum() ;
+	 
+		
+	/*	for (BookCopy  bookCopy : book.getCopies()) {
 			if (bookCopy.isAvailable()) {
 				copyNum = bookCopy.getCopyNum();
 				break ;
 			}
-		}  
+		}  */
 		if (copyNum < 0) {
             throw new LibrarySystemException("No available copy from this book") ;
 		}

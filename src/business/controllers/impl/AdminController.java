@@ -19,7 +19,14 @@ public class AdminController implements AdminControllerInterface {
 		AdminController a = new AdminController();
 		// for test AdminController only
 		System.out.println("test addMember ==> "
-				+ a.addMember("testFirstName", "testLastName", "641-472-2558",  "e@f.com","ss", "iowa", "dd", "11"));
+				+ a.addMember("Most", "Moha", "641-472-2558", "e@f.com", "ss", "iowa", "dd", "11"));
+
+		try {
+			a.addBookCopy("28-12331");
+		} catch (BookNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
 
 	}
 
@@ -40,7 +47,7 @@ public class AdminController implements AdminControllerInterface {
 		Book book = searchBookInMap(isbn, map);
 
 		if (book == null)
-			throw new BookNotFoundException();
+			throw new BookNotFoundException("No Book Found With ISBN : " + isbn);
 
 		book.addCopy();
 

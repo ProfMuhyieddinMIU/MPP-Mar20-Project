@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import business.LoginException;
 import business.controllers.impl.SystemController;
 import business.controllers.interfaces.ControllerInterface;
-import dataaccess.Auth;
 import javafx.event.ActionEvent; 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
-public class MainWindowController implements Initializable {
+public class CheckoutWindowController implements Initializable {
 
 	@FXML
 	private MenuItem exitMenuItem;
@@ -38,11 +37,12 @@ public class MainWindowController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
-		
+
 	}
 
 	public void exitApplication(ActionEvent event) {
+		System.out.println("Application Exit!");
+
 		System.exit(0);
 
 	}
@@ -53,16 +53,7 @@ public class MainWindowController implements Initializable {
 			
 			ControllerInterface c = new SystemController();
 			c.login(usernameTextField.getText(), passwordTextField.getText());
-			String auth = SystemController.currentLoggedInUser.getAuthorization().name();
-			
-			if(auth.equals(Auth.LIBRARIAN.name())) {
-				WindowController.openWindow("LibrarianWindow", event, this.getClass());
-			} else if(auth.equals(Auth.ADMIN.name())) {
-				WindowController.openWindow("AdminWindow", event, this.getClass());
-			} else {
-				WindowController.openWindow("BothWindow", event, this.getClass());
-			}
-			
+			System.out.println(SystemController.currentLoggedInUser.getAuthorization());
 		} catch (LoginException e) {
 			
 			Alert alert = new Alert(AlertType.WARNING);
@@ -73,6 +64,5 @@ public class MainWindowController implements Initializable {
 		}
 
 	}
-	
 
 }

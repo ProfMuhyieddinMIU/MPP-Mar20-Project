@@ -7,11 +7,12 @@ import java.util.List;
 import business.Author;
 import business.Book;
 import business.LibraryMember;
-import business.controllers.interfaces.LibraryInterface;
+import business.controllers.interfaces.LibrarianInterface;
+import business.controllers.interfaces.LibrarianInterface;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 
-public class LibraryController implements LibraryInterface {
+public class LibrarianController implements LibrarianInterface  {
 
 	@Override
 	public List<Book> getAllBooks() {
@@ -27,7 +28,7 @@ public class LibraryController implements LibraryInterface {
  
 	public static void main(String[] args) {
 		// for test LibraryController only 
-		LibraryController l = new LibraryController();
+		LibrarianController l = new LibrarianController();
 		System.out.println("test getAllBooks ==> " + l.getAllBooks());
 		
 		System.out.println("test getBookByIsbn ==> " + l.getBookByIsbn("28-12331").toString());

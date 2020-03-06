@@ -1,4 +1,5 @@
 package dataaccess;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -14,12 +15,17 @@ import business.BookCopy;
 import business.LibraryMember;
 import dataaccess.DataAccessFacade.StorageType;
 
+<<<<<<< HEAD
 //Hus3/5/20:: see all warnings
 public class DataAccessFacade implements DataAccess
 {
+=======
+public class DataAccessFacade implements DataAccess {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 	public static final String OUTPUT_DIR = System.getProperty("user.dir") + "\\src\\dataaccess\\storage";
 	public static final String DATE_PATTERN = "MM/dd/yyyy";
 	private static final long serialVersionUID = 5399827794066637059L;
+<<<<<<< HEAD
 	
 	/**
 	 * Books, Members, or Users
@@ -27,18 +33,28 @@ public class DataAccessFacade implements DataAccess
 	 */
 	enum StorageType 
 	{
+=======
+
+	enum StorageType {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		BOOKS, MEMBERS, USERS;
 	}
 
+<<<<<<< HEAD
 	//implement: other save operations
 	
 	public void saveNewMember(LibraryMember member) 
 	{
+=======
+	// implement: other save operations
+	public void saveNewMember(LibraryMember member) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		HashMap<String, LibraryMember> mems = readMemberMap();
 		String memberId = member.getMemberId();
 		mems.put(memberId, member);
 		saveToStorage(StorageType.MEMBERS, mems);
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * @return Map with name/value pairs being: isbn -> Book
@@ -46,15 +62,43 @@ public class DataAccessFacade implements DataAccess
 	public  HashMap<String,Book> readBooksMap() 
 	{
 		return (HashMap<String,Book>) readFromStorage(StorageType.BOOKS);
+=======
+
+	/**
+	 * 
+	 * @param book
+	 */
+	public void saveNewBook(Book book) {
+		HashMap<String, Book> mems = readBooksMap();
+		String bookIsbn = book.getIsbn();
+		mems.put(bookIsbn, book);
+		saveToStorage(StorageType.BOOKS, mems);
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * @returnMap Map with name/value pairs being: memberId -> LibraryMember
 	 */
 	public HashMap<String, LibraryMember> readMemberMap() 
 	{
+=======
+
+	@SuppressWarnings("unchecked")
+	public HashMap<String, Book> readBooksMap() {
+		// Returns a Map with name/value pairs being
+		// isbn -> Book
+		return (HashMap<String, Book>) readFromStorage(StorageType.BOOKS);
+	}
+
+	@SuppressWarnings("unchecked")
+	public HashMap<String, LibraryMember> readMemberMap() {
+		// Returns a Map with name/value pairs being
+		// memberId -> LibraryMember
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		return (HashMap<String, LibraryMember>) readFromStorage(StorageType.MEMBERS);
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * @return Map with name/value pairs being: userId -> User
@@ -62,7 +106,16 @@ public class DataAccessFacade implements DataAccess
 	public HashMap<String, User> readUserMap() 
 	{
 		return (HashMap<String, User>)readFromStorage(StorageType.USERS);
+=======
+
+	@SuppressWarnings("unchecked")
+	public HashMap<String, User> readUserMap() {
+		// Returns a Map with name/value pairs being
+		// userId -> User
+		return (HashMap<String, User>) readFromStorage(StorageType.USERS);
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 	}
+<<<<<<< HEAD
 	
 	
 	/////load methods - these place test data into the storage area
@@ -70,24 +123,30 @@ public class DataAccessFacade implements DataAccess
 	
 	static void loadBookMap(List<Book> bookList) 
 	{
+=======
+
+	///// load methods - these place test data into the storage area
+	///// - used just once at startup
+
+	static void loadBookMap(List<Book> bookList) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		HashMap<String, Book> books = new HashMap<String, Book>();
 		bookList.forEach(book -> books.put(book.getIsbn(), book));
 		saveToStorage(StorageType.BOOKS, books);
 	}
-	
-	static void loadUserMap(List<User> userList) 
-	{
+
+	static void loadUserMap(List<User> userList) {
 		HashMap<String, User> users = new HashMap<String, User>();
 		userList.forEach(user -> users.put(user.getId(), user));
 		saveToStorage(StorageType.USERS, users);
 	}
- 
-	static void loadMemberMap(List<LibraryMember> memberList) 
-	{
+
+	static void loadMemberMap(List<LibraryMember> memberList) {
 		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
 		memberList.forEach(member -> members.put(member.getMemberId(), member));
 		saveToStorage(StorageType.MEMBERS, members);
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Save an object to the file system
@@ -96,32 +155,34 @@ public class DataAccessFacade implements DataAccess
 	 */
 	static void saveToStorage(StorageType type, Object ob) 
 	{
+=======
+
+	static void saveToStorage(StorageType type, Object ob) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		ObjectOutputStream out = null;
-		try 
-		{
+		try {
 			Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
 			out = new ObjectOutputStream(Files.newOutputStream(path));
 			out.writeObject(ob);
-		} 
-		catch(IOException e) 
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		finally 
-		{
-			if(out != null) 
-			{
-				try 
-				{
+		} finally {
+			if (out != null) {
+				try {
 					out.close();
+<<<<<<< HEAD
 				} 
 				catch(Exception e) 
 				{//Hus3/5/20::was catching without displaying the error or solving it
 					System.err.println("Error Closing Output Stream");
+=======
+				} catch (Exception e) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 				}
 			}
 		}
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * Read an object from the file system
@@ -130,66 +191,71 @@ public class DataAccessFacade implements DataAccess
 	 */
 	static Object readFromStorage(StorageType type) 
 	{
+=======
+
+	static Object readFromStorage(StorageType type) {
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		ObjectInputStream in = null;
 		Object retVal = null;
-		try 
-		{
+		try {
 			Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
 			in = new ObjectInputStream(Files.newInputStream(path));
 			retVal = in.readObject();
-		} 
-		catch(Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally 
-		{
-			if(in != null) 
-			{
-				try 
-				{
+		} finally {
+			if (in != null) {
+				try {
 					in.close();
-				} 
-				catch(Exception e) 
-				{}
+				} catch (Exception e) {
+				}
 			}
 		}
 		return retVal;
 	}
+<<<<<<< HEAD
 	
 	/*Hus3/5/20::StopUnknown
 	final static class Pair<S,T> implements Serializable
 	{
+=======
+
+	final static class Pair<S, T> implements Serializable {
+
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 		S first;
 		T second;
-		Pair(S s, T t) 
-		{
+
+		Pair(S s, T t) {
 			first = s;
 			second = t;
 		}
-		@Override 
-		public boolean equals(Object ob) 
-		{
-			if(ob == null) 
+
+		@Override
+		public boolean equals(Object ob) {
+			if (ob == null)
 				return false;
-			if(this == ob) 
+			if (this == ob)
 				return true;
-			if(ob.getClass() != getClass()) 
+			if (ob.getClass() != getClass())
 				return false;
+<<<<<<< HEAD
 
 			Pair<S,T> p = (Pair<S,T>)ob;
+=======
+			@SuppressWarnings("unchecked")
+			Pair<S, T> p = (Pair<S, T>) ob;
+>>>>>>> branch 'development' of https://github.com/MustafaMosad/G4-MPP-Mar20-Project.git
 			return p.first.equals(first) && p.second.equals(second);
 		}
-		
-		@Override 
-		public int hashCode() 
-		{
+
+		@Override
+		public int hashCode() {
 			return first.hashCode() + 5 * second.hashCode();
 		}
-		
+
 		@Override
-		public String toString() 
-		{
+		public String toString() {
 			return "(" + first.toString() + ", " + second.toString() + ")";
 		}
 	}*/

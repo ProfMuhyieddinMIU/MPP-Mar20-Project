@@ -3,8 +3,8 @@ package ui;
 import java.util.Collections;
 import java.util.List;
 
-import business.ControllerInterface;
-import business.SystemController;
+import business.controllers.impl.SystemController;
+import business.controllers.interfaces.ControllerInterface;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,10 +21,21 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 
 public class Start extends Application
 {
+    
+    
+   
 	public static void main(String[] args)
 	{
 		launch(args);
@@ -60,6 +71,7 @@ public class Start extends Application
 	@Override
 	public void start(Stage primaryStage)
 	{
+	    
 		primStage = primaryStage;
 		primaryStage.setTitle("Main Page");
 
@@ -158,6 +170,8 @@ public class Start extends Application
 		primaryStage.setScene(scene);
 		scene.getStylesheets().add(getClass().getResource("library.css").toExternalForm());
 		primaryStage.show();
+		
+		
 	}
 
 }

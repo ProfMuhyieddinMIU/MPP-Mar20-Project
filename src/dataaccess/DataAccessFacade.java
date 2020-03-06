@@ -1,5 +1,6 @@
 package dataaccess;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,21 +8,23 @@ import java.io.Serializable;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import business.Book;
 import business.BookCopy;
+import business.CheckOutRecord;
 import business.LibraryMember;
 import dataaccess.DataAccessFacade.StorageType;
 
 public class DataAccessFacade implements DataAccess {
-	public static final String OUTPUT_DIR = System.getProperty("user.dir") + "\\src\\dataaccess\\storage";
+	public static final String OUTPUT_DIR = System.getProperty("user.dir") + File.separator +"src"+File.separator+"dataaccess"+File.separator+"storage";
 	public static final String DATE_PATTERN = "MM/dd/yyyy";
 	private static final long serialVersionUID = 5399827794066637059L;
 
 	enum StorageType {
-		BOOKS, MEMBERS, USERS;
+		BOOKS, MEMBERS, USERS , CHECKOUT;
 	}
 
 	// implement: other save operations
@@ -43,6 +46,27 @@ public class DataAccessFacade implements DataAccess {
 		saveToStorage(StorageType.BOOKS, mems);
 	}
 
+
+	public void updateBook(Book book) {
+		HashMap<String, Book> mems = readBooksMap();
+
+		mems.put(book.getIsbn(), book);
+		saveToStorage(StorageType.BOOKS, mems);
+	}
+
+
+	
+	// implement: other save operations
+		public void saveNewCheckOutRecord(CheckOutRecord checkOutRecord  ) {
+			HashMap<String, CheckOutRecord> CheckOutRecords = readCheckOutRecordsMap();
+			String transId = checkOutRecord.getTransId() + "" ;
+			if (CheckOutRecords == null ) {
+				CheckOutRecords = new HashMap<String, CheckOutRecord> ();
+			}
+			CheckOutRecords.put(transId, checkOutRecord);
+			saveToStorage(StorageType.CHECKOUT , CheckOutRecords);
+		}
+		
 	@SuppressWarnings("unchecked")
 	public HashMap<String, Book> readBooksMap() {
 		// Returns a Map with name/value pairs being
@@ -50,6 +74,13 @@ public class DataAccessFacade implements DataAccess {
 		return (HashMap<String, Book>) readFromStorage(StorageType.BOOKS);
 	}
 
+	@SuppressWarnings("unchecked")
+	public HashMap<String, CheckOutRecord> readCheckOutRecordsMap() {
+		// Returns a Map with name/value pairs being
+		// isbn -> Book
+		return (HashMap<String, CheckOutRecord>) readFromStorage(StorageType.CHECKOUT);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public HashMap<String, LibraryMember> readMemberMap() {
 		// Returns a Map with name/value pairs being
@@ -79,6 +110,13 @@ public class DataAccessFacade implements DataAccess {
 		saveToStorage(StorageType.USERS, users);
 	}
 
+	static void loadCheckOutRecordMap(List<CheckOutRecord> checkOutRecordList) {
+		HashMap<String, CheckOutRecord> checkOutRecords = new HashMap<String, CheckOutRecord>();
+		checkOutRecordList.forEach(checkOutRecord -> checkOutRecords.put(checkOutRecord.getTransId() + "" , checkOutRecord ));
+		saveToStorage(StorageType.USERS, checkOutRecords);
+	}
+	 	
+	
 	static void loadMemberMap(List<LibraryMember> memberList) {
 		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
 		memberList.forEach(member -> members.put(member.getMemberId(), member));

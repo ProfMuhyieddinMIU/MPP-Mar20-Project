@@ -6,7 +6,7 @@ public class BookNotFoundException extends LibrarySystemException implements Ser
 	private static final long serialVersionUID = 3326915348398932420L;
 
 	public BookNotFoundException() {
-		super();
+		super("Book not found");
 	}
 
 	public BookNotFoundException(String msg) {

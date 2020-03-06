@@ -49,10 +49,13 @@ public class MainWindowController implements Initializable {
 	}
 
 	public void login(ActionEvent event) {
-		ControllerInterface c = new SystemController();
+		
+		System.out.println(usernameTextField.getText());
 		try {
+			
+			ControllerInterface c = new SystemController();
 			c.login(usernameTextField.getText(), passwordTextField.getText());
-
+			System.out.println(SystemController.currentLoggedInUser.getAuthorization());
 		} catch (LoginException e) {
 			
 			errorLabel.setText(e.getMessage());

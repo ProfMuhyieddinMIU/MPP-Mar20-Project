@@ -1,6 +1,7 @@
 package business.controllers.impl;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import business.Address;
@@ -22,7 +23,7 @@ public class AdminController implements AdminControllerInterface {
 				+ a.addMember("Most", "Moha", "641-472-2558", "e@f.com", "ss", "iowa", "dd", "11"));
 
 		try {
-			a.addBookCopy("28-12331");
+			a.addBookCopy("28-12331", 3);
 		} catch (BookNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
@@ -41,7 +42,7 @@ public class AdminController implements AdminControllerInterface {
 	 * @param isbn
 	 */
 	@Override
-	public void addBookCopy(String isbn) throws BookNotFoundException {
+	public void addBookCopy(String isbn, int numOfCopies) throws BookNotFoundException {
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, Book> map = da.readBooksMap();
 		Book book = searchBookInMap(isbn, map);
@@ -49,7 +50,10 @@ public class AdminController implements AdminControllerInterface {
 		if (book == null)
 			throw new BookNotFoundException("No Book Found With ISBN : " + isbn);
 
-		book.addCopy();
+		for (int i = 0; i < numOfCopies; i++) {
+			book.addCopy();
+
+		}
 		da.updateBook(book);
 
 	}

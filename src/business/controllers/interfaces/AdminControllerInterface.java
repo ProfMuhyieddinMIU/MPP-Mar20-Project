@@ -11,6 +11,6 @@ public interface AdminControllerInterface {
 
 	void addBook(String firstName, String lastName, String phone);
 
-	void addBookCopy(String isbn) throws BookNotFoundException;
+	void addBookCopy(String isbn, int numOfCopies) throws BookNotFoundException;
 
 }

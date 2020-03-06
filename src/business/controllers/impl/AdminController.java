@@ -2,9 +2,13 @@ package business.controllers.impl;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import com.sun.media.sound.InvalidDataException;
+
 import business.Address;
+import business.Author;
 import business.Book;
 import business.LibraryMember;
 import business.controllers.interfaces.AdminControllerInterface;
@@ -136,15 +140,25 @@ public class AdminController implements AdminControllerInterface
 		return "" + generatedId;
 	}
 
+	//Hus3/6/20:
 	@Override
-	public void addBook(String firstName, String lastName, String phone)
+	public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> authors) throws InvalidDataException
 	{
 		DataAccess da = new DataAccessFacade();
-		// validateBookData(book);
-		// da.saveNewBook(book);
-
+		Book b = new Book(isbn, title, maxCheckoutLength, authors);
+		validateBookData(b);
+		da.saveNewBook(b);
 	}
 
-	private void validateBookData(Book book)
-	{}
+	//Hus3/6/20:
+	private void validateBookData(Book b) throws InvalidDataException
+	{
+		if (b.getIsbn().isEmpty() || b.getAuthors().isEmpty() || b.getTitle().isEmpty()
+				|| (b.getMaxCheckoutLength() != 21 ||b.getMaxCheckoutLength() != 7))
+			throw new InvalidDataException();
+		DataAccess da = new DataAccessFacade();
+		HashMap<String, Book> books = da.readBooksMap();
+		if(searchBookInMap(b.getIsbn(), books) != null)
+			throw new InvalidDataException("Book already exists");
+	}
 }

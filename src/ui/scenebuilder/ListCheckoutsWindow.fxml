@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1016.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.AddCopyWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1016.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.ListCheckoutsWindowController">
    <children>
       <MenuBar prefHeight="30.0" prefWidth="1016.0" stylesheets="@style.css">
         <menus>
@@ -35,18 +35,12 @@
             <Image url="@images/MIU_CAMP3.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="isbnTextField" layoutX="441.0" layoutY="189.0" />
-      <Label layoutX="373.0" layoutY="189.0" styleClass="label-normal" text="ISBN" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
-         <font>
-            <Font name="Arial Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="328.0" layoutY="62.0" prefHeight="54.0" prefWidth="361.0" styleClass="label-header" text="Add Copy of a Book" textAlignment="CENTER">
+      <Label layoutX="332.0" layoutY="50.0" prefHeight="33.0" prefWidth="352.0" styleClass="label-header" text="Check Out Records" textAlignment="CENTER">
          <font>
             <Font name="Arial Bold" size="29.0" />
          </font>
       </Label>
-      <Button fx:id="addCopyButton" defaultButton="true" layoutX="441.0" layoutY="280.0" mnemonicParsing="false" onAction="#addCopy" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Add" textFill="WHITE">
+      <Button fx:id="backButton" defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" onAction="#back" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
@@ -59,19 +53,16 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="countTextField" layoutX="441.0" layoutY="236.0" />
-      <Label layoutX="240.0" layoutY="236.0" prefHeight="30.0" prefWidth="198.0" styleClass="label-normal" text="Numer of Copies" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
-         <font>
-            <Font name="Arial Bold" size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="backButton" defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" onAction="#back" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
-         <effect>
-            <Blend opacity="0.0" />
-         </effect>
-         <font>
-            <Font name="Arial Bold" size="20.0" />
-         </font>
-      </Button>
+      <TableView fx:id="tblCheckoutRecords" layoutX="14.0" layoutY="122.0" opacity="0.85" prefHeight="459.0" prefWidth="989.0">
+        <columns>
+          <TableColumn fx:id="clmISBN" prefWidth="96.0" text="ISBN" />
+          <TableColumn fx:id="clmBookTitle" prefWidth="165.0" text="Book Title" />
+            <TableColumn fx:id="clmMemberID" prefWidth="146.0" text="Member ID" />
+            <TableColumn fx:id="clmMemberName" prefWidth="199.0" text="Member Name" />
+            <TableColumn fx:id="clmOutDate" prefWidth="127.0" text="Out Date" />
+            <TableColumn fx:id="clmDueDate" prefWidth="138.0" text="Due Date" />
+            <TableColumn fx:id="clmStatus" prefWidth="113.0" text="Status" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

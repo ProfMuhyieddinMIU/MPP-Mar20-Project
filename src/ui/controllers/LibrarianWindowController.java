@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import business.LoginException;
 import business.controllers.impl.SystemController;
 import business.controllers.interfaces.ControllerInterface;
-import dataaccess.Auth;
 import javafx.event.ActionEvent; 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
-public class MainWindowController implements Initializable {
+public class LibrarianWindowController implements Initializable {
 
 	@FXML
 	private MenuItem exitMenuItem;
@@ -38,41 +37,21 @@ public class MainWindowController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
-		
+
 	}
 
 	public void exitApplication(ActionEvent event) {
+		System.out.println("Application Exit!");
+
 		System.exit(0);
 
 	}
-
-	public void login(ActionEvent event) {
-		
-		try {
-			
-			ControllerInterface c = new SystemController();
-			c.login(usernameTextField.getText(), passwordTextField.getText());
-			String auth = SystemController.currentLoggedInUser.getAuthorization().name();
-			
-			if(auth.equals(Auth.LIBRARIAN.name())) {
-				WindowController.openWindow("LibrarianWindow", event, this.getClass());
-			} else if(auth.equals(Auth.ADMIN.name())) {
-				WindowController.openWindow("AdminWindow", event, this.getClass());
-			} else {
-				WindowController.openWindow("BothWindow", event, this.getClass());
-			}
-			
-		} catch (LoginException e) {
-			
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Invalid Credentionals!");
-			alert.setContentText(e.getMessage());
-			alert.show();
-
-		}
+	
+	public void openCheckout(ActionEvent event) {
+		WindowController.openWindow("CheckoutWindow", event, this.getClass());
 
 	}
+
 	
 
 }

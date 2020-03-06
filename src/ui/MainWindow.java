@@ -19,17 +19,12 @@ public class MainWindow extends Application{
 	public void start(Stage primaryStage) throws Exception {
 
 		try {
-            // Read file fxml and draw interface.
-            Parent root = FXMLLoader.load(getClass()
-                    .getResource("/ui/scenebuilder/MainWindow.fxml"));
- 
-            primaryStage.setTitle("Login");
+			
+            Parent root = FXMLLoader.load(getClass().getResource("/ui/scenebuilder/MainWindow.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.show();
-            
-            
-         
+
         } catch(Exception e) {
             e.printStackTrace();
         }

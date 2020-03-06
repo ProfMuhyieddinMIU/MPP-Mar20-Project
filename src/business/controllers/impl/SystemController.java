@@ -12,7 +12,7 @@ import dataaccess.DataAccessFacade;
 import dataaccess.User;
 
 public class SystemController implements ControllerInterface {
-	public static Auth currentAuth = null;
+	public static User currentLoggedInUser = null;
 
 	public void login(String id, String password) throws LoginException {
 		DataAccess da = new DataAccessFacade();
@@ -27,7 +27,7 @@ public class SystemController implements ControllerInterface {
 		String passwordFound = map.get(id).getPassword();
 		if (!passwordFound.equals(password))
 			throw new LoginException("Password incorrect");
-		currentAuth = map.get(id).getAuthorization();
+		currentLoggedInUser = map.get(id);
 	}
 
 	@Override

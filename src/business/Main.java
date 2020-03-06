@@ -4,10 +4,50 @@ import java.util.*;
 
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Main 
 {
 
+	private static int currentDay = 0;
+	
+	/**
+	 * Moves the system to the next day
+	 */
+	public static void incrementDay()
+	{
+		currentDay++;
+	}
+	
+	/**
+	 * Go forward a specific number of days
+	 * @param d Number of days to go forward
+	 */
+	public static void addDays(int d)
+	{
+		currentDay = d;
+	}
+	
+	/**
+	 * 
+	 * @return A list of all IDs of  LibraryMembers that have an overdue book
+	 */
+	public static List<String> allHavingOverdueBook() 
+	{
+		DataAccess da = new DataAccessFacade();
+		Collection<LibraryMember> members = da.readMemberMap().values();
+		List<LibraryMember> mems = new ArrayList<>();
+		mems.addAll(members);
+		for(LibraryMember m: members)
+		{
+			
+		}
+		List<LibraryMember> od =new ArrayList<>();
+		//implement
+		throw new NotImplementedException();
+		
+	}
+	
 	/*Hus3/5/20:: NotUseful
 	public static void main(String[] args) 
 	{
@@ -36,21 +76,4 @@ public class Main
 		return null;
 	}
 	*/
-	
-	/**
-	 * 
-	 * @return A list of all ids of  LibraryMembers that have an overdue book
-	 */
-	public static List<String> allHavingOverdueBook() 
-	{
-		DataAccess da = new DataAccessFacade();
-		Collection<LibraryMember> members = da.readMemberMap().values();
-		List<LibraryMember> mems = new ArrayList<>();
-		mems.addAll(members);
-		//implement
-		return null;
-		
-	}
-	
-	
 }

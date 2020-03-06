@@ -35,6 +35,7 @@ public class Person implements Serializable
 		lastName = l;
 		telephone = t;
 		address = a;
+		email = e;
 	}
 	
 	public String getFirstName()

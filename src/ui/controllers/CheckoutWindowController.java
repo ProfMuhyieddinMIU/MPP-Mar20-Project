@@ -47,7 +47,7 @@ public class CheckoutWindowController implements Initializable {
 
 	}
 
-	public void login(ActionEvent event) {
+	public void checkout(ActionEvent event) {
 		
 		try {
 			

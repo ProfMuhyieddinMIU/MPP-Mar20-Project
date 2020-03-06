@@ -47,7 +47,7 @@ public class AddMemberWindowController implements Initializable {
 
 	}
 
-	public void login(ActionEvent event) {
+	public void addMember(ActionEvent event) {
 		
 		try {
 			

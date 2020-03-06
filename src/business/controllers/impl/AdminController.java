@@ -50,6 +50,7 @@ public class AdminController implements AdminControllerInterface {
 			throw new BookNotFoundException("No Book Found With ISBN : " + isbn);
 
 		book.addCopy();
+		da.updateBook(book);
 
 	}
 

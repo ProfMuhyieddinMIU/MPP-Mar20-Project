@@ -69,8 +69,8 @@ public class AdminWindowController implements Initializable {
 
 	}
 	
-	public void openAddLibrarian(ActionEvent event) {
-		WindowController.openWindow("AddLibrarianWindow", event, this.getClass());
+	public void openListCheckouts(ActionEvent event) {
+		WindowController.openWindow("ListCheckoutsWindow", event, this.getClass());
 
 	}
 	

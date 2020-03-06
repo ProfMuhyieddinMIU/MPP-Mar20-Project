@@ -15,12 +15,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ui.dataModel.BookDataModel;
 
 public class ListBooksWindowController implements Initializable {
-	
+
 	@FXML
 	private Button backButton;
 
@@ -52,7 +53,7 @@ public class ListBooksWindowController implements Initializable {
 		clmCopies.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("copies"));
 
 		this.getAllBooks();
-		
+
 		TableViewLoad(booksData);
 
 	}
@@ -60,6 +61,17 @@ public class ListBooksWindowController implements Initializable {
 	private void TableViewLoad(ObservableList<BookDataModel> booksData) {
 
 		tblBooks.setItems(getBooksData());
+		
+		tblBooks.setRowFactory(tv -> {
+			TableRow<BookDataModel> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					BookDataModel rowData = row.getItem();
+					System.out.println("Double click on: " + rowData.getTitle());
+				}
+			});
+			return row;
+		});
 
 	}
 
@@ -77,18 +89,16 @@ public class ListBooksWindowController implements Initializable {
 	public void getAllBooks() {
 		LibrarianInterface c = new LibrarianController();
 		List<Book> books = c.getAllBooks();
-		
-		for(Book b: books){
+
+		for (Book b : books) {
 			booksData.add(new BookDataModel(b));
 		}
 	}
-	
+
 	public void back(ActionEvent event) {
 
 		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
-	
-	
 
 }

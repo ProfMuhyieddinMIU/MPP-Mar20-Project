@@ -18,13 +18,13 @@ public class CheckoutDataModel {
 	
 	public CheckoutDataModel(CheckOutRecord c) {
 		
-//		this.isbn = c.getIsbn();
-//		this.bookTitle = ;
-//		this.memberId = memberId;
-//		this.memberName = memberName;
-//		this.checkoutDate = checkoutDate;
-//		this.dueDate = dueDate;
-//		this.satus = satus;
+		this.isbn = c.getIsbn();
+		this.bookTitle = c.getBookTitle();
+		this.memberId = c.getMemberId();
+		this.memberName = c.getMemberName();
+		this.checkoutDate = c.getCheckOutDate().toString();
+		this.dueDate = c.getDueDateAsString();
+		this.satus = c.isOverDueDate()? "Overdue!" : "";
 	}
 
 	public String getIsbn() {
@@ -81,21 +81,6 @@ public class CheckoutDataModel {
 
 	public void setSatus(String satus) {
 		this.satus = satus;
-	}
-
-	public String getAuthorsName(List<Author> authors) {
-		if (authors.size() == 0)
-			return "";
-
-		if (authors.size() == 1)
-			return authors.get(0).getFirstName() + " " + authors.get(0).getLastName();
-
-		String authorsName = "";
-		for (Author a : authors) {
-			authorsName += ", " + a.getFirstName();
-		}
-
-		return authorsName.substring(2);
 	}
 
 }

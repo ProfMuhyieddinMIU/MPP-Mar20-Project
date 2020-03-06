@@ -6,7 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Mosad/Downloads/javax.mail-1.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mosad/Downloads/activation.jar"/>
+	<classpathentry kind="lib" path="D:/workspace/G4-MPP-Mar20-Project/lib/activation.jar"/>
+	<classpathentry kind="lib" path="D:/workspace/G4-MPP-Mar20-Project/lib/javax.mail-1.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

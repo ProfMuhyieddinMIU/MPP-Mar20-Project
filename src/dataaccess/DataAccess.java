@@ -21,4 +21,5 @@ public interface DataAccess {
 	
 	public void saveNewCheckOutRecord(CheckOutRecord checkOutRecord  ) ;
 	public void updateBook(Book book);
+	public void updateMember(LibraryMember m);//Hus3/6/20
 }

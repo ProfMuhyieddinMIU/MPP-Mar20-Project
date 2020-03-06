@@ -256,7 +256,8 @@ public class LibrarianController implements LibrarianInterface  {
             throw new LibrarySystemException("No available copy from this book") ;
 		}
 		
-		
+		//Hus3/6/20:: Next copy is not available
+		book.getNextAvailableCopy().changeAvailability();
 		saveCheckOutBook( memberId, isbn , copyNum );
 		return true;
 	}

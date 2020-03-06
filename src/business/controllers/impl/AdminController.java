@@ -3,45 +3,29 @@ package business.controllers.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import business.Address;
 import business.Book;
 import business.LibraryMember;
 import business.controllers.interfaces.AdminControllerInterface;
 import business.customExceptions.BookNotFoundException;
+import business.customExceptions.MemberInvalidDataException;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 
 public class AdminController implements AdminControllerInterface {
 
-	/**
-	 * 
-	 * @param member
-	 */
-	@Override
-	public void addMember(LibraryMember member) {
-		DataAccess da = new DataAccessFacade();
-		validateMemberData(member);
-		da.saveNewMember(member);
+	public static void main(String[] args) throws MemberInvalidDataException {
+
+		AdminController a = new AdminController();
+		// for test AdminController only
+		System.out.println("test addMember ==> "
+				+ a.addMember("testFirstName", "testLastName", "641-472-2558", "ss", "iowa", "dd", "11"));
 
 	}
 
-	private void validateMemberData(LibraryMember member) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * 
-	 * @param book
-	 */
-	@Override
-	public void addBook(Book book) {
-		DataAccess da = new DataAccessFacade();
-		validateBookData(book);
-		da.saveNewBook(book);
-
-	}
-
-	private void validateBookData(Book book) {
+	private void validateMemberData(LibraryMember member) throws MemberInvalidDataException {
+		if (member.getMemberId().isEmpty() || member.getFirstName().isEmpty() || member.getLastName().isEmpty())
+			throw new MemberInvalidDataException(" Member Id , First Name and Last Name Fields Can not be empty !");
 
 	}
 
@@ -75,6 +59,38 @@ public class AdminController implements AdminControllerInterface {
 				return entry.getValue();
 		}
 		return null;
+
+	}
+
+	@Override
+	public LibraryMember addMember(String firstName, String lastName, String telephone, String street, String state,
+			String city, String zip) throws MemberInvalidDataException {
+
+		DataAccess da = new DataAccessFacade();
+		Address address = new Address(street, city, state, zip);
+
+		LibraryMember member = new LibraryMember(generateMemberId(), firstName, lastName, telephone, address);
+		validateMemberData(member);
+		da.saveNewMember(member);
+		return member;
+	}
+
+	private String generateMemberId() {
+		SystemController systemController = new SystemController();
+
+		int generatedId = systemController.allMemberIds().size() + 1001;
+		return "" + generatedId;
+	}
+
+	@Override
+	public void addBook(String firstName, String lastName, String phone) {
+		DataAccess da = new DataAccessFacade();
+		// validateBookData(book);
+		// da.saveNewBook(book);
+
+	}
+
+	private void validateBookData(Book book) {
 
 	}
 

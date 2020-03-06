@@ -64,7 +64,7 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="addLibrarianButton" defaultButton="true" layoutX="541.0" layoutY="192.0" mnemonicParsing="false" onAction="#openAddLibrarian" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Add Librarian" textFill="WHITE">
+      <Button fx:id="listCheckoutButton" defaultButton="true" layoutX="541.0" layoutY="192.0" mnemonicParsing="false" onAction="#openListCheckouts" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="List Checkout Records" textFill="WHITE">
          <effect>
             <Blend opacity="0.0" />
          </effect>

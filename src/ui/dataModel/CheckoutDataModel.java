@@ -24,7 +24,7 @@ public class CheckoutDataModel {
 		this.memberName = c.getMemberName();
 		this.checkoutDate = c.getCheckOutDate().toString();
 		this.dueDate = c.getDueDateAsString();
-		this.satus = c.getDueDateStatus()? "Overdue!" : "";
+		this.satus = c.isOverDueDate()? "Overdue!" : "";
 	}
 
 	public String getIsbn() {

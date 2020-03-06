@@ -9,8 +9,27 @@ public class Person implements Serializable
 	private String lastName;
 	private String telephone;
 	private Address address;
+	private String email;
 	
-	public Person(String f, String l, String t, Address a)
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(obj == null) 
+			return false;
+		if(!(obj instanceof Person)) 
+			return false;
+		Person p = (Person)obj;
+		return p.getFirstName().equals(firstName) && p.lastName == lastName;
+	}
+	/**
+	 * 
+	 * @param f First name
+	 * @param l Last name
+	 * @param t Telephone number
+	 * @param a Address
+	 * @param e Email
+	 */
+	public Person(String f, String l, String t, Address a, String e)
 	{
 		firstName = f;
 		lastName = l;
@@ -36,6 +55,16 @@ public class Person implements Serializable
 	public Address getAddress()
 	{
 		return address;
+	}
+	
+	public String getEmail()
+	{
+		return email;
+	}
+	
+	public void setEmail(String e)
+	{
+		email = e;
 	}
 	
 	public void setFirstName(String firstName)

@@ -95,10 +95,14 @@ final public class Book implements Serializable
 				return true;
 		return false;
 	}
+	
 	@Override
 	public String toString() 
 	{
-		return "isbn: " + isbn + ", maxLength: " + maxCheckoutLength + ", available: " + isAvailable();
+		return "isbn: " + isbn + ", maxLength: " + maxCheckoutLength + ", available: " + isAvailable() +
+				", Total number of Copies: " + getNumCopies();
+		
+		
 	}
 	
 	/**

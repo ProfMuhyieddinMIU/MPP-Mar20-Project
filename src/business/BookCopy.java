@@ -53,6 +53,7 @@ final public class BookCopy implements Serializable
 	public int getCopyNum() 
 	{
 		return copyNum;
+		
 	}
 	
 	/**

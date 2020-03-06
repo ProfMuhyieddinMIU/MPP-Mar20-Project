@@ -53,7 +53,7 @@
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="tblMembers" layoutX="14.0" layoutY="122.0" opacity="0.85" prefHeight="459.0" prefWidth="989.0">
+      <TableView fx:id="tblBooks" layoutX="14.0" layoutY="122.0" opacity="0.85" prefHeight="459.0" prefWidth="989.0">
         <columns>
           <TableColumn fx:id="clmISBN" prefWidth="114.0" text="ISBN" />
           <TableColumn fx:id="clmTitle" prefWidth="222.0" text="Title" />

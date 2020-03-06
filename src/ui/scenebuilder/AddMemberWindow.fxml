@@ -37,7 +37,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#13d0ff" height="351.0" layoutX="68.0" layoutY="123.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="881.0" />
-      <TextField fx:id="usernameTextField" layoutX="230.0" layoutY="159.0" />
+      <TextField fx:id="firstNameTextField" layoutX="230.0" layoutY="159.0" />
       <Label layoutX="91.0" layoutY="156.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="First Name" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="20.0" />
@@ -61,20 +61,20 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField1" layoutX="691.0" layoutY="161.0" />
+      <TextField fx:id="lastNameTextField" layoutX="691.0" layoutY="161.0" />
       <Label layoutX="91.0" layoutY="202.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Mobile" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField2" layoutX="230.0" layoutY="205.0" />
-      <TextField fx:id="usernameTextField11" layoutX="691.0" layoutY="204.0" />
+      <TextField fx:id="mobileTextField" layoutX="230.0" layoutY="205.0" />
+      <TextField fx:id="emailTextField" layoutX="691.0" layoutY="204.0" />
       <Label layoutX="552.0" layoutY="201.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Email" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField21" layoutX="230.0" layoutY="254.0" prefHeight="30.0" prefWidth="660.0" />
+      <TextField fx:id="streetTextField" layoutX="230.0" layoutY="254.0" prefHeight="30.0" prefWidth="660.0" />
       <Label layoutX="91.0" layoutY="251.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Street" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="20.0" />
@@ -85,8 +85,8 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField211" layoutX="230.0" layoutY="302.0" prefHeight="30.0" prefWidth="660.0" />
-      <TextField fx:id="usernameTextField2111" layoutX="230.0" layoutY="350.0" prefHeight="30.0" prefWidth="660.0" />
+      <TextField fx:id="cityTextField" layoutX="230.0" layoutY="302.0" prefHeight="30.0" prefWidth="660.0" />
+      <TextField fx:id="stateTextField" layoutX="230.0" layoutY="350.0" prefHeight="30.0" prefWidth="660.0" />
       <Label layoutX="91.0" layoutY="347.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="State" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="20.0" />
@@ -97,6 +97,6 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField21111" layoutX="230.0" layoutY="401.0" prefHeight="30.0" prefWidth="660.0" />
+      <TextField fx:id="zipTextField" layoutX="230.0" layoutY="401.0" prefHeight="30.0" prefWidth="660.0" />
    </children>
 </AnchorPane>

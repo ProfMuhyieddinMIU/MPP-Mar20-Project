@@ -49,6 +49,10 @@ public class LibrarianController implements LibrarianInterface  {
 		
 		System.out.println("test getMemberByLName  ==> " + l.getMemberByLName("Eagleton")); 
 		
+		System.out.println("test getMembersFromAllCheckOutRecordsByIsbn(isbn)  ==> " + l.getMembersFromAllCheckOutRecordsByIsbn( "28-12331")); 
+		
+		System.out.println("test getBooksFromAllCheckOutRecordsByMemberId(String memberID)  ==> " + l.getBooksFromAllCheckOutRecordsByMemberId("1004")); 
+		
 		
 		
 		try {
@@ -194,6 +198,41 @@ public class LibrarianController implements LibrarianInterface  {
 		return checkOutRecords;
 	}
 	
+
+	@Override
+	public List<Book> getBooksFromAllCheckOutRecordsByMemberId(String memberID) { 
+		DataAccess da = new DataAccessFacade();
+		List<Book> books = new ArrayList<>();
+		for (CheckOutRecord checkOutRecord : da.readCheckOutRecordsMap().values()  ) {
+			if (checkOutRecord.getMemberId().equalsIgnoreCase(memberID)) {
+				Book book = getBookByIsbn(checkOutRecord.getIsbn()) ;
+				books.add(book) ;
+			}
+		}
+		 
+		 
+		
+		return books;
+	}
+	
+	
+	@Override
+	public List<LibraryMember> getMembersFromAllCheckOutRecordsByIsbn(String isbn) { 
+		DataAccess da = new DataAccessFacade();
+		List<LibraryMember> members = new ArrayList<>();
+		for (CheckOutRecord checkOutRecord : da.readCheckOutRecordsMap().values()  ) {
+			if (checkOutRecord.getIsbn() != null 
+				&& checkOutRecord.getIsbn().equalsIgnoreCase(isbn)) {
+				LibraryMember member = getMemberById(checkOutRecord.getMemberId()) ;
+				members.add(member) ;
+			}
+		}
+		 
+		 
+		
+		return members;
+	}
+	
 	/**
 	 * 
 	 * @param memberId
@@ -253,7 +292,7 @@ public class LibrarianController implements LibrarianInterface  {
 			}
 		}  */
 		if (copyNum < 0) {
-            throw new LibrarySystemException("No available copy from this book") ;
+            throw new LibrarySystemException("The copy that checked out is unavailable") ;
 		}
 		
 		//Hus3/6/20:: Next copy is not available

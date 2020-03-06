@@ -17,8 +17,7 @@ public class MainWindow extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		
+
 		try {
             // Read file fxml and draw interface.
             Parent root = FXMLLoader.load(getClass()

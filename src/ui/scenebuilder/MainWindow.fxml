@@ -8,14 +8,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.MainWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1016.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.MainWindowController">
    <children>
-      <MenuBar prefHeight="30.0" prefWidth="768.0">
+      <MenuBar prefHeight="30.0" prefWidth="1016.0" stylesheets="@style.css">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem id="loginMenuItem" mnemonicParsing="false" text="Login" />
-              <MenuItem id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
+                  <MenuItem fx:id="loginMenuItem" mnemonicParsing="false" text="Login" />
+              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -25,35 +25,35 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem id="aboutMenuItem" mnemonicParsing="false" text="About" />
-                  <MenuItem id="searchMenuItem" mnemonicParsing="false" text="Search" />
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
+                  <MenuItem fx:id="searchMenuItem" mnemonicParsing="false" text="Search" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <ImageView fitHeight="467.0" fitWidth="768.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="612.0" fitWidth="1016.0" layoutX="1.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/MIU_CAMP3.jpg" />
          </image>
       </ImageView>
-      <TextField id="usernameTextField" layoutX="352.0" layoutY="133.0" />
-      <Label layoutX="245.0" layoutY="134.0" text="Username" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+      <TextField fx:id="usernameTextField" layoutX="441.0" layoutY="188.0" />
+      <Label layoutX="310.0" layoutY="185.0" styleClass="label-normal" text="Username" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="242.0" layoutY="175.0" text="Password" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+      <Label layoutX="313.0" layoutY="226.0" styleClass="label-normal" text="Password" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="206.0" layoutY="45.0" text="Maharishi Library System">
+      <Label layoutX="283.0" layoutY="59.0" prefHeight="55.0" prefWidth="451.0" styleClass="label-header" text="Maharishi Library System" textAlignment="CENTER">
          <font>
             <Font name="Arial Bold" size="29.0" />
          </font>
       </Label>
-      <PasswordField id="passwordTextField" layoutX="352.0" layoutY="173.0" />
-      <Button id="loginButton" defaultButton="true" layoutX="352.0" layoutY="212.0" mnemonicParsing="false" onAction="#login" opacity="0.8" prefHeight="33.0" prefWidth="161.0" text="Login" textFill="WHITE">
+      <PasswordField fx:id="passwordTextField" layoutX="441.0" layoutY="228.0" />
+      <Button fx:id="loginButton" defaultButton="true" layoutX="441.0" layoutY="267.0" mnemonicParsing="false" onAction="#login" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Login" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
@@ -61,7 +61,7 @@
             <Blend opacity="0.0" />
          </effect>
       </Button>
-      <Label id="errorLabel" layoutX="352.0" layoutY="263.0" prefHeight="23.0" prefWidth="161.0" textFill="#ee0000">
+      <Label fx:id="errorLabel" layoutX="460.0" layoutY="322.0" prefHeight="23.0" prefWidth="161.0" styleClass="label-error" textFill="#ee0000">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>

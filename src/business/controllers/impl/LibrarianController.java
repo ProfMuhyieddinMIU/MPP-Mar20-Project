@@ -1,13 +1,19 @@
 package business.controllers.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import business.Author;
 import business.Book;
+import business.BookCopy;
+import business.CheckOutRecord;
 import business.LibraryMember;
 import business.controllers.interfaces.LibrarianInterface;
+import business.customExceptions.BookNotFoundException;
+import business.customExceptions.LibrarySystemException;
+import business.customExceptions.MemberNotFoundException;
 import business.controllers.interfaces.LibrarianInterface;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
@@ -38,12 +44,21 @@ public class LibrarianController implements LibrarianInterface  {
 		System.out.println("test getAllMembers ==> " + l.getAllMembers());
 		 
 		System.out.println("test getMemberById(String memberId) ==> " + l.getMemberById("1004")); 
-		
-		System.out.println("test getMemberById(String memberId) ==> " + l.getMemberByFName("Sarah")); 
-		
-		System.out.println("test getMemberById(String memberId) ==> " + l.getMemberByLName("Eagleton")); 
 		 
+		System.out.println("test getMemberByFName ==> " + l.getMemberByFName("Sarah")); 
 		
+		System.out.println("test getMemberByLName  ==> " + l.getMemberByLName("Eagleton")); 
+		
+		
+		
+		try {
+			System.out.println("test checkOutBook  ==> " + l.checkOutBook ("1004" , "28-12331" ) );
+		} catch (LibrarySystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("test getAllCheckOutRecords  ==> " + l. getAllCheckOutRecords()); 
 	}
 	
 	@Override
@@ -167,12 +182,79 @@ public class LibrarianController implements LibrarianInterface  {
 		return  getMembersByAttribute("LastName" ,lname ) ;
 	}
 
+	
+
 	@Override
-	public boolean CheckOutBook(String memberId, int copyId) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<CheckOutRecord> getAllCheckOutRecords() { 
+		DataAccess da = new DataAccessFacade();
+		List<CheckOutRecord> checkOutRecords = new ArrayList<>();
+		checkOutRecords.addAll(da.readCheckOutRecordsMap().values());
+		 
+		
+		return checkOutRecords;
 	}
-
+	
+	/**
+	 * 
+	 * @param memberId
+	 * @param isbn
+	 * @param copyNum
+	 * @return
+	 */
+	private CheckOutRecord saveCheckOutBook(String memberId, String isbn , int copyNum) {
+		
+		CheckOutRecord checkOutRecord = new CheckOutRecord();
+		checkOutRecord.setMemberId(memberId);
+		checkOutRecord.setIsbn(isbn);
+		checkOutRecord.setCopyNum(copyNum);
+		
+		 LocalDateTime currentDate = LocalDateTime.now();
+		    System.out.println("===== currentDate =>" + currentDate);
+		checkOutRecord.setCheckOutDate(currentDate);    
+		    
+		DataAccess da = new DataAccessFacade(); 
+		long dummyTransId = -1 ;
+		if (da.readCheckOutRecordsMap() == null ) {
+			dummyTransId = 1 ;
+		}else {
+			dummyTransId = da.readCheckOutRecordsMap().size() + 1 ;
+		}
+		
+		checkOutRecord.setTransId( dummyTransId );
+		
+		da.saveNewCheckOutRecord(checkOutRecord);
+		return checkOutRecord;
+	}
+	
+	
 	 
-
+	@Override
+	public boolean checkOutBook(String memberId, String isbn) throws MemberNotFoundException, BookNotFoundException , LibrarySystemException {
+		// validateCheckOutData( memberId,    isbn) ;
+		LibraryMember member = getMemberById( memberId);
+		if (member == null || member.getMemberId() == null ) {
+			throw new MemberNotFoundException();
+		}
+		
+		Book book = getBookByIsbn(isbn) ;
+		if (book == null || book.getTitle() == null ) {
+			throw new BookNotFoundException();
+		} 
+		
+		int copyNum = -1 ;
+		for (BookCopy  bookCopy : book.getCopies()) {
+			if (bookCopy.isAvailable()) {
+				copyNum = bookCopy.getCopyNum();
+				break ;
+			}
+		}  
+		if (copyNum < 0) {
+            throw new LibrarySystemException("No available copy from this book") ;
+		}
+		
+		
+		saveCheckOutBook( memberId, isbn , copyNum );
+		return true;
+	}
+	
 }

@@ -6,7 +6,7 @@ public class MemberNotFoundException extends LibrarySystemException implements S
 	private static final long serialVersionUID = 3326915348398932420L;
 
 	public MemberNotFoundException() {
-		super();
+		super("Member not found");
 	}
 
 	public MemberNotFoundException(String msg) {

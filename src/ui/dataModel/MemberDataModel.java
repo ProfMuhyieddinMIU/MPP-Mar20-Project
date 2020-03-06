@@ -11,6 +11,7 @@ public class MemberDataModel {
 	private String telephone;
 	private String address;
 	private String email;
+	
 	public MemberDataModel(LibraryMember m) {
 		this.memberId = m.getMemberId();
 		this.firstName = m.getFirstName();

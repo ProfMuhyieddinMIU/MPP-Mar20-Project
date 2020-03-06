@@ -2,6 +2,7 @@ package business;
 
 import java.io.Serializable;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import business.controllers.impl.LibrarianController;
@@ -41,6 +42,15 @@ public class CheckOutRecord  implements Serializable {
 	public LocalDateTime getCheckOutDate() {
 		return checkOutDate;
 	}
+	
+	public LocalDate getCheckOutDateAsDate() {
+		return checkOutDate.toLocalDate() ;
+	}
+	
+	public String getCheckOutDateAsDateAsString() {
+		return ( checkOutDate == null ? "" : checkOutDate.toLocalDate().toString() ) ;
+	}
+	
 	public void setCheckOutDate(LocalDateTime checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
@@ -71,8 +81,8 @@ public class CheckOutRecord  implements Serializable {
 		return bookTitle    ;
 	}
 	
-	public LocalDateTime getDueDate() {
-		LocalDateTime dueDate = null ; 
+	public LocalDate getDueDate() {
+		LocalDate dueDate = null ; 
 		try {
 		LibrarianInterface librarianController = new LibrarianController();
 		Book  book = librarianController.getBookByIsbn(getIsbn()) ;
@@ -81,7 +91,7 @@ public class CheckOutRecord  implements Serializable {
 			checkOutLength = book.getMaxCheckoutLength() ;
 		}
 		 
-		dueDate = getCheckOutDate().plusDays( (checkOutLength == 0 ? 7 :  checkOutLength  ) ) ;
+		dueDate = getCheckOutDate().plusDays( (checkOutLength == 0 ? 7 :  checkOutLength  ) ).toLocalDate() ;
 		} catch (Exception e) {
 			e.printStackTrace();
             System.out.println("couldn't get dueDate : getCheckOutDate()=" + getCheckOutDate()  + "   dueDate = " + dueDate);
@@ -95,11 +105,15 @@ public class CheckOutRecord  implements Serializable {
 	
 	
 	public boolean isOverDueDate() {
-		// int days = Days.daysBetween(getDueDate(), LocalDateTime.now() ).getDays();
-		// return ( getDueDate() == null ? false : getDueDate() <  )  ;
-		 Duration duration = Duration.between(getDueDate() , LocalDateTime.now());		 
+        System.out.println("===== LocalDateTime.now().toLocalDate()=" + LocalDateTime.now().toLocalDate());
+        System.out.println("===== getDueDate()=" + getDueDate());
+		if (getDueDate().isAfter( LocalDateTime.now().toLocalDate().minusDays(1)  )  ) {
+			return false ;
+		}
+	//	 Duration duration = Duration.between(getDueDate() , LocalDateTime.now().toLocalDate());		 
 		 
-		return duration.toDays() > 0 ;
+	//	return duration.toDays() > 0 ;
+		return true ;
 	}
 	
 	@Override
@@ -109,6 +123,11 @@ public class CheckOutRecord  implements Serializable {
 				+ ", copyNum: " + copyNum + ", LocalDateTime: " + checkOutDate 
 				+ ", getBookTitle(): " + getBookTitle()
 				+ ", getMemberName: " + getMemberName()
-				+ ", getDueDateAsString: " + getDueDateAsString();
+				+ ", getDueDateAsString: " + getDueDateAsString()
+		+ ", getCheckOutDateAsDateAsString: " + getCheckOutDateAsDateAsString()
+		+ ", isOverDueDate(): " + ( isOverDueDate() ? "True"  : "False" );
+		
+		
+		
 	}
 }

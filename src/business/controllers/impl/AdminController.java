@@ -19,7 +19,7 @@ public class AdminController implements AdminControllerInterface {
 		AdminController a = new AdminController();
 		// for test AdminController only
 		System.out.println("test addMember ==> "
-				+ a.addMember("testFirstName", "testLastName", "641-472-2558", "ss", "iowa", "dd", "11"));
+				+ a.addMember("testFirstName", "testLastName", "641-472-2558",  "e@f.com","ss", "iowa", "dd", "11"));
 
 	}
 
@@ -63,13 +63,13 @@ public class AdminController implements AdminControllerInterface {
 	}
 
 	@Override
-	public LibraryMember addMember(String firstName, String lastName, String telephone, String street, String state,
-			String city, String zip) throws MemberInvalidDataException {
+	public LibraryMember addMember(String firstName, String lastName, String telephone, String email, String street,
+			String state, String city, String zip) throws MemberInvalidDataException {
 
 		DataAccess da = new DataAccessFacade();
 		Address address = new Address(street, city, state, zip);
 
-		LibraryMember member = new LibraryMember(generateMemberId(), firstName, lastName, telephone, address);
+		LibraryMember member = new LibraryMember(generateMemberId(), firstName, lastName, telephone, address, email);
 		validateMemberData(member);
 		da.saveNewMember(member);
 		return member;

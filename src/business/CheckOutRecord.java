@@ -19,6 +19,7 @@ public class CheckOutRecord  implements Serializable {
 	private String isbn ;
 	private int copyNum;
 	private LocalDateTime checkOutDate ;
+	private LocalDateTime bookReturnDate ;
 	
 	
 	public long getTransId() {
@@ -61,6 +62,12 @@ public class CheckOutRecord  implements Serializable {
 		this.copyNum = copyNum;
 	}
 	
+	public LocalDateTime getBookReturnDate() {
+		return bookReturnDate;
+	}
+	public void setBookReturnDate(LocalDateTime bookReturnDate) {
+		this.bookReturnDate = bookReturnDate;
+	}
 	public String getMemberName() {
 		LibrarianInterface librarianController = new LibrarianController();
 		LibraryMember  member = librarianController.getMemberById(getMemberId()) ;
@@ -105,15 +112,11 @@ public class CheckOutRecord  implements Serializable {
 	
 	
 	public boolean isOverDueDate() {
-        System.out.println("===== LocalDateTime.now().toLocalDate()=" + LocalDateTime.now().toLocalDate());
-        System.out.println("===== getDueDate()=" + getDueDate());
+        
 		if (getDueDate().isAfter( LocalDateTime.now().toLocalDate().minusDays(1)  )  ) {
 			return false ;
 		}
-	//	 Duration duration = Duration.between(getDueDate() , LocalDateTime.now().toLocalDate());		 
-		 
-	//	return duration.toDays() > 0 ;
-		return true ;
+         return true ;
 	}
 	
 	@Override

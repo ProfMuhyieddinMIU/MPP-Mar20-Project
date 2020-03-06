@@ -1,6 +1,7 @@
 package business;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import business.controllers.impl.LibrarianController;
@@ -93,10 +94,12 @@ public class CheckOutRecord  implements Serializable {
 	}
 	
 	
-	public boolean getDueDateStatus() {
+	public boolean isOverDueDate() {
 		// int days = Days.daysBetween(getDueDate(), LocalDateTime.now() ).getDays();
 		// return ( getDueDate() == null ? false : getDueDate() <  )  ;
-		return true ;
+		 Duration duration = Duration.between(getDueDate() , LocalDateTime.now());		 
+		 
+		return duration.toDays() > 0 ;
 	}
 	
 	@Override

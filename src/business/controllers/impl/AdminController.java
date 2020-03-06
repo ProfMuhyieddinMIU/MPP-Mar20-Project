@@ -12,6 +12,7 @@ import business.Author;
 import business.Book;
 import business.LibraryMember;
 import business.controllers.interfaces.AdminControllerInterface;
+import business.customExceptions.BookInvalidDataException;
 import business.customExceptions.BookNotFoundException;
 import business.customExceptions.MemberInvalidDataException;
 import business.customExceptions.MemberNotFoundException;
@@ -29,7 +30,7 @@ public class AdminController implements AdminControllerInterface {
 
 		try {
 			a.addBookCopy("28-12331", 3);
-		} catch (BookNotFoundException e) {
+		} catch (BookNotFoundException | BookInvalidDataException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
@@ -46,13 +47,16 @@ public class AdminController implements AdminControllerInterface {
 	 * 
 	 * @param isbn
 	 * @param numOfCopies
+	 * @throws BookInvalidDataException
 	 */
 	@Override
-	public void addBookCopy(String isbn, int numOfCopies) throws BookNotFoundException {
+	public void addBookCopy(String isbn, int numOfCopies) throws BookNotFoundException, BookInvalidDataException {
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, Book> map = da.readBooksMap();
 		Book book = searchBookInMap(isbn, map);
 
+		if (isbn.isEmpty())
+			throw new BookInvalidDataException("Isbn Field Cannot be empty !");
 		if (book == null)
 			throw new BookNotFoundException("No Book Found With ISBN : " + isbn);
 

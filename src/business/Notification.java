@@ -3,7 +3,7 @@ package business;
 public class Notification
 {
 	private String msg;
-	private boolean urgent;
+	private boolean isUrgent;
 	
 	/**
 	 * 
@@ -13,6 +13,16 @@ public class Notification
 	public Notification(String m, boolean u)
 	{
 		msg = m;
-		urgent = u;
+		isUrgent = u;
+	}
+	
+	public String getMessage()
+	{
+		return msg;
+	}
+	
+	public boolean getUrgency()
+	{
+		return isUrgent;
 	}
 }

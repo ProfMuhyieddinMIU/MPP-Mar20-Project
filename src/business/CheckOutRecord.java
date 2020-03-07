@@ -81,6 +81,9 @@ public class CheckOutRecord  implements Serializable {
 	public String getMemberName() {
 		LibrarianInterface librarianController = new LibrarianController();
 		LibraryMember  member = librarianController.getMemberById(getMemberId()) ;
+		if (member == null ) {
+			return "" ;
+		}
 		return member.getFirstName() + " " +member.getLastName() ;
 	}
 	

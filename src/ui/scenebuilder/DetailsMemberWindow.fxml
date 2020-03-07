@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1016.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.DetailsMemberWindowController">
+   <children>
+      <MenuBar prefHeight="30.0" prefWidth="1016.0" stylesheets="@style.css">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
+                  <MenuItem fx:id="searchMenuItem" mnemonicParsing="false" text="Search" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ImageView fitHeight="612.0" fitWidth="1016.0" layoutX="1.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/MIU_CAMP3.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#13d0ff" height="351.0" layoutX="68.0" layoutY="123.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="881.0" />
+      <TextField fx:id="firstNameTextField" layoutX="230.0" layoutY="159.0" />
+      <Label layoutX="91.0" layoutY="156.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="First Name" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="345.0" layoutY="58.0" prefHeight="43.0" prefWidth="327.0" styleClass="label-header" text="Add New Member" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Bold" size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="addButton" defaultButton="true" layoutX="401.0" layoutY="504.0" mnemonicParsing="false" onAction="#addMember" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Add" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+      </Button>
+      <Label layoutX="552.0" layoutY="158.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Last Name" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lastNameTextField" layoutX="691.0" layoutY="161.0" />
+      <Label layoutX="91.0" layoutY="202.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Mobile" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="mobileTextField" layoutX="230.0" layoutY="205.0" />
+      <TextField fx:id="emailTextField" layoutX="691.0" layoutY="204.0" />
+      <Label layoutX="552.0" layoutY="201.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Email" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="streetTextField" layoutX="230.0" layoutY="254.0" prefHeight="30.0" prefWidth="660.0" />
+      <Label layoutX="91.0" layoutY="251.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Street" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="299.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="City" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="cityTextField" layoutX="230.0" layoutY="302.0" prefHeight="30.0" prefWidth="660.0" />
+      <TextField fx:id="stateTextField" layoutX="230.0" layoutY="350.0" prefHeight="30.0" prefWidth="660.0" />
+      <Label layoutX="91.0" layoutY="347.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="State" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="398.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Zip Code" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="zipTextField" layoutX="230.0" layoutY="401.0" prefHeight="30.0" prefWidth="660.0" />
+      <Button fx:id="backButton" defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" onAction="#back"  opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

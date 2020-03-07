@@ -2,7 +2,7 @@ package business;
 
 import java.io.Serializable;
 
-public class Person implements Serializable
+public abstract class Person implements Serializable
 {
 	private static final long serialVersionUID = 3665880920647848288L;
 	private String firstName;

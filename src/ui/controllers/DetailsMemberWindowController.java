@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import com.sun.media.sound.InvalidDataException;
 
 import business.Author;
+import business.LibraryMember;
 import business.LoginException;
 import business.controllers.impl.AdminController;
 import business.controllers.impl.SystemController;
@@ -15,11 +16,14 @@ import business.controllers.interfaces.AdminControllerInterface;
 import business.controllers.interfaces.ControllerInterface;
 import business.customExceptions.BookInvalidDataException;
 import business.customExceptions.BookNotFoundException;
+import business.customExceptions.MemberInvalidDataException;
+import business.customExceptions.MemberNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,65 +43,53 @@ import ui.dataModel.MemberDataModel;
 public class DetailsMemberWindowController implements Initializable {
 
 	@FXML
-	private Button backButton;
+	private Button saveButton;
 	
 	@FXML
-	private Button addAuthorButton;
-	
-	@FXML
-	private RadioButton rb7Days;
-	
-	@FXML
-	private RadioButton rb21Days;
-	
-	@FXML
-	private TextField isbnTextField;
-	
-	@FXML
-	private TextField titleTextField;
-	
-	@FXML
-	private MenuItem exitMenuItem;
-
-	public static ObservableList<Author> authorsData = FXCollections.observableArrayList();
-	
-
-	public static List<Author> authors ;
+	private Button cancelButton;
 
 	@FXML
-	private TableView<Author> tblAuthors;
+	private Label lblTitle ; 
 	
 	@FXML
-	private TableColumn<Author, String> clmAuthors;
+	private TextField firstNameTextField;
 	
 	@FXML
-	private TableColumn<Author, String> clmLastName;
+	private TextField lastNameTextField;
 	
 	@FXML
-	private TableColumn<Author, String> clmBio;
+	private TextField mobileTextField;
+	
+	@FXML
+	private TextField emailTextField;
+	
+	@FXML
+	private TextField streetTextField;
+	
+	@FXML
+	private TextField cityTextField;
+	
+	@FXML
+	private TextField stateTextField;
+	
+	@FXML
+	private TextField zipTextField;
+	
+	public static LibraryMember member ; 
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		authorsData = FXCollections.observableArrayList();
-		authors = new ArrayList<>();
-		
-		clmAuthors.setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
-		clmLastName.setCellValueFactory(new PropertyValueFactory<Author, String>("lastName"));
-		clmBio.setCellValueFactory(new PropertyValueFactory<Author, String>("bio"));
-		
-		TableViewLoad(authorsData);
+		lblTitle.setText("Member # " + member.getMemberId());
+		firstNameTextField.setText(member.getFirstName());
+		lastNameTextField.setText(member.getLastName());
+		mobileTextField.setText(member.getTelephone());
+		emailTextField.setText(member.getEmail());
+		streetTextField.setText(member.getAddress().getStreet());
+		cityTextField.setText(member.getAddress().getStreet());
+		stateTextField.setText(member.getAddress().getState());
+		zipTextField.setText(member.getAddress().getZip());
 
-	}
-	
-	private void TableViewLoad(ObservableList<Author> authorsData) {
-
-		tblAuthors.setItems(getAuthorssData());
-
-	}
-
-	public ObservableList<Author> getAuthorssData() {
-		return authorsData;
 	}
 
 	public void exitApplication(ActionEvent event) {
@@ -105,38 +97,37 @@ public class DetailsMemberWindowController implements Initializable {
 
 	}
 
-	public void addBook(ActionEvent event) {
+	public void updateMember(ActionEvent event) {
 
+		
 		try {
-
-			AdminControllerInterface c = new AdminController();
-			c.addBook(isbnTextField.getText(), titleTextField.getText(), rb7Days.isSelected()?7:21, authors);
+			
+			AdminController c = new AdminController();
+			c.editMember(member.getMemberId(), firstNameTextField.getText(), lastNameTextField.getText(), mobileTextField.getText(), 
+					emailTextField.getText(), streetTextField.getText(), stateTextField.getText(), cityTextField.getText(), zipTextField.getText());
+			
 			
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Success!");
-			alert.setContentText("Book "+titleTextField.getText()+" has been added successfully!");
+			alert.setTitle("Successed!");
+			alert.setContentText("Info of Member # "+ member.getMemberId() + " have been updated Successfully" );
 			alert.show();
-
-
-		} catch (NumberFormatException | InvalidDataException e) {
-
+			
+			WindowController.openWindow("ListMembersWindow", event, this.getClass());
+			
+		} catch (MemberInvalidDataException | MemberNotFoundException e) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Failed!");
 			alert.setContentText(e.getMessage());
 			alert.show();
-
 		}
 
 	}
 	
-	public void back(ActionEvent event) {
+	public void cancel(ActionEvent event) {
 
-		WindowController.openWindow("AdminWindow", event, this.getClass());
+		((Node)(event.getSource())).getScene().getWindow().hide();
 
 	}
 	
-	public void openAddAuthor(ActionEvent event) {
-		WindowController.openPopus("AddAuthorPopup", event, this.getClass());
-	}
 
 }

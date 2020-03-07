@@ -60,6 +60,9 @@ public class AddBookWindowController implements Initializable {
 	private MenuItem exitMenuItem;
 
 	public static ObservableList<Author> authorsData = FXCollections.observableArrayList();
+	
+
+	public static List<Author> authors ;
 
 	@FXML
 	private TableView<Author> tblAuthors;
@@ -77,6 +80,7 @@ public class AddBookWindowController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		authorsData = FXCollections.observableArrayList();
+		authors = new ArrayList<>();
 		
 		clmAuthors.setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
 		clmLastName.setCellValueFactory(new PropertyValueFactory<Author, String>("lastName"));
@@ -106,13 +110,7 @@ public class AddBookWindowController implements Initializable {
 		try {
 
 			AdminControllerInterface c = new AdminController();
-
-			System.out.println(isbnTextField.getText());
-			System.out.println(titleTextField.getText());
-			System.out.println(rb7Days.isSelected()?7:21);
-			System.out.println(authorsData.size());
-			
-			c.addBook(isbnTextField.getText(), titleTextField.getText(), rb7Days.isSelected()?7:21, authorsData);
+			c.addBook(isbnTextField.getText(), titleTextField.getText(), rb7Days.isSelected()?7:21, authors);
 			
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Success!");

@@ -44,6 +44,7 @@ public class AddAuthorPopupController implements Initializable {
 
 		Author a = new Author(firstNameTextField.getText(), lastNameTextField.getText(), "", new Address("", "", "", ""), bioTextArea.getText() , "");
 		AddBookWindowController.authorsData.add(a);
+		AddBookWindowController.authors.add(a);
 		((Node)(event.getSource())).getScene().getWindow().hide();
 
 	}

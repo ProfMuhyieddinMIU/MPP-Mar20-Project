@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="504.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.AddAuthorPopupController">
+   <children>
+      <ImageView fitHeight="486.0" fitWidth="497.0" layoutX="4.0" layoutY="3.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/MIU_CAMP5.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#13d0ff" height="335.0" layoutX="30.0" layoutY="88.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="444.0" />
+      <TextField fx:id="firstNameTextField" layoutX="185.0" layoutY="112.0" prefHeight="33.0" prefWidth="264.0" />
+      <Label layoutX="55.0" layoutY="112.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="First Name" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="120.0" layoutY="23.0" prefHeight="43.0" prefWidth="264.0" styleClass="label-header" text="Author Details" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="okButton" defaultButton="true" layoutX="31.0" layoutY="430.0" mnemonicParsing="false" onAction="#ok" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="OK" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+      </Button>
+      <Label layoutX="55.0" layoutY="158.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Last Name" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lastNameTextField" layoutX="185.0" layoutY="158.0" prefHeight="33.0" prefWidth="264.0" />
+      <Button fx:id="cancelButton" defaultButton="true" layoutX="275.0" layoutY="430.0" mnemonicParsing="false" onAction="#cancel" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Cancel" textFill="WHITE">
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="bioTextArea" layoutX="185.0" layoutY="202.0" prefHeight="197.0" prefWidth="264.0" />
+      <Label layoutX="55.0" layoutY="202.0" prefHeight="32.0" prefWidth="129.0" styleClass="label-normal" text="Bio" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

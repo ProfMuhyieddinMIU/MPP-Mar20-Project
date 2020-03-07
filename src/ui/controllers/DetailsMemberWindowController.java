@@ -1,5 +1,6 @@
 package ui.controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import ui.dataModel.BookDataModel;
 import ui.dataModel.CheckoutDataModel;
 import ui.dataModel.MemberDataModel;
@@ -75,6 +78,10 @@ public class DetailsMemberWindowController implements Initializable {
 	@FXML
 	private TextField zipTextField;
 	
+	@FXML
+	private ImageView imgMember;
+	
+	
 	public static LibraryMember member ; 
 	
 	@Override
@@ -89,7 +96,14 @@ public class DetailsMemberWindowController implements Initializable {
 		cityTextField.setText(member.getAddress().getStreet());
 		stateTextField.setText(member.getAddress().getState());
 		zipTextField.setText(member.getAddress().getZip());
-
+		
+		
+		URL url = this.getClass().getResource("/ui/scenebuilder/images/users/"+member.getMemberId()+".jpg");
+		if(url != null) {
+			Image image = new Image(url.toString());
+	        imgMember.setImage(image);
+		}
+        
 	}
 
 	public void exitApplication(ActionEvent event) {
@@ -110,7 +124,7 @@ public class DetailsMemberWindowController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Successed!");
 			alert.setContentText("Info of Member # "+ member.getMemberId() + " have been updated Successfully" );
-			alert.show();
+			alert.showAndWait();
 			
 			WindowController.openWindow("ListMembersWindow", event, this.getClass());
 			

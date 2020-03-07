@@ -87,6 +87,9 @@
          </font>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d181b" height="203.0" layoutX="672.0" layoutY="110.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="179.0" />
-      <ImageView fitHeight="184.0" fitWidth="167.0" layoutX="677.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgMember" fitHeight="184.0" fitWidth="167.0" layoutX="677.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+         
+         </image></ImageView>
    </children>
 </AnchorPane>

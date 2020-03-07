@@ -14,14 +14,24 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
+              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                  <MenuItem fx:id="exitMenuItem1" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Add Book" />
+                  <MenuItem mnemonicParsing="false" text="Add Copy" />
+                  <MenuItem mnemonicParsing="false" text="Add Member" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="View">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="View Books" />
+                  <MenuItem mnemonicParsing="false" text="View Members" />
+                  <MenuItem mnemonicParsing="false" text="View Checkout Records" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
@@ -64,7 +74,7 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="listCheckoutButton" defaultButton="true" layoutX="541.0" layoutY="192.0" mnemonicParsing="false" onAction="#openListCheckouts" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="List Checkout Records" textFill="WHITE">
+      <Button fx:id="listCheckoutButton" defaultButton="true" layoutX="541.0" layoutY="256.0" mnemonicParsing="false" onAction="#openListCheckouts" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="List Checkout Records" textFill="WHITE">
          <effect>
             <Blend opacity="0.0" />
          </effect>
@@ -72,7 +82,7 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="listMembersButton" defaultButton="true" layoutX="541.0" layoutY="256.0" mnemonicParsing="false" onAction="#openListMembers" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="List Members" textFill="WHITE">
+      <Button fx:id="listMembersButton" defaultButton="true" layoutX="541.0" layoutY="192.0" mnemonicParsing="false" onAction="#openListMembers" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="List Members" textFill="WHITE">
          <effect>
             <Blend opacity="0.0" />
          </effect>

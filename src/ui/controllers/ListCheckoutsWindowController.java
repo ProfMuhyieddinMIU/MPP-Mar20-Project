@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import business.Book;
 import business.CheckOutRecord;
 import business.controllers.impl.LibrarianController;
+import business.controllers.impl.SystemController;
 import business.controllers.interfaces.LibrarianInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,6 +101,11 @@ public class ListCheckoutsWindowController implements Initializable {
 
 	}
 
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
+	
 	public void getAllCheckoutRecords() {
 		LibrarianInterface c = new LibrarianController();
 		List<CheckOutRecord> checkoutRecords = c.getAllCheckOutRecords();

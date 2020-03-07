@@ -68,6 +68,11 @@ public class AddMemberWindowController implements Initializable {
 		System.exit(0);
 
 	}
+	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
 
 	public void addMember(ActionEvent event) {
 		

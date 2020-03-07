@@ -37,6 +37,11 @@ public class AddCopyWindowController implements Initializable {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
 
 	public void exitApplication(ActionEvent event) {
 		System.out.println("Application Exit!");

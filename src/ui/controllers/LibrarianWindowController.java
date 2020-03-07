@@ -51,6 +51,26 @@ public class LibrarianWindowController implements Initializable {
 		WindowController.openWindow("CheckoutWindow", event, this.getClass());
 
 	}
+	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
+	
+	public void openBooks(ActionEvent event) {
+		WindowController.openWindow("ListBooksWindow", event, this.getClass());
+
+	}
+	
+	public void openMembers(ActionEvent event) {
+		WindowController.openWindow("ListMembersWindow", event, this.getClass());
+
+	}
+	
+	public void openCheckoutRecords(ActionEvent event) {
+		WindowController.openWindow("ListCheckoutsWindow", event, this.getClass());
+
+	}
 
 	
 

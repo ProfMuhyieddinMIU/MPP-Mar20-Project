@@ -92,6 +92,11 @@ public class ListMembersWindowController implements Initializable {
 		});
 
 	}
+	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
 
 	public ObservableList<MemberDataModel> getMembersData() {
 		return membersData;

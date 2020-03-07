@@ -142,4 +142,11 @@ public class AddBookWindowController implements Initializable {
 		WindowController.openPopus("AddAuthorPopup", event, this.getClass());
 	}
 
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
+
+	
+	
 }

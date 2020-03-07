@@ -90,7 +90,11 @@ public class DetailsCheckoutRecordWindowController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		lblMemberID.setText(member.getMemberId());
+		lblMemberID.setStyle("-fx-background-color: black");
+		
 		lblMemberName.setText(member.getFirstName()+" "+member.getLastName());
+		lblMemberName.setStyle("-fx-background-color: black");
+		
 		URL urlUser = this.getClass().getResource("/ui/scenebuilder/images/users/"+member.getMemberId()+".jpg");
 		if(urlUser != null) {
 			Image image = new Image(urlUser.toString());
@@ -98,7 +102,11 @@ public class DetailsCheckoutRecordWindowController implements Initializable {
 		}
 		
 		lblBookTitle.setText(book.getTitle());
+		lblBookTitle.setStyle("-fx-background-color: black");
+		
 		lblISBN.setText(book.getIsbn());
+		lblISBN.setStyle("-fx-background-color: black");
+		
 		URL urlBook = this.getClass().getResource("/ui/scenebuilder/images/books/"+book.getIsbn()+".jpg");
 		if(urlBook != null) {
 			Image image = new Image(urlBook.toString());

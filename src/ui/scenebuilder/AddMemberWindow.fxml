@@ -15,14 +15,24 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
+              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                  <MenuItem fx:id="exitMenuItem1" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Add Book" />
+                  <MenuItem mnemonicParsing="false" text="Add Copy" />
+                  <MenuItem mnemonicParsing="false" text="Add Member" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="View">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="View Books" />
+                  <MenuItem mnemonicParsing="false" text="View Members" />
+                  <MenuItem mnemonicParsing="false" text="View Checkout Records" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
@@ -98,7 +108,7 @@
          </font>
       </Label>
       <TextField fx:id="zipTextField" layoutX="230.0" layoutY="401.0" prefHeight="30.0" prefWidth="660.0" />
-      <Button fx:id="backButton" defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" onAction="#back"  opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
+      <Button fx:id="backButton" defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" onAction="#back" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
          <effect>
             <Blend opacity="0.0" />
          </effect>

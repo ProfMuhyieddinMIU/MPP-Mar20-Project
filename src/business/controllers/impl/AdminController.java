@@ -150,7 +150,7 @@ public class AdminController implements AdminControllerInterface {
 	// Hus3/6/20:
 	private void validateBookData(Book b) throws InvalidDataException {
 		if (b.getIsbn().isEmpty() || b.getAuthors().isEmpty() || b.getTitle().isEmpty()
-				|| (b.getMaxCheckoutLength() != 21 || b.getMaxCheckoutLength() != 7))
+				|| (b.getMaxCheckoutLength() != 21 && b.getMaxCheckoutLength() != 7))
 			throw new InvalidDataException();
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, Book> books = da.readBooksMap();

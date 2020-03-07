@@ -7,6 +7,7 @@ import java.util.List;
 
 import business.Author;
 import business.Book;
+import business.BookCopy;
 import business.CheckOutRecord;
 import business.LibraryMember;
 import business.controllers.interfaces.LibrarianInterface;
@@ -239,16 +240,14 @@ public class LibrarianController implements LibrarianInterface  {
 	 * @param copyNum
 	 * @return
 	 */
-	private CheckOutRecord saveCheckOutBook(String memberId, String isbn , int copyNum) {
+	private CheckOutRecord saveCheckOutBook(String memberId, String isbn , int copyNum ,LocalDateTime checkOutDate  ) {
 		
 		CheckOutRecord checkOutRecord = new CheckOutRecord();
 		checkOutRecord.setMemberId(memberId);
 		checkOutRecord.setIsbn(isbn);
 		checkOutRecord.setCopyNum(copyNum);
 		
-		 LocalDateTime currentDate = LocalDateTime.now();
-		    System.out.println("===== currentDate =>" + currentDate);
-		checkOutRecord.setCheckOutDate(currentDate);    
+		checkOutRecord.setCheckOutDate(checkOutDate);    
 		    
 		DataAccess da = new DataAccessFacade(); 
 		long dummyTransId = -1 ;
@@ -267,7 +266,7 @@ public class LibrarianController implements LibrarianInterface  {
 	
 	 
 	@Override
-	public boolean checkOutBook(String memberId, String isbn) throws MemberNotFoundException, BookNotFoundException , LibrarySystemException {
+	public boolean checkOutBook(String memberId, String isbn ,LocalDateTime checkOutDate ) throws MemberNotFoundException, BookNotFoundException , LibrarySystemException {
 		// validateCheckOutData( memberId,    isbn) ;
 		LibraryMember member = getMemberById( memberId);
 		if (member == null || member.getMemberId() == null ) {
@@ -306,11 +305,23 @@ public class LibrarianController implements LibrarianInterface  {
 		
 		//Hus3/6/20:: Next copy is not available
 		book.getNextAvailableCopy().changeAvailability();
-		updateBookMap(book);
-		saveCheckOutBook( memberId, isbn , copyNum );
+		updateBookMap(book);		
+		LocalDateTime currentDate = LocalDateTime.now(); 
+		saveCheckOutBook( memberId, isbn , copyNum , currentDate );
 		return true;
 	}
 
+	
+	 
+		@Override
+		public boolean checkOutBook(String memberId, String isbn) throws MemberNotFoundException, BookNotFoundException , LibrarySystemException {
+			 
+			LocalDateTime currentDate = LocalDateTime.now(); 
+
+			return checkOutBook( memberId,  isbn , currentDate ) ;
+		}
+
+		
 	private void updateBookMap(Book book) {
 		DataAccess da = new DataAccessFacade();
 		da.updateBook(book);
@@ -332,6 +343,13 @@ public class LibrarianController implements LibrarianInterface  {
 		for (CheckOutRecord checkOutRecord : da.readCheckOutRecordsMap().values()  ) {
 			if (transId != null && checkOutRecord.getTransId() == Long.parseLong(transId) ) {
 				    setCheckOutRecordReturnDate ( checkOutRecord) ;
+				    Book book = getBookByIsbn(checkOutRecord.getIsbn());
+				    BookCopy bookCopy = book.getNextUnAvailableCopy() ; 
+				    if (bookCopy != null) {
+				    	bookCopy.changeAvailability();
+				    	updateBookMap(book);
+					}
+					
 				    return true ;
 				}
 			
@@ -340,6 +358,12 @@ public class LibrarianController implements LibrarianInterface  {
 					&& checkOutRecord.getMemberId().equalsIgnoreCase(memberId)
 					&& checkOutRecord.getBookReturnDate() == null ) {
 					setCheckOutRecordReturnDate ( checkOutRecord) ;
+					Book book = getBookByIsbn(checkOutRecord.getIsbn());
+					   BookCopy bookCopy = book.getNextUnAvailableCopy() ; 
+					    if (bookCopy != null) {
+					    	bookCopy.changeAvailability();
+					    	updateBookMap(book);
+						}
 				    return true ;
 				}
  

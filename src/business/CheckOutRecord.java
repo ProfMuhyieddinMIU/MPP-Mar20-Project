@@ -28,8 +28,7 @@ public class CheckOutRecord  implements Serializable {
 		 this.memberId = memberId ;
 		 this.isbn =isbn ;
 		 this.copyNum = copyNum;
-		 this.checkOutDate = checkOutDate ;
-		 this.bookReturnDate = bookReturnDate;
+		 this.checkOutDate = checkOutDate ; 
 	}
 	
 	public long getTransId() {

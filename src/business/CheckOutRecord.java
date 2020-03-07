@@ -21,6 +21,15 @@ public class CheckOutRecord  implements Serializable {
 	private LocalDateTime checkOutDate ;
 	private LocalDateTime bookReturnDate ;
 	
+	public CheckOutRecord (long transId ,String memberId ,String isbn , int copyNum 
+			              , LocalDateTime checkOutDate )
+	{
+		 this.transId = transId ;
+		 this.memberId = memberId ;
+		 this.isbn =isbn ;
+		 this.copyNum = copyNum;
+		 this.checkOutDate = checkOutDate ; 
+	}
 	
 	public long getTransId() {
 		return transId;
@@ -71,6 +80,9 @@ public class CheckOutRecord  implements Serializable {
 	public String getMemberName() {
 		LibrarianInterface librarianController = new LibrarianController();
 		LibraryMember  member = librarianController.getMemberById(getMemberId()) ;
+		if (member == null ) {
+			return "" ;
+		}
 		return member.getFirstName() + " " +member.getLastName() ;
 	}
 	

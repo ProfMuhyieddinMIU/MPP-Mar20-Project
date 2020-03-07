@@ -14,9 +14,9 @@ public class InsertCheckOutRecordTestData {
 		
 		System.out.println("test getAllMembers ==> " + l.getAllMembers());
 		
-		LocalDateTime currentDate = LocalDateTime.now().minusDays(25); 
+		LocalDateTime currentDate = LocalDateTime.now().minusDays(10); 
 		try {
-			System.out.println("test checkOutBook  ==> " + l.checkOutBook ("1001" , "22-12345" ,currentDate) );
+			System.out.println("test checkOutBook  ==> " + l.checkOutBook ("1003" , "33-12345" ,currentDate) );
 		} catch (LibrarySystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

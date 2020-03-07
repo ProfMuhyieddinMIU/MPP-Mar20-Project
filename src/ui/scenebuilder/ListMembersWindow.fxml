@@ -14,12 +14,15 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
+              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Logout" />
+                  <MenuItem fx:id="exitMenuItem1" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="View">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="View Books" />
+                  <MenuItem mnemonicParsing="false" text="View Members" />
+                  <MenuItem mnemonicParsing="false" text="View Checkout Records" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -40,7 +43,7 @@
             <Font name="Arial Bold" size="29.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" onAction="#back"  defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
+      <Button fx:id="backButton" defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" onAction="#back" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>

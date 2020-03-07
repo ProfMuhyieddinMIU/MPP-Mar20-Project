@@ -37,6 +37,11 @@ public class AddCopyWindowController implements Initializable {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
 
 	public void exitApplication(ActionEvent event) {
 		System.out.println("Application Exit!");
@@ -56,7 +61,9 @@ public class AddCopyWindowController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Successed!");
 			alert.setContentText("You added "+ countTextField.getText() + " copy/ies to Book with ISBN # "+ isbnTextField.getText());
-			alert.show();
+			alert.showAndWait();
+
+			WindowController.openWindow("ListBooksWindow", event, this.getClass());
 
 		} catch (NumberFormatException | BookNotFoundException | BookInvalidDataException e) {
 

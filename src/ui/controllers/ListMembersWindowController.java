@@ -14,6 +14,7 @@ import business.controllers.interfaces.LibrarianInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -79,12 +80,22 @@ public class ListMembersWindowController implements Initializable {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					MemberDataModel rowData = row.getItem();
-					System.out.println("Double click on: " + rowData.getAddress());
+					
+					LibrarianController c = new LibrarianController();
+					DetailsMemberWindowController.member = c.getMemberById(rowData.getMemberId());
+					
+					WindowController.openPopup("DetailsMemberWindow", this.getClass());
+					
 				}
 			});
 			return row;
 		});
 
+	}
+	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
 	}
 
 	public ObservableList<MemberDataModel> getMembersData() {

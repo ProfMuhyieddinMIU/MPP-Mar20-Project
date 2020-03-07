@@ -54,6 +54,11 @@ public class AdminWindowController implements Initializable {
 
 	}
 	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
+	
 	public void openAddMember(ActionEvent event) {
 		WindowController.openWindow("AddMemberWindow", event, this.getClass());
 

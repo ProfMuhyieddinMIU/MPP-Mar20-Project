@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import business.Book;
 import business.CheckOutRecord;
 import business.controllers.impl.LibrarianController;
+import business.controllers.impl.SystemController;
 import business.controllers.interfaces.LibrarianInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,7 +76,13 @@ public class ListCheckoutsWindowController implements Initializable {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					CheckoutDataModel rowData = row.getItem();
-					System.out.println("Double click on: " + rowData.getBookTitle());
+					
+					LibrarianController c = new LibrarianController();
+					DetailsCheckoutRecordWindowController.book = c.getBookByIsbn(rowData.getIsbn());
+					DetailsCheckoutRecordWindowController.member = c.getMemberById(rowData.getMemberId());
+					DetailsCheckoutRecordWindowController.recordsStatus = rowData.getSatus(); 
+					
+					WindowController.openPopup("DetailsCheckoutRecordWindow", this.getClass());
 				}
 			});
 			return row;
@@ -94,6 +101,11 @@ public class ListCheckoutsWindowController implements Initializable {
 
 	}
 
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
+	
 	public void getAllCheckoutRecords() {
 		LibrarianInterface c = new LibrarianController();
 		List<CheckOutRecord> checkoutRecords = c.getAllCheckOutRecords();

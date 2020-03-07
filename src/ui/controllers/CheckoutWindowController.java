@@ -3,12 +3,14 @@ package ui.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import business.Author;
 import business.LoginException;
 import business.controllers.impl.LibrarianController;
 import business.controllers.impl.SystemController;
 import business.controllers.interfaces.ControllerInterface;
 import business.controllers.interfaces.LibrarianInterface;
 import business.customExceptions.LibrarySystemException;
+import dataaccess.Auth;
 import javafx.event.ActionEvent; 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,7 +57,10 @@ public class CheckoutWindowController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Successed!");
 			alert.setContentText("Check out is done successfully!");
-			alert.show();
+			alert.showAndWait();
+			
+
+			WindowController.openWindow("ListCheckoutsWindow", event, this.getClass());
 			
 		} catch (LibrarySystemException e) {
 			
@@ -70,7 +75,11 @@ public class CheckoutWindowController implements Initializable {
 	
 	public void back(ActionEvent event) {
 
-		WindowController.openWindow("LibrarianWindow", event, this.getClass());
+		if(SystemController.currentLoggedInUser.getAuthorization().equals(Auth.BOTH)) {
+			WindowController.openWindow("BothWindow", event, this.getClass());
+		}else {
+			WindowController.openWindow("LibrarianWindow", event, this.getClass());
+		}
 
 	}
 

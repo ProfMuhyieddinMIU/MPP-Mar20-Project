@@ -15,7 +15,7 @@ public class BookDataModel {
 	
 	
 	public BookDataModel(Book b) {
-		this.copies = b.getNumCopies()+"";
+		this.copies = b.getNumberOfAvailable()+"";
 		this.authors = this.getAuthorsName(b.getAuthors());
 		this.isbn = b.getIsbn();
 		this.title = b.getTitle();

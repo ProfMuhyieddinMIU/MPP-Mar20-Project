@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="869.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.DetailsCheckoutRecordWindowController">
+   <children>
+      <ImageView fitHeight="573.0" fitWidth="863.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/MIU_CAMP3.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#13d0ff" height="203.0" layoutX="25.0" layoutY="110.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="392.0" />
+      <Label fx:id="lblTitle" alignment="CENTER" layoutX="24.0" layoutY="21.0" prefHeight="43.0" prefWidth="825.0" styleClass="label-header" text="Check out Record Details" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Bold" size="29.0" />
+         </font>
+      </Label>
+      <Button fx:id="checkInButton" defaultButton="true" layoutX="211.0" layoutY="460.0" mnemonicParsing="false" onAction="#checkIn" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Check In" textFill="#ee0404">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+      </Button>
+      <Button fx:id="cancelButton" defaultButton="true" layoutX="428.0" layoutY="460.0" mnemonicParsing="false" onAction="#cancel" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Cancel" textFill="WHITE">
+         <effect>
+            <Blend opacity="0.0" />
+         </effect>
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#13d0ff" height="203.0" layoutX="427.0" layoutY="110.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="419.0" />
+      <ImageView fx:id="imgBook" fitHeight="191.0" fitWidth="131.0" layoutX="278.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgMember" fitHeight="191.0" fitWidth="147.0" layoutX="691.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" />
+      <Label blendMode="SRC_ATOP" layoutX="44.0" layoutY="132.0" text="ISBN" />
+      <Label fx:id="lblISBN" blendMode="SRC_ATOP" layoutX="44.0" layoutY="156.0" text="ISBN" />
+      <Label fx:id="lblISBN1" blendMode="SRC_ATOP" layoutX="44.0" layoutY="182.0" text="Title" />
+      <Label fx:id="lblBookTitle" blendMode="SRC_ATOP" layoutX="47.0" layoutY="208.0" text="Title" />
+      <Label blendMode="SRC_ATOP" layoutX="437.0" layoutY="132.0" text="Member ID" />
+      <Label fx:id="lblMemberID" blendMode="SRC_ATOP" layoutX="437.0" layoutY="156.0" text="Member ID" />
+      <Label blendMode="SRC_ATOP" layoutX="437.0" layoutY="182.0" text="Name" />
+      <Label fx:id="lblMemberName" blendMode="SRC_ATOP" layoutX="437.0" layoutY="208.0" text="Name" />
+   </children>
+</AnchorPane>

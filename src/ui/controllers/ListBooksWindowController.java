@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import business.Book;
 import business.controllers.impl.LibrarianController;
+import business.controllers.impl.SystemController;
 import business.controllers.interfaces.LibrarianInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,7 +68,11 @@ public class ListBooksWindowController implements Initializable {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					BookDataModel rowData = row.getItem();
-					System.out.println("Double click on: " + rowData.getTitle());
+					
+					LibrarianController c = new LibrarianController();
+					DetailsBookWindowController.book = c.getBookByIsbn(rowData.getIsbn());
+					
+					WindowController.openPopup("DetailsBookWindow", this.getClass());
 				}
 			});
 			return row;
@@ -84,6 +89,11 @@ public class ListBooksWindowController implements Initializable {
 
 		System.exit(0);
 
+	}
+	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
 	}
 
 	public void getAllBooks() {

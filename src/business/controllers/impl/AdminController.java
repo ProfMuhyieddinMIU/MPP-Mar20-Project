@@ -20,11 +20,9 @@ import business.customExceptions.MemberNotFoundException;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 
-public class AdminController implements AdminControllerInterface
-{
+public class AdminController implements AdminControllerInterface {
 
-	public static void main(String[] args) throws LibrarySystemException
-	{
+	public static void main(String[] args) throws LibrarySystemException {
 
 		AdminController a = new AdminController();
 		// for test AdminController only
@@ -43,8 +41,7 @@ public class AdminController implements AdminControllerInterface
 
 	}
 
-	private void validateMemberData(String firstName, String lastName, String email) throws MemberInvalidDataException
-	{
+	private void validateMemberData(String firstName, String lastName, String email) throws MemberInvalidDataException {
 		if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty())
 			throw new MemberInvalidDataException("First Name , Last Name and Email Fields Can not be empty !");
 	}
@@ -56,22 +53,22 @@ public class AdminController implements AdminControllerInterface
 	 * @throws BookInvalidDataException
 	 */
 	@Override
-	public void addBookCopy(String isbn, int numOfCopies) throws BookNotFoundException, BookInvalidDataException
-	{
+	public void addBookCopy(String isbn, int numOfCopies) throws BookNotFoundException, BookInvalidDataException {
 		validateAddCopyData(isbn);
 
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, Book> map = da.readBooksMap();
 		Book book = searchBookInMap(isbn, map);
 
+		if (book == null)
+			throw new BookNotFoundException("Book with ISBN : " + isbn + "  Is not Exist!");
 		for (int i = 0; i < numOfCopies; i++)
 			book.addCopy();
 
 		da.updateBook(book);
 	}
 
-	private void validateAddCopyData(String isbn) throws BookInvalidDataException
-	{
+	private void validateAddCopyData(String isbn) throws BookInvalidDataException {
 		if (isbn.isEmpty())
 			throw new BookInvalidDataException("Isbn Field Cannot be empty !");
 
@@ -95,8 +92,7 @@ public class AdminController implements AdminControllerInterface
 	 */
 	public void editMember(String memberID, String firstName, String lastName, String telephone, String email,
 			String street, String state, String city, String zip)
-			throws MemberInvalidDataException, MemberNotFoundException
-	{
+			throws MemberInvalidDataException, MemberNotFoundException {
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, LibraryMember> mems = da.readMemberMap();
 		LibraryMember m = null;
@@ -123,9 +119,8 @@ public class AdminController implements AdminControllerInterface
 	 * @param map
 	 * @return
 	 */
-	private Book searchBookInMap(String isbn, HashMap<String, Book> map)
-	{
-		if(map == null)
+	private Book searchBookInMap(String isbn, HashMap<String, Book> map) {
+		if (map == null)
 			return null;
 		for (Map.Entry<String, Book> entry : map.entrySet())
 			if (entry.getKey().equals(isbn))
@@ -135,8 +130,7 @@ public class AdminController implements AdminControllerInterface
 
 	@Override
 	public LibraryMember addMember(String firstName, String lastName, String telephone, String email, String street,
-			String state, String city, String zip) throws MemberInvalidDataException
-	{
+			String state, String city, String zip) throws MemberInvalidDataException {
 
 		validateMemberData(firstName, lastName, email);
 
@@ -149,8 +143,7 @@ public class AdminController implements AdminControllerInterface
 		return member;
 	}
 
-	private String generateMemberId()
-	{
+	private String generateMemberId() {
 		SystemController systemController = new SystemController();
 
 		int generatedId = systemController.allMemberIds().size() + 1001;
@@ -160,8 +153,7 @@ public class AdminController implements AdminControllerInterface
 	// Hus3/6/20:
 	@Override
 	public void addBook(String isbn, String title, int maxCheckoutLength, List<Author> authors)
-			throws InvalidDataException
-	{
+			throws InvalidDataException {
 		DataAccess da = new DataAccessFacade();
 		Book b = new Book(isbn, title, maxCheckoutLength, authors);
 		validateBookData(b);
@@ -169,14 +161,13 @@ public class AdminController implements AdminControllerInterface
 	}
 
 	// Hus3/6/20:
-	private void validateBookData(Book b) throws InvalidDataException
-	{
+	private void validateBookData(Book b) throws InvalidDataException {
 		if (b.getIsbn().isEmpty() || b.getAuthors().isEmpty() || b.getTitle().isEmpty()
 				|| (b.getMaxCheckoutLength() != 21 && b.getMaxCheckoutLength() != 7))
 			throw new InvalidDataException();
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, Book> books = da.readBooksMap();
-		//if(!books.isEmpty())
+		// if(!books.isEmpty())
 		if (searchBookInMap(b.getIsbn(), books) != null)
 			throw new InvalidDataException("Book already exists");
 	}

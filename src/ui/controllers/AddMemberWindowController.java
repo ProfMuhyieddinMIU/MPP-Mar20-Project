@@ -68,6 +68,11 @@ public class AddMemberWindowController implements Initializable {
 		System.exit(0);
 
 	}
+	
+	public void logout(ActionEvent event) {
+		SystemController.currentLoggedInUser = null ;
+		WindowController.openPopus("MainWindow", event, this.getClass());
+	}
 
 	public void addMember(ActionEvent event) {
 		
@@ -80,7 +85,10 @@ public class AddMemberWindowController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Successed!");
 			alert.setContentText("Member created successfully! His ID is "+ member.getMemberId());
-			alert.show();
+			alert.showAndWait();
+			
+
+			WindowController.openWindow("ListMembersWindow", event, this.getClass());
 
 		} catch (NumberFormatException | MemberInvalidDataException e) {
 

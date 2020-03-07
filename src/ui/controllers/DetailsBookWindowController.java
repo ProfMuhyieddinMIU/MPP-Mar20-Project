@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import business.Author;
 import business.Book;
 import business.controllers.impl.LibrarianController;
 import business.controllers.interfaces.LibrarianInterface;
@@ -12,71 +13,91 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import ui.dataModel.BookDataModel;
 
 public class DetailsBookWindowController implements Initializable {
 
 	@FXML
-	private Button backButton;
+	private Button okButton;
+	
+	@FXML
+	private Label lblTitle;
+	
+	
+	@FXML
+	private ImageView imgBook;
 
 	@FXML
-	private MenuItem exitMenuItem;
+	private TextField availableTextField;
+	
+	@FXML
+	private TextField maxTextField;
+	
+	@FXML
+	private TextField totalTextField;
 
-	ObservableList<BookDataModel> booksData = FXCollections.observableArrayList();
+	ObservableList<Author> authorsData = FXCollections.observableArrayList();
 
 	@FXML
-	private TableView<BookDataModel> tblBooks;
+	private TableView<Author> tblAuthors;
+	
 	@FXML
-	private TableColumn<BookDataModel, String> clmISBN;
+	private TableColumn<Author, String> clmFirstName;
+	
 	@FXML
-	private TableColumn<BookDataModel, String> clmTitle;
+	private TableColumn<Author, String> clmLastName;
+	
 	@FXML
-	private TableColumn<BookDataModel, String> clmAuthors;
-	@FXML
-	private TableColumn<BookDataModel, String> clmDays;
-	@FXML
-	private TableColumn<BookDataModel, String> clmCopies;
+	private TableColumn<Author, String> clmBio;
+	
+	public static Book book ;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		clmISBN.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("isbn"));
-		clmTitle.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("title"));
-		clmAuthors.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("authors"));
-		clmDays.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("maxCheckoutLength"));
-		clmCopies.setCellValueFactory(new PropertyValueFactory<BookDataModel, String>("copies"));
-
-		this.getAllBooks();
-
-		TableViewLoad(booksData);
-
-	}
-
-	private void TableViewLoad(ObservableList<BookDataModel> booksData) {
-
-		tblBooks.setItems(getBooksData());
 		
-		tblBooks.setRowFactory(tv -> {
-			TableRow<BookDataModel> row = new TableRow<>();
-			row.setOnMouseClicked(event -> {
-				if (event.getClickCount() == 2 && (!row.isEmpty())) {
-					BookDataModel rowData = row.getItem();
-					System.out.println("Double click on: " + rowData.getTitle());
-				}
-			});
-			return row;
-		});
+		lblTitle.setText(book.getTitle());
+
+		clmFirstName.setCellValueFactory(new PropertyValueFactory<Author, String>("firstName"));
+		clmLastName.setCellValueFactory(new PropertyValueFactory<Author, String>("lastName"));
+		clmBio.setCellValueFactory(new PropertyValueFactory<Author, String>("bio"));
+		
+		authorsData.addAll(book.getAuthors());
+		TableViewLoad(authorsData);
+		
+		availableTextField.setText(book.getNumberOfAvailable()+"");
+		maxTextField.setText(book.getMaxCheckoutLength()+"");
+		totalTextField.setText(book.getNumCopies()+"");
+
+		
+		
+		URL url = this.getClass().getResource("/ui/scenebuilder/images/books/"+book.getIsbn()+".jpg");
+		if(url != null) {
+			Image image = new Image(url.toString());
+			imgBook.setImage(image);
+		}
 
 	}
 
-	public ObservableList<BookDataModel> getBooksData() {
-		return booksData;
+	private void TableViewLoad(ObservableList<Author> booksData) {
+
+		tblAuthors.setItems(getAuthorsData());
+
+
+	}
+
+	public ObservableList<Author> getAuthorsData() {
+		return authorsData;
 	}
 
 	public void exitApplication(ActionEvent event) {
@@ -86,19 +107,17 @@ public class DetailsBookWindowController implements Initializable {
 
 	}
 
-	public void getAllBooks() {
-		LibrarianInterface c = new LibrarianController();
-		List<Book> books = c.getAllBooks();
-
-		for (Book b : books) {
-			booksData.add(new BookDataModel(b));
-		}
-	}
 
 	public void back(ActionEvent event) {
 
 		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
+	
+	public void ok(ActionEvent event) {
+
+		((Node)(event.getSource())).getScene().getWindow().hide();
+
+	} 
 
 }

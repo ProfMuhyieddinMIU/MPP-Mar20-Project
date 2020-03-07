@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -8,58 +9,55 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="1016.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.DetailsBookWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="869.0" styleClass="background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controllers.DetailsBookWindowController">
    <children>
-      <MenuBar prefHeight="30.0" prefWidth="1016.0" stylesheets="@style.css">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitApplication" text="Exit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
-                  <MenuItem fx:id="searchMenuItem" mnemonicParsing="false" text="Search" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <ImageView fitHeight="612.0" fitWidth="1016.0" layoutX="1.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="573.0" fitWidth="863.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/MIU_CAMP3.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="419.0" layoutY="51.0" prefHeight="50.0" prefWidth="179.0" styleClass="label-header" text="All Books" textAlignment="CENTER">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#13d0ff" height="402.0" layoutX="15.0" layoutY="110.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="640.0" />
+      <TextField fx:id="availableTextField" editable="false" layoutX="274.0" layoutY="155.0" prefHeight="33.0" prefWidth="157.0" />
+      <Label layoutX="31.0" layoutY="148.0" prefHeight="19.0" prefWidth="220.0" styleClass="label-normal" text="Available Copies" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTitle" alignment="CENTER" layoutX="17.0" layoutY="21.0" prefHeight="33.0" prefWidth="840.0" styleClass="label-header" textAlignment="CENTER">
          <font>
             <Font name="Arial Bold" size="29.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" onAction="#back"  defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
+      <Label layoutX="31.0" layoutY="196.0" prefHeight="32.0" prefWidth="220.0" styleClass="label-normal" text="Number of Copies" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
+      </Label>
+      <TextField fx:id="totalTextField" editable="false" layoutX="274.0" layoutY="198.0" prefHeight="33.0" prefWidth="157.0" />
+      <TextField fx:id="maxTextField" editable="false" layoutX="274.0" layoutY="246.0" prefHeight="18.0" prefWidth="157.0" />
+      <Label layoutX="31.0" layoutY="243.0" prefHeight="32.0" prefWidth="238.0" styleClass="label-normal" text="Max Checkout Days" textFill="WHITE" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="okButton" defaultButton="true" layoutX="662.0" layoutY="469.0" mnemonicParsing="false" onAction="#ok" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Ok" textFill="WHITE">
          <effect>
             <Blend opacity="0.0" />
          </effect>
-      </Button>
-      <Label fx:id="errorLabel" layoutX="460.0" layoutY="322.0" prefHeight="23.0" prefWidth="161.0" styleClass="label-error" textFill="#ee0000">
          <font>
-            <Font name="Arial Bold" size="14.0" />
+            <Font name="Arial Bold" size="20.0" />
          </font>
-      </Label>
-      <TableView fx:id="tblBooks" layoutX="14.0" layoutY="122.0" opacity="0.85" prefHeight="459.0" prefWidth="989.0">
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d181b" height="196.0" layoutX="690.0" layoutY="110.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="145.0" />
+      <ImageView fx:id="imgBook" fitHeight="169.0" fitWidth="129.0" layoutX="697.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+         
+         </image></ImageView>
+      <TableView fx:id="tblAuthors" layoutX="29.0" layoutY="301.0" opacity="0.84" prefHeight="190.0" prefWidth="613.0">
         <columns>
-          <TableColumn fx:id="clmISBN" prefWidth="114.0" text="ISBN" />
-          <TableColumn fx:id="clmTitle" prefWidth="222.0" text="Title" />
-            <TableColumn fx:id="clmAuthors" prefWidth="153.0" text="Authors" />
-            <TableColumn fx:id="clmDays" prefWidth="256.0" text="Max Check Out Days" />
-            <TableColumn fx:id="clmCopies" prefWidth="230.0" text="Number of Copies" />
+          <TableColumn fx:id="clmFirstName" prefWidth="122.0" text="Authors" />
+          <TableColumn fx:id="clmLastName" prefWidth="130.0" />
+            <TableColumn fx:id="clmBio" prefWidth="351.0" />
         </columns>
       </TableView>
    </children>

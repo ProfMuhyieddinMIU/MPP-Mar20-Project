@@ -67,7 +67,11 @@ public class ListBooksWindowController implements Initializable {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					BookDataModel rowData = row.getItem();
-					System.out.println("Double click on: " + rowData.getTitle());
+					
+					LibrarianController c = new LibrarianController();
+					DetailsBookWindowController.book = c.getBookByIsbn(rowData.getIsbn());
+					
+					WindowController.openPopup("DetailsBookWindow", this.getClass());
 				}
 			});
 			return row;

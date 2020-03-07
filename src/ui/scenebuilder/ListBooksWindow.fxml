@@ -40,7 +40,7 @@
             <Font name="Arial Bold" size="29.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" onAction="#back"  defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
+      <Button fx:id="backButton" defaultButton="true" layoutX="804.0" layoutY="589.0" mnemonicParsing="false" onAction="#back" opacity="0.8" prefHeight="43.0" prefWidth="198.0" text="Back" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="20.0" />
          </font>
@@ -59,7 +59,7 @@
           <TableColumn fx:id="clmTitle" prefWidth="222.0" text="Title" />
             <TableColumn fx:id="clmAuthors" prefWidth="153.0" text="Authors" />
             <TableColumn fx:id="clmDays" prefWidth="256.0" text="Max Check Out Days" />
-            <TableColumn fx:id="clmCopies" prefWidth="230.0" text="Number of Copies" />
+            <TableColumn fx:id="clmCopies" prefWidth="230.0" text="Available Copies" />
         </columns>
       </TableView>
    </children>

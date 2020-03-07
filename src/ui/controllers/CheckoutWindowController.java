@@ -55,7 +55,10 @@ public class CheckoutWindowController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Successed!");
 			alert.setContentText("Check out is done successfully!");
-			alert.show();
+			alert.showAndWait();
+			
+
+			WindowController.openWindow("ListCheckoutsWindow", event, this.getClass());
 			
 		} catch (LibrarySystemException e) {
 			

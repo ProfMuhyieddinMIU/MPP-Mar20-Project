@@ -56,7 +56,9 @@ public class AddCopyWindowController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Successed!");
 			alert.setContentText("You added "+ countTextField.getText() + " copy/ies to Book with ISBN # "+ isbnTextField.getText());
-			alert.show();
+			alert.showAndWait();
+
+			WindowController.openWindow("ListBooksWindow", event, this.getClass());
 
 		} catch (NumberFormatException | BookNotFoundException | BookInvalidDataException e) {
 

@@ -115,7 +115,10 @@ public class AddBookWindowController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Success!");
 			alert.setContentText("Book "+titleTextField.getText()+" has been added successfully!");
-			alert.show();
+			alert.showAndWait();
+			
+
+			WindowController.openWindow("ListBooksWindow", event, this.getClass());
 
 
 		} catch (NumberFormatException | InvalidDataException e) {

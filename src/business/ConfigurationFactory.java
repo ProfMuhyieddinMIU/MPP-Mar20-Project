@@ -8,7 +8,7 @@ import java.util.Properties;
 public class ConfigurationFactory {
 
 	public static String getProperty(String key) throws IOException {
-		InputStream input = new FileInputStream("src\\config.properties");
+		InputStream input = new FileInputStream("src/config.properties");
 
 		Properties prop = new Properties();
 

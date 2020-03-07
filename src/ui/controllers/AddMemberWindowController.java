@@ -80,7 +80,10 @@ public class AddMemberWindowController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Successed!");
 			alert.setContentText("Member created successfully! His ID is "+ member.getMemberId());
-			alert.show();
+			alert.showAndWait();
+			
+
+			WindowController.openWindow("ListMembersWindow", event, this.getClass());
 
 		} catch (NumberFormatException | MemberInvalidDataException e) {
 

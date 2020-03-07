@@ -75,7 +75,13 @@ public class ListCheckoutsWindowController implements Initializable {
 			row.setOnMouseClicked(event -> {
 				if (event.getClickCount() == 2 && (!row.isEmpty())) {
 					CheckoutDataModel rowData = row.getItem();
-					System.out.println("Double click on: " + rowData.getBookTitle());
+					
+					LibrarianController c = new LibrarianController();
+					DetailsCheckoutRecordWindowController.book = c.getBookByIsbn(rowData.getIsbn());
+					DetailsCheckoutRecordWindowController.member = c.getMemberById(rowData.getMemberId());
+					DetailsCheckoutRecordWindowController.recordsStatus = rowData.getSatus(); 
+					
+					WindowController.openPopup("DetailsCheckoutRecordWindow", this.getClass());
 				}
 			});
 			return row;

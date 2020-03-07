@@ -45,6 +45,7 @@ public class EmailSenderController implements EmailSenderControllerInterface {
 			EmailUtil.sendEmail(session, fromEmail, email, subject, body);
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			throw new LibrarySystemException("Internal Error Try Again Later !");
 		}
 

@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -72,6 +73,17 @@ public class ListMembersWindowController implements Initializable {
 	private void TableViewLoad(ObservableList<MemberDataModel> membersData) {
 
 		tblMembers.setItems(getMembersData());
+		
+		tblMembers.setRowFactory(tv -> {
+			TableRow<MemberDataModel> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					MemberDataModel rowData = row.getItem();
+					System.out.println("Double click on: " + rowData.getAddress());
+				}
+			});
+			return row;
+		});
 
 	}
 

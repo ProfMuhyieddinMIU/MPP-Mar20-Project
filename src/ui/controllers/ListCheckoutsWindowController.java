@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ui.dataModel.BookDataModel;
@@ -68,6 +69,17 @@ public class ListCheckoutsWindowController implements Initializable {
 	private void TableViewLoad(ObservableList<CheckoutDataModel> checkoutRecordsData) {
 
 		tblCheckoutRecords.setItems(getCheckoutRecordsData());
+		
+		tblCheckoutRecords.setRowFactory(tv -> {
+			TableRow<CheckoutDataModel> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					CheckoutDataModel rowData = row.getItem();
+					System.out.println("Double click on: " + rowData.getBookTitle());
+				}
+			});
+			return row;
+		});
 
 	}
 

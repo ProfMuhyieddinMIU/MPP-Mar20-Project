@@ -28,8 +28,7 @@ public class CheckOutRecord  implements Serializable {
 		 this.memberId = memberId ;
 		 this.isbn =isbn ;
 		 this.copyNum = copyNum;
-		 this.checkOutDate = checkOutDate ;
-		 this.bookReturnDate = bookReturnDate;
+		 this.checkOutDate = checkOutDate ; 
 	}
 	
 	public long getTransId() {
@@ -81,6 +80,9 @@ public class CheckOutRecord  implements Serializable {
 	public String getMemberName() {
 		LibrarianInterface librarianController = new LibrarianController();
 		LibraryMember  member = librarianController.getMemberById(getMemberId()) ;
+		if (member == null ) {
+			return "" ;
+		}
 		return member.getFirstName() + " " +member.getLastName() ;
 	}
 	

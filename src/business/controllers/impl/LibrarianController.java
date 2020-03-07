@@ -313,9 +313,8 @@ public class LibrarianController implements LibrarianInterface  {
 		
 		//Hus3/6/20:: Next copy is not available
 		book.getNextAvailableCopy().changeAvailability();
-		updateBookMap(book);		
-		LocalDateTime currentDate = LocalDateTime.now(); 
-		saveCheckOutBook( memberId, isbn , copyNum , currentDate );
+		updateBookMap(book);		 
+		saveCheckOutBook( memberId, isbn , copyNum , checkOutDate );
 		return true;
 	}
 

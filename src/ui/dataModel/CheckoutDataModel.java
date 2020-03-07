@@ -22,7 +22,7 @@ public class CheckoutDataModel {
 		this.bookTitle = c.getBookTitle();
 		this.memberId = c.getMemberId();
 		this.memberName = c.getMemberName();
-		this.checkoutDate = c.getCheckOutDate().toString();
+		this.checkoutDate = c.getCheckOutDateAsDate().toString();
 		this.dueDate = c.getDueDateAsString();
 		this.satus = c.isOverDueDate()? "Overdue!" : "";
 	}

@@ -27,4 +27,17 @@ public class WindowController {
 	        }
 	}
 	
+	public static void openPopus(String PopupName, ActionEvent event, Class c){
+		 try {
+	        	Parent root = FXMLLoader.load(c.getResource("/ui/scenebuilder/"+PopupName+".fxml"));
+	            Stage stage = new Stage();
+	            stage.setScene(new Scene(root));
+	            stage.initStyle(StageStyle.UNDECORATED);
+	            stage.show();
+	        }
+	        catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	}
+	
 }

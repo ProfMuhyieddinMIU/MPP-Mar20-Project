@@ -51,16 +51,18 @@ public class DataAccessFacade implements DataAccess
 		saveToStorage(StorageType.MEMBERS, mems);
 	}
 
+	//Hus3/6/20:: fix if first book
 	/**
 	 * 
 	 * @param book
 	 */
 	public void saveNewBook(Book book)
 	{
-		HashMap<String, Book> mems = readBooksMap();
-		String bookIsbn = book.getIsbn();
-		mems.put(bookIsbn, book);
-		saveToStorage(StorageType.BOOKS, mems);
+		HashMap<String, Book> bks = readBooksMap();
+		if(bks == null)
+			bks = new HashMap<String, Book>();
+		bks.put(book.getIsbn(), book);
+		saveToStorage(StorageType.BOOKS, bks);
 	}
 
 	public void updateBook(Book book)
@@ -205,6 +207,11 @@ public class DataAccessFacade implements DataAccess
 			Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
 			in = new ObjectInputStream(Files.newInputStream(path));
 			retVal = in.readObject();
+		}
+		catch (IOException e)
+		{
+			//e.printStackTrace();
+			return null;
 		}
 		catch (Exception e)
 		{

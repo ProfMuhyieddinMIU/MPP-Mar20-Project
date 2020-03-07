@@ -159,6 +159,19 @@ final public class Book implements Serializable
 		return null;
 	}
 	
+	/** 
+	 *  get first copy of Book that checked out before to be used when book return 
+	 *  added by Mohamed Elarian
+	 * @return
+	 */
+	public BookCopy getNextUnAvailableCopy() 
+	{	
+		for(BookCopy c : copies)
+			if( ! c.isAvailable())
+				return c;
+		return null;
+	}
+	
 	/**
 	 * Get a copy by its ID
 	 * @param copyNum The copy ID

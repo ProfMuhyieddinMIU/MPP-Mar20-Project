@@ -7,6 +7,7 @@ import java.util.List;
 
 import business.Author;
 import business.Book;
+import business.BookCopy;
 import business.CheckOutRecord;
 import business.LibraryMember;
 import business.controllers.interfaces.LibrarianInterface;
@@ -332,6 +333,13 @@ public class LibrarianController implements LibrarianInterface  {
 		for (CheckOutRecord checkOutRecord : da.readCheckOutRecordsMap().values()  ) {
 			if (transId != null && checkOutRecord.getTransId() == Long.parseLong(transId) ) {
 				    setCheckOutRecordReturnDate ( checkOutRecord) ;
+				    Book book = getBookByIsbn(checkOutRecord.getIsbn());
+				    BookCopy bookCopy = book.getNextUnAvailableCopy() ; 
+				    if (bookCopy != null) {
+				    	bookCopy.changeAvailability();
+				    	updateBookMap(book);
+					}
+					
 				    return true ;
 				}
 			
@@ -340,6 +348,12 @@ public class LibrarianController implements LibrarianInterface  {
 					&& checkOutRecord.getMemberId().equalsIgnoreCase(memberId)
 					&& checkOutRecord.getBookReturnDate() == null ) {
 					setCheckOutRecordReturnDate ( checkOutRecord) ;
+					Book book = getBookByIsbn(checkOutRecord.getIsbn());
+					   BookCopy bookCopy = book.getNextUnAvailableCopy() ; 
+					    if (bookCopy != null) {
+					    	bookCopy.changeAvailability();
+					    	updateBookMap(book);
+						}
 				    return true ;
 				}
  

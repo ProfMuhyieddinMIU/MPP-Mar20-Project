@@ -84,6 +84,14 @@ public class DataAccessFacade implements DataAccess
 		saveToStorage(StorageType.CHECKOUT, CheckOutRecords);
 	}
 
+	public void updateCheckOutRecord(CheckOutRecord checkOutRecord)
+	{
+		HashMap<String, CheckOutRecord> recs = readCheckOutRecordsMap() ;
+
+		recs.put(checkOutRecord.getTransId() + "" , checkOutRecord);
+		saveToStorage(StorageType.CHECKOUT , recs);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public HashMap<String, Book> readBooksMap()
 	{

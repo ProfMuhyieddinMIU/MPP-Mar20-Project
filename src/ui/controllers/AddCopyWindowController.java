@@ -8,6 +8,7 @@ import business.controllers.impl.AdminController;
 import business.controllers.impl.SystemController;
 import business.controllers.interfaces.AdminControllerInterface;
 import business.controllers.interfaces.ControllerInterface;
+import business.customExceptions.BookInvalidDataException;
 import business.customExceptions.BookNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,7 +58,7 @@ public class AddCopyWindowController implements Initializable {
 			alert.setContentText("You added "+ countTextField.getText() + " copy/ies to Book with ISBN # "+ isbnTextField.getText());
 			alert.show();
 
-		} catch (NumberFormatException | BookNotFoundException e) {
+		} catch (NumberFormatException | BookNotFoundException | BookInvalidDataException e) {
 
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Failed!");

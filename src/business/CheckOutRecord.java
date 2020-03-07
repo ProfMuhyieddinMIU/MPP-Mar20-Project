@@ -112,7 +112,9 @@ public class CheckOutRecord  implements Serializable {
 	
 	
 	public boolean isOverDueDate() {
-        
+		if (getBookReturnDate() != null   ) {
+			return false ;
+		}
 		if (getDueDate().isAfter( LocalDateTime.now().toLocalDate().minusDays(1)  )  ) {
 			return false ;
 		}
@@ -127,6 +129,7 @@ public class CheckOutRecord  implements Serializable {
 				+ ", getBookTitle(): " + getBookTitle()
 				+ ", getMemberName: " + getMemberName()
 				+ ", getDueDateAsString: " + getDueDateAsString()
+				+ ", BookReturnDate: " + getBookReturnDate()
 		+ ", getCheckOutDateAsDateAsString: " + getCheckOutDateAsDateAsString()
 		+ ", isOverDueDate(): " + ( isOverDueDate() ? "True"  : "False" );
 		

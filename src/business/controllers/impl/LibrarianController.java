@@ -192,7 +192,11 @@ public class LibrarianController implements LibrarianInterface  {
 	public List<CheckOutRecord> getAllCheckOutRecords() { 
 		DataAccess da = new DataAccessFacade();
 		List<CheckOutRecord> checkOutRecords = new ArrayList<>();
-		checkOutRecords.addAll(da.readCheckOutRecordsMap().values());
+		HashMap<String, CheckOutRecord> currentCheckOutRecords  = da.readCheckOutRecordsMap() ;
+		if (currentCheckOutRecords != null ) {
+			checkOutRecords.addAll(   da.readCheckOutRecordsMap().values());
+		}
+		
 		 
 		
 		return checkOutRecords;
@@ -242,13 +246,13 @@ public class LibrarianController implements LibrarianInterface  {
 	 */
 	private CheckOutRecord saveCheckOutBook(String memberId, String isbn , int copyNum ,LocalDateTime checkOutDate  ) {
 		
-		CheckOutRecord checkOutRecord = new CheckOutRecord();
+		/* CheckOutRecord checkOutRecord = new CheckOutRecord();
 		checkOutRecord.setMemberId(memberId);
 		checkOutRecord.setIsbn(isbn);
 		checkOutRecord.setCopyNum(copyNum);
 		
 		checkOutRecord.setCheckOutDate(checkOutDate);    
-		    
+		 */   
 		DataAccess da = new DataAccessFacade(); 
 		long dummyTransId = -1 ;
 		if (da.readCheckOutRecordsMap() == null ) {
@@ -257,8 +261,8 @@ public class LibrarianController implements LibrarianInterface  {
 			dummyTransId = da.readCheckOutRecordsMap().size() + 1 ;
 		}
 		
-		checkOutRecord.setTransId( dummyTransId );
-		
+		// checkOutRecord.setTransId( dummyTransId );
+		CheckOutRecord checkOutRecord = new CheckOutRecord (dummyTransId , memberId , isbn ,  copyNum ,  checkOutDate ) ;
 		da.saveNewCheckOutRecord(checkOutRecord);
 		return checkOutRecord;
 	}
@@ -279,7 +283,11 @@ public class LibrarianController implements LibrarianInterface  {
 		} 
 		
 		DataAccess da = new DataAccessFacade();
-		for (CheckOutRecord checkOutRecord : da.readCheckOutRecordsMap().values()  ) {
+		HashMap<String, CheckOutRecord> checkOutRecords  = da.readCheckOutRecordsMap() ;
+		if (checkOutRecords != null && checkOutRecords.size() > 0 ) {
+			
+		
+		for (CheckOutRecord checkOutRecord :checkOutRecords.values()  ) {
 			if (checkOutRecord.getIsbn() != null && checkOutRecord.getMemberId() != null 
 				&& checkOutRecord.getIsbn().equalsIgnoreCase(isbn)
 				&& checkOutRecord.getMemberId().equalsIgnoreCase(memberId)
@@ -287,7 +295,7 @@ public class LibrarianController implements LibrarianInterface  {
 				  throw new LibrarySystemException("This member already has a copy from this book amd can't get another copy") ;
 			}
 		}
-		
+		}
 		int copyNum = -1 ;
 		if(book.isAvailable())
 			copyNum = book.getNextAvailableCopy().getCopyNum() ;

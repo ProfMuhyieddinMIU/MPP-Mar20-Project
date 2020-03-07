@@ -97,7 +97,10 @@ public class DataAccessFacade implements DataAccess
 	{
 		// Returns a Map with name/value pairs being
 		// isbn -> Book
-		return (HashMap<String, Book>) readFromStorage(StorageType.BOOKS);
+		Object o = readFromStorage(StorageType.BOOKS);
+		if(o == null)
+			return new HashMap<String, Book>();
+		return (HashMap<String, Book>)o ;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -105,7 +108,10 @@ public class DataAccessFacade implements DataAccess
 	{
 		// Returns a Map with name/value pairs being
 		// isbn -> Book
-		return (HashMap<String, CheckOutRecord>) readFromStorage(StorageType.CHECKOUT);
+		Object o = readFromStorage(StorageType.CHECKOUT);
+		if(o == null)
+			return new HashMap<String, CheckOutRecord>();
+		return (HashMap<String, CheckOutRecord>)o ;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -113,7 +119,10 @@ public class DataAccessFacade implements DataAccess
 	{
 		// Returns a Map with name/value pairs being
 		// memberId -> LibraryMember
-		return (HashMap<String, LibraryMember>) readFromStorage(StorageType.MEMBERS);
+		Object o = readFromStorage(StorageType.MEMBERS);
+		if(o == null)
+			return new HashMap<String, LibraryMember>();
+		return (HashMap<String, LibraryMember>)o ;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -121,7 +130,10 @@ public class DataAccessFacade implements DataAccess
 	{
 		// Returns a Map with name/value pairs being
 		// userId -> User
-		return (HashMap<String, User>) readFromStorage(StorageType.USERS);
+		Object o = readFromStorage(StorageType.USERS);
+		if(o == null)
+			return new HashMap<String, User>();
+		return (HashMap<String, User>)o ;
 	}
 
 	///// load methods - these place test data into the storage area
@@ -196,10 +208,10 @@ public class DataAccessFacade implements DataAccess
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			return null;
 		}
 		finally
-		{
+		{ 
 			if (in != null)
 			{
 				try

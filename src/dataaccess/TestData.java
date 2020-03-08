@@ -1,5 +1,6 @@
 package dataaccess;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.List;
 import business.Address;
 import business.Author;
 import business.Book;
+import business.BookCopy;
+import business.CheckoutEntry;
+import business.CheckoutRecord;
 import business.LibraryMember;
 
 /**
@@ -22,49 +26,10 @@ import business.LibraryMember;
 public class TestData {
 	
 	
-	public static void main(String[] args) {
-		TestData td = new TestData();
-		td.bookData();
-		td.libraryMemberData();
-		td.userData();
-		DataAccess da = new DataAccessFacade();
-		System.out.println(da.readBooksMap());
-		System.out.println(da.readUserMap());
-	}
-	///create books
-	public void bookData() {
-		allBooks.get(0).addCopy();
-		allBooks.get(0).addCopy();
-		allBooks.get(1).addCopy();
-		allBooks.get(3).addCopy();
-		allBooks.get(2).addCopy();
-		allBooks.get(2).addCopy();
-		DataAccessFacade.loadBookMap(allBooks);
-	}
+List<LibraryMember> members = new ArrayList<LibraryMember>();
 	
-	public void userData() {
-		DataAccessFacade.loadUserMap(allUsers);
-	}
-	
-	//create library members
-	public void libraryMemberData() {
-		LibraryMember libraryMember = new LibraryMember("1001", "Andy", "Rogers", "641-223-2211", addresses.get(4));
-		members.add(libraryMember);
-		libraryMember = new LibraryMember("1002", "Drew", "Stevens", "702-998-2414", addresses.get(5));
-		members.add(libraryMember);
-		
-		libraryMember = new LibraryMember("1003", "Sarah", "Eagleton", "451-234-8811", addresses.get(6));
-		members.add(libraryMember);
-		
-		libraryMember = new LibraryMember("1004", "Ricardo", "Montalbahn", "641-472-2871", addresses.get(7));
-		members.add(libraryMember);
-		
-		DataAccessFacade.loadMemberMap(members);	
-	}
-	
-	///////////// DATA //////////////
-	List<LibraryMember> members = new ArrayList<LibraryMember>();
 	@SuppressWarnings("serial")
+	
 	
 	List<Address> addresses = new ArrayList<Address>() {
 		{
@@ -81,13 +46,15 @@ public class TestData {
 	@SuppressWarnings("serial")
 	public List<Author> allAuthors = new ArrayList<Author>() {
 		{
-			add(new Author("Joe", "Thomas", "641-445-2123", addresses.get(0), "A happy man is he."));
-			add(new Author("Sandra", "Thomas", "641-445-2123", addresses.get(0), "A happy wife is she."));
-			add(new Author("Nirmal", "Pugh", "641-919-3223", addresses.get(1), "Thinker of thoughts."));
-			add(new Author("Andrew", "Cleveland", "976-445-2232", addresses.get(2), "Author of childrens' books."));
-			add(new Author("Sarah", "Connor", "123-422-2663", addresses.get(3), "Known for her clever style."));
+			add(new Author("1","Joe", "Thomas", "641-445-2123", addresses.get(0), "A happy man is he.", ""));
+			add(new Author("2","Sandra", "Thomas", "641-445-2123", addresses.get(0), "A happy wife is she.", ""));
+			add(new Author("3","Nirmal", "Pugh", "641-919-3223", addresses.get(1), "Thinker of thoughts.", ""));
+			add(new Author("4","Andrew", "Cleveland", "976-445-2232", addresses.get(2), "Author of childrens' books.", ""));
+			add(new Author("5","Sarah", "Connor", "123-422-2663", addresses.get(3), "Known for her clever style.", ""));
 		}
 	};
+	
+	
 	
 	@SuppressWarnings("serial")
 	List<Book> allBooks = new ArrayList<Book>() {
@@ -95,16 +62,174 @@ public class TestData {
 			add(new Book("23-11451", "The Big Fish", 21, Arrays.asList(allAuthors.get(0), allAuthors.get(1))));
 			add(new Book("28-12331", "Antartica", 7, Arrays.asList(allAuthors.get(2))));
 			add(new Book("99-22223", "Thinking Java", 21, Arrays.asList(allAuthors.get(3))));
-			add(new Book("48-56882", "Jimmy's First Day of School", 7, Arrays.asList(allAuthors.get(4))));		
+			add(new Book("48-56882", "Jimmy's First Day of School", 7, Arrays.asList(allAuthors.get(4))));
+			
 		}
 	};
 	
+	
+
 	@SuppressWarnings("serial")
 	List<User> allUsers = new ArrayList<User>() {
 		{
-			add(new User("101", "xyz", Auth.LIBRARIAN));
-			add(new User("102", "abc", Auth.ADMIN));
-			add(new User("103", "111", Auth.BOTH));
+			add(new User("1", "1", Auth.LIBRARIAN));
+			add(new User("1", "1", Auth.ADMIN));
+			add(new User("1", "1", Auth.BOTH));
 		}
 	};
+	
+	public static void main(String[] args) {
+		
+		
+		
+		TestData td = new TestData();
+		
+		td.bookData();
+		
+		td.libraryMemberData();
+		
+		td.userData();
+		
+		
+		
+		
+		
+		
+		
+		//td.authorData();
+		//td.addressData();
+		//td.bookCopyData();
+		
+		
+		DataAccess da = new DataAccessFacade();
+		
+		
+		//System.out.println(da.readBookCopyMap());
+		
+		
+		System.out.println(da.readBooksMap());
+		System.out.println(da.readUserMap());
+		
+		
+		//System.out.println(da.readAuthorMap());
+		
+		
+		System.out.println(da.readMemberMap());
+		
+		
+	}
+	///create books
+	public void bookData() {
+		allBooks.get(0).addCopy();
+		allBooks.get(0).addCopy();
+		allBooks.get(0).addCopy();		
+		allBooks.get(1).addCopy();
+		allBooks.get(1).addCopy();
+		allBooks.get(1).addCopy();
+		allBooks.get(3).addCopy();
+		allBooks.get(2).addCopy();
+		allBooks.get(2).addCopy();
+		allBooks.get(2).addCopy();
+		
+		
+		DataAccessFacade.loadBookMap(allBooks);
+		
+		
+	}
+	
+	
+	
+	public void userData() {
+		DataAccessFacade.loadUserMap(allUsers);
+	}
+	
+	public void authorData() {
+		DataAccessFacade.loadAuthorMap(allAuthors);
+	}
+	
+//	public void addressData() {
+//		DataAccessFacade.loadAddressMap(addresses);
+//	}
+	
+	//create library members
+	
+	public void libraryMemberData() {
+		
+		
+		DataAccessFacade data = new DataAccessFacade();
+		
+		
+		BookCopy bc;
+		
+		
+		LibraryMember libraryMember = new LibraryMember("1001", "Andy", "Rogers", "641-223-2211", addresses.get(4));
+		
+		
+		bc = allBooks.get(0).getNextAvailableCopy();
+		
+		
+		bc.setAvailable(false);
+		
+		
+		data.updateAvailabilityOfBook(bc.getBook().getIsbn(), bc.getCopyNum(), false);	
+		
+		
+		
+		CheckoutEntry entry1 = new CheckoutEntry(bc, LocalDate.of(2019, 12, 13),
+				
+				LocalDate.of(2019, 12, 31));
+		
+		
+		
+		bc = allBooks.get(1).getNextAvailableCopy();
+		
+		
+		
+		bc.setAvailable(false);
+		
+		
+		data.updateAvailabilityOfBook(bc.getBook().getIsbn(), bc.getCopyNum(), false);
+		
+		CheckoutEntry entry2 = new CheckoutEntry(bc, LocalDate.of(2020, 1, 20),
+				LocalDate.of(2020, 1, 19));
+		
+
+		CheckoutRecord checkoutRecord = new CheckoutRecord();
+		
+		checkoutRecord.addCheckoutEntry(entry1);
+		checkoutRecord.addCheckoutEntry(entry2);
+		
+		
+		libraryMember.setCheckoutRecord(checkoutRecord);
+		
+		members.add(libraryMember);
+		
+		
+		libraryMember = new LibraryMember("1002", "Drew", "Stevens", "702-998-2414", addresses.get(5));
+		
+		
+		
+		members.add(libraryMember);
+		
+		
+		
+		libraryMember = new LibraryMember("1003", "Sarah", "Eagleton", "451-234-8811", addresses.get(6));
+		
+		
+		bc = allBooks.get(3).getNextAvailableCopy();
+		bc.setAvailable(false);
+		data.updateAvailabilityOfBook(bc.getBook().getIsbn(), bc.getCopyNum(), false);
+		entry1 = new CheckoutEntry(bc, LocalDate.of(2019, 5, 27),LocalDate.of(2019, 5, 29));
+
+		checkoutRecord = new CheckoutRecord();
+		checkoutRecord.addCheckoutEntry(entry1);
+		libraryMember.setCheckoutRecord(checkoutRecord);
+		members.add(libraryMember);
+		
+		libraryMember = new LibraryMember("1004", "Ricardo", "Montalbahn", "641-472-2871", addresses.get(7));
+		members.add(libraryMember);
+		
+		DataAccessFacade.loadMemberMap(members);	
+		
+	}
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="423.0" prefWidth="500.0" styleClass="background" stylesheets="@library.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.EditMemberInfoWindow">
+   <children>
+      <GridPane layoutX="5.0" layoutY="22.0" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="22.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="First Name" GridPane.rowIndex="1" />
+            <Label text="Last Name" GridPane.rowIndex="2" />
+            <Label text="Street" GridPane.rowIndex="4" />
+            <Label text="City" GridPane.rowIndex="5" />
+            <Label text="Zip" GridPane.rowIndex="7" />
+            <Label text="State" GridPane.rowIndex="6" />
+            <TextField fx:id="txtMemberID" GridPane.columnIndex="1" />
+            <TextField fx:id="txtFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtPhone" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtStreet" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtCity" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="Member ID" />
+            <Label text="Phone" GridPane.rowIndex="3" />
+            <TextField fx:id="txtState" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="txtZip" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnOk" layoutX="351.0" layoutY="228.0" mnemonicParsing="false" onAction="#edit" text="OK" textOverrun="CLIP" AnchorPane.bottomAnchor="15.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></Button>
+      <Button fx:id="btnCancel" layoutX="420.0" layoutY="252.0" mnemonicParsing="false" onAction="#cancel" onDragDetected="#cancel" text="Cancel" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+      <TextField fx:id="txtSearchMemberID" layoutX="14.0" layoutY="346.0" promptText="Search member ID" AnchorPane.topAnchor="346.0" />
+      <Button fx:id="btnSearch" layoutX="14.0" layoutY="378.0" mnemonicParsing="false" onAction="#search" text="Search" />
+   </children>
+</AnchorPane>

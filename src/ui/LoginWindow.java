@@ -3,6 +3,7 @@ package ui;
 import business.ControllerInterface;
 import business.LoginException;
 import business.SystemController;
+import config.Constants;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,11 +15,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ui.components.G6Button;
 
 public class LoginWindow extends Stage implements LibWindow {
 	public static final LoginWindow INSTANCE = new LoginWindow();
@@ -66,7 +67,7 @@ public class LoginWindow extends Stage implements LibWindow {
         PasswordField pwBox = new PasswordField();
         grid.add(pwBox, 1, 2);
 
-        Button loginBtn = new Button("Log in");
+        G6Button loginBtn = new G6Button("Log in");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(loginBtn);
@@ -85,6 +86,7 @@ public class LoginWindow extends Stage implements LibWindow {
         			c.login(userTextField.getText().trim(), pwBox.getText().trim());
         			messageBar.setFill(Start.Colors.green);
              	    messageBar.setText("Login successful");
+             	    Start.homeWindow();
         		} catch(LoginException ex) {
         			messageBar.setFill(Start.Colors.red);
         			messageBar.setText("Error! " + ex.getMessage());
@@ -93,7 +95,7 @@ public class LoginWindow extends Stage implements LibWindow {
         	}
         });
 
-        Button backBtn = new Button("<= Back to Main");
+        Button backBtn = new Button("Back to Main");
         backBtn.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
         	public void handle(ActionEvent e) {
@@ -105,7 +107,7 @@ public class LoginWindow extends Stage implements LibWindow {
         hBack.setAlignment(Pos.BOTTOM_LEFT);
         hBack.getChildren().add(backBtn);
         grid.add(hBack, 0, 7);
-        Scene scene = new Scene(grid);
+        Scene scene = new Scene(grid, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         scene.getStylesheets().add(getClass().getResource("library.css").toExternalForm());
         setScene(scene);
         

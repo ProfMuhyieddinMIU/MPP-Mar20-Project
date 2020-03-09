@@ -72,9 +72,9 @@ List<LibraryMember> members = new ArrayList<LibraryMember>();
 	@SuppressWarnings("serial")
 	List<User> allUsers = new ArrayList<User>() {
 		{
-			add(new User("1", "1", Auth.LIBRARIAN));
-			add(new User("1", "1", Auth.ADMIN));
-			add(new User("1", "1", Auth.BOTH));
+			add(new User("101", "xyz", Auth.LIBRARIAN));
+			add(new User("102", "abc", Auth.ADMIN));
+			add(new User("103", "111", Auth.BOTH));
 		}
 	};
 	
@@ -89,31 +89,14 @@ List<LibraryMember> members = new ArrayList<LibraryMember>();
 		td.libraryMemberData();
 		
 		td.userData();
-		
-		
-		
-		
-		
-		
-		
-		//td.authorData();
-		//td.addressData();
-		//td.bookCopyData();
-		
+				
 		
 		DataAccess da = new DataAccessFacade();
-		
-		
-		//System.out.println(da.readBookCopyMap());
-		
+				
 		
 		System.out.println(da.readBooksMap());
 		System.out.println(da.readUserMap());
-		
-		
-		//System.out.println(da.readAuthorMap());
-		
-		
+
 		System.out.println(da.readMemberMap());
 		
 		
@@ -146,12 +129,7 @@ List<LibraryMember> members = new ArrayList<LibraryMember>();
 	public void authorData() {
 		DataAccessFacade.loadAuthorMap(allAuthors);
 	}
-	
-//	public void addressData() {
-//		DataAccessFacade.loadAddressMap(addresses);
-//	}
-	
-	//create library members
+
 	
 	public void libraryMemberData() {
 		

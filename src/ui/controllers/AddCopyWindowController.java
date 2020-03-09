@@ -81,5 +81,34 @@ public class AddCopyWindowController implements Initializable {
 		WindowController.openWindow("AdminWindow", event, this.getClass());
 
 	}
+	
+	public void openAddMember(ActionEvent event) {
+		WindowController.openWindow("AddMemberWindow", event, this.getClass());
+
+	}
+	
+	public void openAddCopy(ActionEvent event) {
+		WindowController.openWindow("AddCopyWindow", event, this.getClass());
+
+	}
+	
+	public void openAddBook(ActionEvent event) {
+		WindowController.openWindow("AddBookWindow", event, this.getClass());
+
+	}
+	
+	public void openListCheckouts(ActionEvent event) {
+		WindowController.openWindow("ListCheckoutsWindow", event, this.getClass());
+
+	}
+	
+	public void openListMembers(ActionEvent event) {
+		WindowController.openWindow("ListMembersWindow", event, this.getClass());
+
+	}
+	
+	public void openListBooks(ActionEvent event) {
+		WindowController.openWindow("ListBooksWindow", event, this.getClass());
+	}
 
 }

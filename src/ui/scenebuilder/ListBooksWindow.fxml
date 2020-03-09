@@ -20,9 +20,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="View">
             <items>
-              <MenuItem mnemonicParsing="false" text="View Books" />
-                  <MenuItem mnemonicParsing="false" text="View Members" />
-                  <MenuItem mnemonicParsing="false" text="View Checkout Records" />
+              <MenuItem mnemonicParsing="false" text="View Books"  onAction="#openListBooks"/>
+                  <MenuItem mnemonicParsing="false" text="View Members" onAction="#openListMembers"/>
+                  <MenuItem mnemonicParsing="false" text="View Checkout Records" onAction="#openListCheckouts"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

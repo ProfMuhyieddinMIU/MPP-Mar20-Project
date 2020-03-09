@@ -21,24 +21,19 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Add Book" />
-                  <MenuItem mnemonicParsing="false" text="Add Copy" />
-                  <MenuItem mnemonicParsing="false" text="Add Member" />
+              <MenuItem mnemonicParsing="false" text="Add Book"   onAction="#openAddBook" />
+                  <MenuItem mnemonicParsing="false" text="Add Copy" onAction="#openAddCopy" />
+                  <MenuItem mnemonicParsing="false" text="Add Member" onAction="#openAddMember" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="View">
                <items>
-                  <MenuItem mnemonicParsing="false" text="View Books" />
-                  <MenuItem mnemonicParsing="false" text="View Members" />
-                  <MenuItem mnemonicParsing="false" text="View Checkout Records" />
+                  <MenuItem mnemonicParsing="false" text="View Books" onAction="#openListBooks"/>
+                  <MenuItem mnemonicParsing="false" text="View Members"  onAction="#openListMembers" />
+                  <MenuItem mnemonicParsing="false" text="View Checkout Records" onAction="#openListCheckouts"/>
                </items>
             </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
-                  <MenuItem fx:id="searchMenuItem" mnemonicParsing="false" text="Search" />
-            </items>
-          </Menu>
+  
         </menus>
       </MenuBar>
       <ImageView fitHeight="612.0" fitWidth="1016.0" layoutX="1.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">

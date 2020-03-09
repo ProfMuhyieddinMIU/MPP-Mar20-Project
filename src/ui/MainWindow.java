@@ -171,18 +171,21 @@ public class MainWindow extends Stage implements LibWindow{
 			
 		
 		if(SystemController.currentAuth.equals(Auth.LIBRARIAN)) {
+			
 			menu.getItems().addAll(checkout, print, logout);
 			
 			//menu.getItems().addAll(checkout,logout);
 			
 			System.out.println(SystemController.currentAuth);
 			
-	} else if(SystemController.currentAuth.equals(Auth.ADMIN)) {
-		menu.getItems().addAll(createMember, editMemberInfo, addBook, addBookCopy, print, logout);
+	   } else if(SystemController.currentAuth.equals(Auth.ADMIN)) {
+		//menu.getItems().addAll(createMember, editMemberInfo, addBook, addBookCopy, print, logout);
 		
-		//menu.getItems().addAll(createMember, editMemberInfo, addBook, addBookCopy, print, logout)
+		//menu.getItems().addAll(createMember, editMemberInfo, addBook, addBookCopy, print, logout);
 		
 			menu.getItems().addAll(createMember, editMemberInfo, addBookCopy, logout);
+		   
+		  // menu.getItems().addAll(checkout, print, logout);
 			
 			
 		} else if(SystemController.currentAuth.equals(Auth.BOTH)) {

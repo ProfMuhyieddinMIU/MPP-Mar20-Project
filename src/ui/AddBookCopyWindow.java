@@ -141,7 +141,7 @@ public class AddBookCopyWindow extends Stage implements LibWindow {
 
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Information");
-				alert.setContentText("Book Copy added");
+				alert.setContentText( txtCopies.getText() + " Copies has been added");
 				System.out.println(book.getCopies().toString());
 				alert.showAndWait();
 			}

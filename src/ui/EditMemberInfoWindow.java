@@ -13,16 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EditMemberInfoWindow extends Stage{
-	
-	
+public class EditMemberInfoWindow extends Stage {
+
 	public static final EditMemberInfoWindow INSTANCE = new EditMemberInfoWindow();
-	
-	
-	
-	
-	
-	
+
 	private boolean isInitialized = false;
 
 	public boolean isInitialized() {
@@ -58,14 +52,15 @@ public class EditMemberInfoWindow extends Stage{
 	@FXML
 	private TextField txtSearchMemberID;
 	private LibraryMember l;
+
 	public void init() {
 		try {
 
 			FXMLLoader fxmloader = new FXMLLoader();
 			fxmloader.setLocation(getClass().getResource("/ui/EditMember.fxml"));
-			
+
 			Scene scene = new Scene(fxmloader.load());
-			
+
 			scene.getStylesheets().add(getClass().getResource("library.css").toExternalForm());
 			EditMemberInfoWindow.INSTANCE.setScene(scene);
 			EditMemberInfoWindow.INSTANCE.setTitle("Edit Member");
@@ -80,9 +75,8 @@ public class EditMemberInfoWindow extends Stage{
 	public void search(ActionEvent e) {
 		try {
 			ControllerInterface c = new SystemController();
-			
-			if (txtSearchMemberID.getText().length() != 0 
-					|| txtSearchMemberID.getText() != null
+
+			if (txtSearchMemberID.getText().length() != 0 || txtSearchMemberID.getText() != null
 					|| !txtSearchMemberID.getText().isEmpty()) {
 				l = c.searchMember(txtSearchMemberID.getText());
 				if (l != null) {
@@ -95,8 +89,8 @@ public class EditMemberInfoWindow extends Stage{
 					txtState.setText(l.getAddress().getState());
 					txtZip.setText(l.getAddress().getZip());
 					txtSearchMemberID.setText("");
-				} 
-				if(l == null) {
+				}
+				if (l == null) {
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Information");
 					alert.setContentText("Member didn't find");
@@ -117,7 +111,7 @@ public class EditMemberInfoWindow extends Stage{
 				alert.setContentText("insert member id to search");
 				alert.showAndWait();
 			}
-			
+
 		} catch (Exception ex) {
 			System.out.println("Error! " + ex.getMessage());
 		}
@@ -125,32 +119,26 @@ public class EditMemberInfoWindow extends Stage{
 
 	public void edit(ActionEvent e) {
 		try {
-			
+
 			ControllerInterface c = new SystemController();
-			
-			
+
 			l.setMemberId(txtMemberID.getText());
 			l.setFirstName(txtFirstName.getText());
 			l.setLastName(txtLastName.getText());
 			l.setTelephone(txtPhone.getText());
-			
+
 			l.getAddress().setCity(txtCity.getText());
 			l.getAddress().setState(txtState.getText());
 			l.getAddress().setStreet(txtStreet.getText());
 			l.getAddress().setZip(txtZip.getText());
 			c.editMember(l);
-			
+
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Information");
 			alert.setContentText("member infor edited");
 			EditMemberInfoWindow.INSTANCE.hide();
-			
-			
-			
+
 			alert.showAndWait();
-			
-			
-			
 
 		} catch (Exception ex) {
 			System.out.println("Error! " + ex.getMessage());

@@ -19,7 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class MainWindow extends Stage implements LibWindow{
+public class MainWindow extends Stage implements LibWindow {
 
 	public static final MainWindow INSTANCE = new MainWindow();
 
@@ -33,42 +33,37 @@ public class MainWindow extends Stage implements LibWindow{
 		isInitialized = val;
 	}
 
-	
-	
-	
 	@Override
 	public void init() {
 		Stage primaryStage = Start.primStage();
 		primaryStage.setTitle("Main Page");
-		        
+
 		VBox topContainer = new VBox();
-		
+
 		topContainer.setId("top-container");
-		
+
 		MenuBar mainMenu = new MenuBar();
-		
+
 		VBox imageHolder = new VBox();
-		
+
 		Image image = new Image("ui/library.jpg", 400, 300, false, false);
 
-		// simply displays in ImageView the image as is
-		
 		ImageView iv = new ImageView();
-		
+
 		iv.setImage(image);
-		
+
 		imageHolder.getChildren().add(iv);
-		
+
 		imageHolder.setAlignment(Pos.CENTER);
-		
+
 		HBox splashBox = new HBox();
-		
+
 		Label splashLabel = new Label("The Library System");
-		
+
 		splashLabel.setFont(Font.font("Trajan Pro", FontWeight.BOLD, 30));
-		
+
 		splashBox.getChildren().add(splashLabel);
-		
+
 		splashBox.setAlignment(Pos.CENTER);
 
 		topContainer.getChildren().add(mainMenu);
@@ -78,18 +73,17 @@ public class MainWindow extends Stage implements LibWindow{
 		Menu menu = new Menu("Main Menu");
 
 		MenuItem createMember = new MenuItem("Create Member");
-		
+
 		createMember.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				
+
 				Start.hideAllWindows();
-				
+
 				LoginWindow.INSTANCE.hide();
-				AddMemberWindow.INSTANCE.init();				
-				AddMemberWindow.INSTANCE.show();	
-				
-				
+				AddMemberWindow.INSTANCE.init();
+				AddMemberWindow.INSTANCE.show();
+
 			}
 		});
 
@@ -104,24 +98,23 @@ public class MainWindow extends Stage implements LibWindow{
 				EditMemberInfoWindow.INSTANCE.show();
 			}
 		});
-	
-	MenuItem addBook = new MenuItem("Add Book");
+
+		MenuItem addBook = new MenuItem("Add Book");
 		addBook.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				
+
 				Start.hideAllWindows();
-				
+
 				if (!AddBookWindow.INSTANCE.isInitialized()) {
 					AddBookWindow.INSTANCE.init();
-				}				
+				}
 				AddBookWindow.INSTANCE.show();
 			}
 		});
-	
-	MenuItem addBookCopy = new MenuItem("Add BookCopy");
-		
-		
+
+		MenuItem addBookCopy = new MenuItem("Add BookCopy");
+
 		addBookCopy.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -129,11 +122,10 @@ public class MainWindow extends Stage implements LibWindow{
 				if (!AddBookCopyWindow.INSTANCE.isInitialized()) {
 					AddBookCopyWindow.INSTANCE.init();
 				}
-				//ControllerInterface ci = new SystemController();				
 				AddBookCopyWindow.INSTANCE.show();
 			}
 		});
-		
+
 		MenuItem checkout = new MenuItem("Checkout Book");
 		checkout.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -142,73 +134,52 @@ public class MainWindow extends Stage implements LibWindow{
 				if (!CheckoutBookWindow.INSTANCE.isInitialized()) {
 					CheckoutBookWindow.INSTANCE.init();
 				}
-				//ControllerInterface ci = new SystemController();				
 				CheckoutBookWindow.INSTANCE.show();
 			}
 		});
-		
-	MenuItem print = new MenuItem("Print");
-	print.setOnAction(new EventHandler<ActionEvent>() {
-		@Override
-		public void handle(ActionEvent e) {
-			Start.hideAllWindows();
-			if (!PrinterWindow.INSTANCE.isInitialized()) {
+
+		MenuItem print = new MenuItem("Print");
+		print.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				Start.hideAllWindows();
+				if (!PrinterWindow.INSTANCE.isInitialized()) {
+					PrinterWindow.INSTANCE.init();
+				}
 				PrinterWindow.INSTANCE.init();
-			}				
-			PrinterWindow.INSTANCE.init();				
-		}
-	});
-	
+			}
+		});
+
 		MenuItem logout = new MenuItem("Exit");
 		logout.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				Start.hideAllWindows();
-				Platform.exit();				
+				Platform.exit();
 			}
 		});
-		
-			
-		
-		if(SystemController.currentAuth.equals(Auth.LIBRARIAN)) {
-			
+
+		if (SystemController.currentAuth.equals(Auth.LIBRARIAN)) {
+
 			menu.getItems().addAll(checkout, print, logout);
-			
-			//menu.getItems().addAll(checkout,logout);
-			
+
+
 			System.out.println(SystemController.currentAuth);
-			
-	   } else if(SystemController.currentAuth.equals(Auth.ADMIN)) {
-		//menu.getItems().addAll(createMember, editMemberInfo, addBook, addBookCopy, print, logout);
-		
-		//menu.getItems().addAll(createMember, editMemberInfo, addBook, addBookCopy, print, logout);
-		
+
+		} else if (SystemController.currentAuth.equals(Auth.ADMIN)) {
+
 			menu.getItems().addAll(createMember, editMemberInfo, addBookCopy, logout);
-		   
-		  // menu.getItems().addAll(checkout, print, logout);
-			
-			
-		} else if(SystemController.currentAuth.equals(Auth.BOTH)) {
+
+
+		} else if (SystemController.currentAuth.equals(Auth.BOTH)) {
 			menu.getItems().addAll(createMember, editMemberInfo, addBook, addBookCopy, checkout, print, logout);
-			//menu.getItems().addAll(createMember, editMemberInfo,  addBookCopy, checkout, logout);
 		}
-		
-		
-		
-		
+
 		mainMenu.getMenus().addAll(menu);
 		MainWindow.INSTANCE.setResizable(true);
-		Scene scene = new Scene(topContainer, 500, 400);	
+		Scene scene = new Scene(topContainer, 500, 400);
 		scene.getStylesheets().add(getClass().getResource("library.css").toExternalForm());
 		setScene(scene);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

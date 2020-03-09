@@ -83,9 +83,7 @@ public class AddAuthorWindow extends Stage {
 		} else {
 			Address address = new Address(txtStreet.getText(), txtCity.getText(), txtState.getText(), txtZip.getText());
 
-//			Author author = new Author(UUID.randomUUID().toString(), txtFirstName.getText(), txtLastName.getText(),
-//					txtTelephone.getText(), address, txtBio.getText(), txtCredentials.getText());
-			
+
 			
 			Author author = new Author(UUID.randomUUID().toString(), txtFirstName.getText(), txtLastName.getText(),
 					txtTelephone.getText(), address, txtBio.getText(), txtCredentials.getText());

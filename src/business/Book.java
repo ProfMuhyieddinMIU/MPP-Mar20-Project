@@ -5,116 +5,200 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *
  */
-final public class Book implements Serializable {
+final public class Book implements Serializable 
+{
 	
 	private static final long serialVersionUID = 6110690276685962829L;
-	private BookCopy[] copies;
+	private List<BookCopy> copies;//Hus3/5/20
 	private List<Author> authors;
 	private String isbn;
 	private String title;
 	private int maxCheckoutLength;
-	public Book(String isbn, String title, int maxCheckoutLength, List<Author> authors) {
+	
+	/**
+	 * 
+	 * @param isbn The ID of the book
+	 * @param title The Title of the book
+	 * @param maxCheckoutLength The max number of days the book can be checked out each time
+	 * @param authors A list of the book authors
+	 */
+	public Book(String isbn, String title, int maxCheckoutLength, List<Author> authors) 
+	{
 		this.isbn = isbn;
 		this.title = title;
 		this.maxCheckoutLength = maxCheckoutLength;
 		this.authors = Collections.unmodifiableList(authors);
-		copies = new BookCopy[]{new BookCopy(this, 1, true)};	
+		//Hus3/5/20:: first copy of book, id=1,available
+		copies = new ArrayList<BookCopy>();
+		copies.add(new BookCopy(this, 1, true));
 	}
 	
-	public void updateCopies(BookCopy copy) {
-		for(int i = 0; i < copies.length; ++i) {
+	/* Hus3/5/20:: 
+	public void updateCopies(BookCopy copy) 
+	{
+		for(int i = 0; i < copies.length; ++i) 
+		{
 			BookCopy c = copies[i];
-			if(c.equals(copy)) {
+			if(c.equals(copy))
 				copies[i] = copy;
-				
-			}
 		}
-	}
+	}*/
 
-	public List<Integer> getCopyNums() {
+	/**
+	 * 
+	 * @return All the copy IDs for the current book
+	 */
+	public List<Integer> getCopyNums()
+	{
 		List<Integer> retVal = new ArrayList<>();
-		for(BookCopy c : copies) {
+		for(BookCopy c : copies)
 			retVal.add(c.getCopyNum());
-		}
 		return retVal;
 		
 	}
 	
-	public void addCopy() {
-		BookCopy[] newArr = new BookCopy[copies.length + 1];
-		System.arraycopy(copies, 0, newArr, 0, copies.length);
-		newArr[copies.length] = new BookCopy(this, copies.length +1, true);
-		copies = newArr;
+	/**
+	 * Add a new copy to this book having incremental ID
+	 */
+	public void addCopy() 
+	{//Hus3/5/20:: ArraytoList copies
+		copies.add(new BookCopy(this, copies.size() +1, true));
 	}
 	
 	
 	@Override
-	public boolean equals(Object ob) {
-		if(ob == null) return false;
-		if(ob.getClass() != getClass()) return false;
+	public boolean equals(Object ob) 
+	{
+		if(ob == null || ob.getClass() != getClass()) 
+			return false;
 		Book b = (Book)ob;
 		return b.isbn.equals(isbn);
 	}
 	
-	
-	public boolean isAvailable() {
-		if(copies == null) {
+	/**
+	 * 
+	 * @return Whether there is a copy that is available for loan
+	 */
+	public boolean isAvailable() 
+	{//Hus3/5/20 arraytolist copies
+		if(copies == null)
 			return false;
-		}
-		return Arrays.stream(copies)
-				     .map(l -> l.isAvailable())
-				     .reduce(false, (x,y) -> x || y);
+		for(BookCopy c : copies)
+			if(c.isAvailable())
+				return true;
+		return false;
 	}
+	
 	@Override
-	public String toString() {
-		return "isbn: " + isbn + ", maxLength: " + maxCheckoutLength + ", available: " + isAvailable();
+	public String toString() 
+	{
+		return "isbn: " + isbn + ", maxLength: " + maxCheckoutLength + ", available: " + isAvailable() +
+				", Total number of Copies: " + getNumCopies();
+		
+		
 	}
 	
-	public int getNumCopies() {
-		return copies.length;
+	/**
+	 * 
+	 * @return The current total number of copies owned by the library
+	 */
+	public int getNumCopies() 
+	{
+		return copies.size();
 	}
 	
-	public String getTitle() {
+	/**
+	 * 
+	 * @return The title of the book
+	 */
+	public String getTitle() 
+	{
 		return title;
 	}
-	public BookCopy[] getCopies() {
+	
+	/**
+	 * 
+	 * @return A list of all available copies
+	 */
+	public List<BookCopy> getCopies() 
+	{
 		return copies;
 	}
 	
-	public List<Author> getAuthors() {
+	/**
+	 * 
+	 * @return A list of the book Authors
+	 */
+	public List<Author> getAuthors() 
+	{
 		return authors;
 	}
 	
-	public String getIsbn() {
+	/**
+	 * 
+	 * @return The book ISBN
+	 */
+	public String getIsbn() 
+	{
 		return isbn;
 	}
 	
-	public BookCopy getNextAvailableCopy() {	
-		Optional<BookCopy> optional 
-			= Arrays.stream(copies)
-			        .filter(x -> x.isAvailable()).findFirst();
-		return optional.isPresent() ? optional.get() : null;
-	}
-	
-	public BookCopy getCopy(int copyNum) {
-		for(BookCopy c : copies) {
-			if(copyNum == c.getCopyNum()) {
+	/**
+	 * 
+	 * @return The first available copy, or null if none is available
+	 */
+	public BookCopy getNextAvailableCopy() 
+	{	
+		for(BookCopy c : copies)
+			if(c.isAvailable())
 				return c;
-			}
-		}
 		return null;
 	}
-	public int getMaxCheckoutLength() {
+	
+	/** 
+	 *  get first copy of Book that checked out before to be used when book return 
+	 *  added by Mohamed Elarian
+	 * @return
+	 */
+	public BookCopy getNextUnAvailableCopy() 
+	{	
+		for(BookCopy c : copies)
+			if( ! c.isAvailable())
+				return c;
+		return null;
+	}
+	
+	/**
+	 * Get a copy by its ID
+	 * @param copyNum The copy ID
+	 * @return Reference to this copy
+	 */
+	public BookCopy getCopy(int copyNum) 
+	{
+		for(BookCopy c : copies)
+			if(copyNum == c.getCopyNum())
+				return c;
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @return The maximum number of days this book can be checkedOut each time
+	 */
+	public int getMaxCheckoutLength() 
+	{
 		return maxCheckoutLength;
 	}
-
 	
-	
-	
-	
+	public int getNumberOfAvailable() {
+		int count = 0 ;
+		for(BookCopy c : copies)
+			if( c.isAvailable())
+				count++;
+		return count;
+	}
 }

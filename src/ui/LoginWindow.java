@@ -3,6 +3,7 @@ package ui;
 import business.ControllerInterface;
 import business.LoginException;
 import business.SystemController;
+import config.Constants;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,16 +15,20 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import ui.components.G6Button;
 
 public class LoginWindow extends Stage implements LibWindow {
 	public static final LoginWindow INSTANCE = new LoginWindow();
 	
 	private boolean isInitialized = false;
+	
+	private TextField userTextField;
+	private PasswordField pwBox;
 	
 	public boolean isInitialized() {
 		return isInitialized;
@@ -39,7 +44,21 @@ public class LoginWindow extends Stage implements LibWindow {
 	/* This class is a singleton */
     private LoginWindow () {}
     
+    private void login() {
+    	try {
+			ControllerInterface c = new SystemController();
+			c.login(userTextField.getText().trim(), pwBox.getText().trim());
+			messageBar.setFill(Start.Colors.green);
+     	    messageBar.setText("Login successful");
+     	    Start.homeWindow();
+		} catch(LoginException ex) {
+			messageBar.setFill(Start.Colors.red);
+			messageBar.setText("Error! " + ex.getMessage());
+		}
+    }
+    
     public void init() { 
+    	
         GridPane grid = new GridPane();
         grid.setId("top-container");
         grid.setAlignment(Pos.CENTER);
@@ -54,7 +73,7 @@ public class LoginWindow extends Stage implements LibWindow {
         Label userName = new Label("User Name:");
         grid.add(userName, 0, 1);
 
-        TextField userTextField = new TextField();
+        userTextField = new TextField();
         //userTextField.setPrefColumnCount(10);
         //userTextField.setPrefWidth(30);
         grid.add(userTextField, 1, 1);
@@ -63,10 +82,16 @@ public class LoginWindow extends Stage implements LibWindow {
         grid.add(pw, 0, 2);
         grid.setGridLinesVisible(false) ;
 
-        PasswordField pwBox = new PasswordField();
+        pwBox = new PasswordField();
         grid.add(pwBox, 1, 2);
+        pwBox.setOnAction(new EventHandler<ActionEvent>() {
+        	@Override
+        	public void handle(ActionEvent e) {
+        		login();
+        	}
+		});
 
-        Button loginBtn = new Button("Log in");
+        G6Button loginBtn = new G6Button("Log in");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(loginBtn);
@@ -80,20 +105,11 @@ public class LoginWindow extends Stage implements LibWindow {
         loginBtn.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
         	public void handle(ActionEvent e) {
-        		try {
-        			ControllerInterface c = new SystemController();
-        			c.login(userTextField.getText().trim(), pwBox.getText().trim());
-        			messageBar.setFill(Start.Colors.green);
-             	    messageBar.setText("Login successful");
-        		} catch(LoginException ex) {
-        			messageBar.setFill(Start.Colors.red);
-        			messageBar.setText("Error! " + ex.getMessage());
-        		}
-        	   
+        		login();
         	}
         });
 
-        Button backBtn = new Button("<= Back to Main");
+        Button backBtn = new Button("Back to Main");
         backBtn.setOnAction(new EventHandler<ActionEvent>() {
         	@Override
         	public void handle(ActionEvent e) {
@@ -105,9 +121,11 @@ public class LoginWindow extends Stage implements LibWindow {
         hBack.setAlignment(Pos.BOTTOM_LEFT);
         hBack.getChildren().add(backBtn);
         grid.add(hBack, 0, 7);
-        Scene scene = new Scene(grid);
-        scene.getStylesheets().add(getClass().getResource("library.css").toExternalForm());
+        Scene scene = new Scene(grid, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+//        scene.getStylesheets().add(getClass().getResource("library.css").toExternalForm());
         setScene(scene);
+        JMetro jMetro = new JMetro();
+		jMetro.setScene(scene);
         
     }
 	
